@@ -525,31 +525,31 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Set the number of active lanes to 4 - 10.14 RTM (for laptop with 4K display) (by FireWolf)</string>
+				<string>Set the number of active lanes to 4 (for laptop with 4K display) (by FireWolf)</string>
 				<key>Disabled</key>
 				<false/>
 				<key>Find</key>
-				<data>VUiJ5Uj/BaVGBwCLlsAlAACKjg==</data>
+				<data>i5bAJQAAio6VIwAAD7aG</data>
 				<key>InfoPlistPatch</key>
 				<false/>
 				<key>Name</key>
 				<string>AppleIntelCFLGraphicsFramebuffer</string>
 				<key>Replace</key>
-				<data>VUiJ5bgEAAAAiYa8JQAAMcBdww==</data>
+				<data>uAQAAACJhrwlAAAxwF3D</data>
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Set the number of active lanes to 4 - 10.14.1 beta 1 (for laptop with 4K display) (by FireWolf)</string>
+				<string>Set the number of active lanes to 2 (for laptop with 4K display) (by FireWolf)</string>
 				<key>Disabled</key>
 				<true/>
 				<key>Find</key>
-				<data>VUiJ5Uj/Bb1KBwCLlsAlAACKjg==</data>
+				<data>i5bAJQAAio6VIwAAD7aG</data>
 				<key>InfoPlistPatch</key>
 				<false/>
 				<key>Name</key>
 				<string>AppleIntelCFLGraphicsFramebuffer</string>
 				<key>Replace</key>
-				<data>VUiJ5bgEAAAAiYa8JQAAMcBdww==</data>
+				<data>uAIAAACJhrwlAAAxwF3D</data>
 			</dict>
 		</array>
 	</dict>

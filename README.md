@@ -20,9 +20,7 @@ This repository contains a sample configuration to run macOS (Currently Mojave `
 - Monitors
   - TBD
 
-## Preparation
-
-WIP.
+## See `notes.org` for items that are working, and instructions/links for how to fix specific issues.
 
 ## UEFI Variables
 

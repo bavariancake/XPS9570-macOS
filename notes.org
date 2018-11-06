@@ -1,0 +1,42 @@
+* Description of features, fixes, and workarounds
+** Intel UHD 630 Graphics
+   Intel graphics is supported by [[https://www.tonymacx86.com/threads/solved-uhd-630-either-not-booting-or-no-acceleration-on-dell-xps-15-9570-4k.261101/page-7#post-1821091][setting the active display lanes to 4]].
+   See [[https://www.tonymacx86.com/threads/fix-coffee-lake-intel-uhd-graphics-630-on-macos-mojave-kernel-panic-due-to-divide-by-zero.261687/][deprecated fix]] by Austere.J - waiting for new patch (TBD).
+   64MB DVMT pre-alloc is sufficient, which is the BIOS default on the XPS 9570.
+*** Graphics acceleration (About This Mac -> Intel UHD Graphics 630 1536 MB)
+**** [[file:CLOVER/config.plist][config.plist]] (10.14, 10.14.1)
+     - Graphics/Inject/Intel=yes
+     - Graphics/ig-platform-id=0x3e9b0000
+     - KernelAndKextPatches/KextsToPatch/Item 1 (4 lanes - default for 4K XPS 9570)
+     - KernelAndKextPatches/KextsToPatch/Item 2 (2 lanes - disabled by default)
+**** [[https://github.com/PMheart/CoreDisplayFixup][CoreDisplayFixup]] [[file:kexts/CoreDisplayFixup.kext][kext]]
+     Now included in [[https://github.com/acidanthera/WhateverGreen][WhateverGreen]], but the UHD 630 patches are still a work in progress.
+*** Backlight control (via slider in SysPrefs/Displays)
+    Patched via kext and SSDT patch ([[https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightfixup-kext.218222/][discussion]]).
+    Can use pre-built [[https://bitbucket.org/RehabMan/applebacklightfixup/downloads/][kext and SSDT-PNLF.aml]], but the .aml file should
+    be the same as [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl][SSDT-PNLF.dsl]] from [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config][OS-X-Clover-Laptop-Config]].
+**** [[https://github.com/RehabMan/AppleBacklightFixup][AppleBacklightFixup]] [[file:kexts/AppleBacklightFixup.kext][kext]]
+**** [[file:CLOVER/ACPI/patched/SSDT-PNLF.dsl][SSDT-PNLF.dsl]]/[[file:CLOVER/ACPI/patched/SSDT-PNLF.aml][.aml]]
+*** Known issue: [[https://www.tonymacx86.com/threads/bug-black-screen-3-minutes-after-booting-coffeelake-uhd-630.261131/][Black/dark screen 3 minutes after booting with CoffeeLake UHD 630]]
+    Workaround: wait 3 minutes until a proper solution is found (TBD).
+** Battery status
+   Requires only a kext on the XPS 9570, but includes a [[https://www.tonymacx86.com/threads/guide-how-to-patch-dsdt-for-working-battery-status.116102/][discussion]] of
+   how to make DSDT edits if needed, which is a good step-by-step
+   patching guide using [[https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/][MaciASL]].
+*** [[https://github.com/RehabMan/OS-X-ACPI-Battery-Driver][ACPIBatteryManager]] [[file:kexts/ACPIBatteryManager.kext][kext]]
+** macOS sets BIOS clock to UTC, but Windows sets clock to local time
+   Set Windows to use UTC as well, using regedit:
+   - regedit -> HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation
+   - create new DWORD (32-bit) 'RealTimeIsUniversal' with value '1'
+* General notes
+** Kexts
+*** Kexts should be installed in /Library/Extensions
+*** Installation
+    sudo cp -r <mydriver.kext> /Library/Extensions
+    # update kext cache
+    sudo kextcache -i /
+    # check output for errors!
+    # common problems are wrong permissions or file ownership.
+** [[https://github.com/acidanthera/Lilu][Lilu]] [[file:kexts/Lilu.kext][kext]]: Used to patch and process other kexts
+** [[https://github.com/RehabMan/OS-X-ACPI-Debug][OS-X-ACPI-Debug]]: "Enable debug tracing from ACPI code (DSDT) to system.log"
+   Not currently installed, but should be useful for debugging ACPI issues.

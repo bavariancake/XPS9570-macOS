@@ -1,1 +1,0 @@
-These kexts should go into /Library/Extensions.
