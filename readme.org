@@ -97,14 +97,15 @@ to use UTC as well, with =regedit=:
   - regedit -> =HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation=
   - create new DWORD (32-bit) =RealTimeIsUniversal= with value '1'
 ** Known problems/caveats
-   - +Graphics acceleration becomes poor after display goes to sleep+
-     (Fixed by new the link rate in the graphics section)
    - Right-side USB port appears as an internal port, so devices attached to it can't be ejected
-   - Hangs on boot with Apple logo intermittently
+   - Internal keyboard behaves strangely with [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][OS-X-Voodoo-PS2-Controller]], poor touchpad support
    - Constant CPU activity in =kernel_task=
    - iMessage does not work
    - Drive encryption is disabled (not tested)
-See Clover installer for "FileVault 2" UEFI drivers.
+   - Hangs on boot with Apple logo intermittently (TBD: may be fixed by new link rate patch, still testing)
+     (note to self: see Clover installer for "FileVault 2" UEFI drivers)
+   - +Graphics acceleration becomes poor after display goes to sleep+
+     (Fixed by new the link rate in the graphics section)
 * Installation and system updates
 ** Clover boot manager
 
@@ -114,9 +115,9 @@ See Clover installer for "FileVault 2" UEFI drivers.
 
    link? version? new features?
 ** Updating 10.14 -> 10.14.1 (work in progress)
-See [[https://github.com/Xigtun/xps-9570-mojave][xps-9750-mojave]] repo
+(Note to self: see [[https://github.com/Xigtun/xps-9570-mojave][xps-9750-mojave]] repo)
 * Miscellaneous Notes
-** Kexts
+** Installing kexts
 Kexts should be installed in =/Library/Extensions=.
 
 Installation:
@@ -125,8 +126,14 @@ Installation:
   sudo kextcache -i / # update kext cache
 #+END_SRC
 
-Common problems are wrong permissions or file ownership.
 *Be sure to check output for errors!*
-** [[https://github.com/acidanthera/Lilu][Lilu]] [[file:kexts/Lilu.kext][kext]]: Used to patch and process other kexts
-** [[https://github.com/RehabMan/OS-X-ACPI-Debug][OS-X-ACPI-Debug]]: "Enable debug tracing from ACPI code (DSDT) to system.log"
-Not currently installed, but should be useful for debugging ACPI issues.
+
+Common problems are wrong permissions or file ownership.
+** Kext patching
+Kexts can be patched on boot by Clover (see =KernelAndKextPatches/KextsToPatch= section in
+[[file:CLOVER/config.plist][config.plist]]), but Clover has some limitations, e.g. it can only patch kexts that are in the kext
+cache. More complex cases can be handled by [[https://github.com/acidanthera/Lilu][Lilu]], used for "arbitrary kext and process patching",
+which is itself installed as a [[file:kexts/Lilu.kext][kext]].
+** ACPI debugging
+The [[https://github.com/RehabMan/OS-X-ACPI-Debug][OS-X-ACPI-Debug]] repo allows for "debug tracing from ACPI code (DSDT) to system.log".
+Not currently installed and not tested, but should be useful if ACPI  problems come up.
