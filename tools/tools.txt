@@ -1,0 +1,16 @@
+- AppleIntelInfo.kext (1.4)
+  From power management guide:
+  https://www.tonymacx86.com/threads/guide-native-power-management-for-laptops.175801/
+  Record CPU p-state info to test power management - loaded manually for debugging only.
+
+- MaciASL.app (2018-0507)
+  https://github.com/RehabMan/OS-X-MaciASL-patchmatic
+  ACPI editor/compiler for DSDT patching.
+
+- iasl (2018-05-07, iasl.zip, tool reported version: 20180427(RM))
+  https://bitbucket.org/RehabMan/acpica/downloads/
+  Intel ACPI ASL+ Optimizing Compiler/Disassembler
+
+- patchmatic (2018-0507)
+  https://github.com/RehabMan/OS-X-MaciASL-patchmatic
+  ACPI utility to read DSDT/SSDT as patched by Clover.
