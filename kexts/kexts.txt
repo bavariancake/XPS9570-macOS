@@ -1,0 +1,15 @@
+- ACPIBatteryManager.kext (2018-1005)
+  https://github.com/RehabMan/OS-X-ACPI-Battery-Driver
+  ACPIBatteryManager by RehabMan
+
+- AppleBacklightFixup.kext (
+  https://github.com/RehabMan/AppleBacklightFixup (2018-1013)
+  Implement backlight control for laptop internal displays on macOS/OS X
+
+- Lilu.kext (1.2.8)
+  https://github.com/acidanthera/Lilu
+  An open source kernel extension bringing a platform for arbitrary kext, library, and program patching throughout the system for macOS.
+
+- WhateverGreen.kext (1.2.4)
+  https://github.com/acidanthera/WhateverGreen
+  Lilu plugin providing patches to select GPUs on macOS.
