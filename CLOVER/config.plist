@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Comment</key>
+	<string>This file is for 10.14.x with native CoffeeLake support</string>
 	<key>ACPI</key>
 	<dict>
 		<key>AutoMerge</key>
@@ -31,7 +33,7 @@
 					<key>Comment</key>
 					<string>change OSID to XSID (to avoid match against _OSI XOSI patch)</string>
 					<key>Disabled</key>
-					<true/>
+					<false/>
 					<key>Find</key>
 					<data>T1NJRA==</data>
 					<key>Replace</key>
@@ -41,7 +43,7 @@
 					<key>Comment</key>
 					<string>change _OSI to XOSI</string>
 					<key>Disabled</key>
-					<true/>
+					<false/>
 					<key>Find</key>
 					<data>X09TSQ==</data>
 					<key>Replace</key>
@@ -61,7 +63,7 @@
 					<key>Comment</key>
 					<string>change EC0 to EC</string>
 					<key>Disabled</key>
-					<true/>
+					<false/>
 					<key>Find</key>
 					<data>RUMwXw==</data>
 					<key>Replace</key>
@@ -71,7 +73,7 @@
 					<key>Comment</key>
 					<string>change H_EC to EC</string>
 					<key>Disabled</key>
-					<true/>
+					<false/>
 					<key>Find</key>
 					<data>SF9FQw==</data>
 					<key>Replace</key>
@@ -90,6 +92,8 @@
 				<dict>
 					<key>Comment</key>
 					<string>change HDAS to HDEF</string>
+					<key>Disabled</key>
+					<true/>
 					<key>Find</key>
 					<data>SERBUw==</data>
 					<key>Replace</key>
@@ -118,6 +122,14 @@
 					<data>R0ZYMA==</data>
 					<key>Replace</key>
 					<data>SUdQVQ==</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change PEGP to GFX0</string>
+					<key>Find</key>
+					<data>UEVHUA==</data>
+					<key>Replace</key>
+					<data>R0ZYMA==</data>
 				</dict>
 				<dict>
 					<key>Comment</key>
@@ -274,8 +286,6 @@
 		<key>Timeout</key>
 		<integer>5</integer>
 	</dict>
-	<key>Comment</key>
-	<string>This file is for 10.14.x with native CoffeeLake support</string>
 	<key>Devices</key>
 	<dict>
 		<key>AddProperties</key>
@@ -439,6 +449,8 @@
 			<key>Tool</key>
 			<true/>
 		</dict>
+		<key>Theme</key>
+		<string>random</string>
 	</dict>
 	<key>Graphics</key>
 	<dict>
@@ -562,8 +574,12 @@
 	</dict>
 	<key>SMBIOS</key>
 	<dict>
+		<key>BiosReleaseDate</key>
+		<string>09/28/2018</string>
 		<key>BiosVendor</key>
 		<string>Apple Inc.</string>
+		<key>BiosVersion</key>
+		<string>MBP151.88Z.F000.B00.1809280842</string>
 		<key>Board-ID</key>
 		<string>Mac-937A206F2EE63C01</string>
 		<key>BoardManufacturer</key>
@@ -580,6 +596,8 @@
 		<string>Apple Inc.</string>
 		<key>ChassisType</key>
 		<string>0x09</string>
+		<key>EfiVersion</key>
+		<string>220.200.252.0.0</string>
 		<key>Family</key>
 		<string>MacBook Pro</string>
 		<key>FirmwareFeatures</key>
@@ -595,11 +613,13 @@
 		<key>PlatformFeature</key>
 		<string>0x1A</string>
 		<key>ProductName</key>
-		<string>MacBookPro15,2</string>
+		<string>MacBookPro15,1</string>
+		<key>SerialNumber</key>
+		<string>C02YE08QKGYG</string>
+		<key>SmUUID</key>
+		<string>9A21755D-78FB-A416-7BC9-A2FFE3125973</string>
 		<key>Version</key>
 		<string>1.0</string>
-		<key>Trust</key>
-		<true/>
 	</dict>
 	<key>SystemParameters</key>
 	<dict>
