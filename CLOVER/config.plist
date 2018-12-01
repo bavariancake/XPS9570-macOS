@@ -8,8 +8,17 @@
 	<dict>
 		<key>AutoMerge</key>
 		<true/>
+		<key>FixHeaders</key>
+		<true/>
 		<key>Comment-DisabledAML</key>
 		<string>Disable other forms of CPU PM due to SSDT/Generate/PluginType=true</string>
+		<key>DisabledAML</key>
+		<array>
+			<string>SSDT.aml</string>
+			<string>SSDT-XCPM.aml</string>
+			<string>SSDT-PluginType1.aml</string>
+			<string>SSDT-UPRW.aml</string>
+		</array>
 		<key>DSDT</key>
 		<dict>
 			<key>DropOEM_DSM</key>
@@ -20,12 +29,20 @@
 				<string>The following fixes may be needed for onboard audio/USB/etc</string>
 				<key>FixHPET</key>
 				<false/>
+				<key>FixHeaders</key>
+				<false/>
 				<key>FixIPIC</key>
+				<false/>
+				<key>FixMutex</key>
 				<false/>
 				<key>FixRTC</key>
 				<false/>
 				<key>FixTMR</key>
 				<false/>
+				<key>Comment-FixUSB</key>
+				<string>Haven&apos;t tested this yet - docs are not clear on what this does</string>
+				<key>FixUSB</key>
+				<true/>
 			</dict>
 			<key>Patches</key>
 			<array>
@@ -41,7 +58,7 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>change _OSI to XOSI</string>
+					<string>Change _OSI to XOSI, use with SSDT-XOSI.aml</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
@@ -51,7 +68,7 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>change _DSM to XDSM</string>
+					<string>Change _DSM to XDSM (needed for _DSM injections, e.g. for HDEF, IGPU)</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
@@ -61,29 +78,9 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>change EC0 to EC</string>
+					<string>Change ECDV to EC (so Mac OS knows about the Embedded Controller)</string>
 					<key>Disabled</key>
 					<false/>
-					<key>Find</key>
-					<data>RUMwXw==</data>
-					<key>Replace</key>
-					<data>RUNfXw==</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>change H_EC to EC</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>SF9FQw==</data>
-					<key>Replace</key>
-					<data>RUNfXw==</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>change ECDV to EC</string>
-					<key>Disabled</key>
-					<true/>
 					<key>Find</key>
 					<data>RUNEVg==</data>
 					<key>Replace</key>
@@ -91,9 +88,9 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>change HDAS to HDEF</string>
+					<string>Change HDAS to HDEF (needed for audio)</string>
 					<key>Disabled</key>
-					<true/>
+					<false/>
 					<key>Find</key>
 					<data>SERBUw==</data>
 					<key>Replace</key>
@@ -101,7 +98,9 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>change HECI to IMEI</string>
+					<string>Change HECI to IMEI (so Mac OS can natively use the Management Engine)</string>
+					<key>Disabled</key>
+					<false/>
 					<key>Find</key>
 					<data>SEVDSQ==</data>
 					<key>Replace</key>
@@ -110,6 +109,8 @@
 				<dict>
 					<key>Comment</key>
 					<string>change MEI to IMEI</string>
+					<key>Disabled</key>
+					<false/>
 					<key>Find</key>
 					<data>TUVJXw==</data>
 					<key>Replace</key>
@@ -117,7 +118,9 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>change GFX0 to IGPU</string>
+					<string>Change GFX0 to IGPU (needed for graphics)</string>
+					<key>Disabled</key>
+					<false/>
 					<key>Find</key>
 					<data>R0ZYMA==</data>
 					<key>Replace</key>
@@ -125,43 +128,9 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>change PEGP to GFX0</string>
-					<key>Find</key>
-					<data>UEVHUA==</data>
-					<key>Replace</key>
-					<data>R0ZYMA==</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>change PCI0.VID to IGPU #1 (Thinkpad)</string>
-					<key>Find</key>
-					<data>UENJMFZJRF8=</data>
-					<key>Replace</key>
-					<data>UENJMElHUFU=</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>change PCI0.VID to IGPU #2 (Thinkpad)</string>
-					<key>Find</key>
-					<data>VklEXwhfQURSDAAAAgA=</data>
-					<key>Replace</key>
-					<data>SUdQVQhfQURSDAAAAgA=</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>Rename BRT6 to BRTX, use with SSDT-BRT6.aml, SSDT-PNLF.aml, AppleBacklightInjector.kext, and VoodooPS2Controller.kext to fix brightness keys</string>
-					<key>Disabled</key>
-					<true/>
-					<key>Find</key>
-					<data>FCBCUlQ2Ag==</data>
-					<key>Replace</key>
-					<data>FCBCUlRYAg==</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
 					<string>Rename method UPRW to XPRW and use with SSDT-UPRW.aml to fix USB &quot;instant wake&quot; on sleep</string>
 					<key>Disabled</key>
-					<false/>
+					<true/>
 					<key>Find</key>
 					<data>FBJVUFJXAHA=</data>
 					<key>Replace</key>
@@ -171,7 +140,7 @@
 					<key>Comment</key>
 					<string>Rename method GPRW to YPRW and use with SSDT-UPRW.aml to fix USB &quot;instant wake&quot; on sleep</string>
 					<key>Disabled</key>
-					<false/>
+					<true/>
 					<key>Find</key>
 					<data>FEAGR1BSVwI=</data>
 					<key>Replace</key>
@@ -183,9 +152,9 @@
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
-					<data>FEkEX1BUUwE=</data>
+					<data>X1BUUwE=</data>
 					<key>Replace</key>
-					<data>FEkEWlBUUwE=</data>
+					<data>WlBUUwE=</data>
 				</dict>
 				<dict>
 					<key>Comment</key>
@@ -193,9 +162,9 @@
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
-					<data>FDlfV0FLAQ==</data>
+					<data>X1dBSwE=</data>
 					<key>Replace</key>
-					<data>FDlaV0FLAQ==</data>
+					<data>WldBSwE=</data>
 				</dict>
 				<dict>
 					<key>Comment</key>
@@ -203,18 +172,34 @@
 					<key>Disabled</key>
 					<true/>
 					<key>Find</key>
-					<data>X1JNVgCgFpCTVEJUUwGTU0JOUlRCVVOkVEFSU6EGpEhQQ0UULUhQTUUIoCaQkpNWRElEDP////+TUE1TWAGGUFhTWAoCcAFQTVNYcAFQU1BYFCpfSU5JAHBMVFIxTFRSWnBQTUwxTE1TTHBQTkwxTE5TTHBPQkYxT0JGWhQPX1BSVwCkR1BSVwppCgQUFl9QUlQAoApQSUNNpEFSMTKkUFIxMluCRztSUDE2</data>
+					<data>X1JNVg==</data>
 					<key>Replace</key>
-					<data>WFJNVgCgFpCTVEJUUwGTU0JOUlRCVVOkVEFSU6EGpEhQQ0UULUhQTUUIoCaQkpNWRElEDP////+TUE1TWAGGUFhTWAoCcAFQTVNYcAFQU1BYFCpfSU5JAHBMVFIxTFRSWnBQTUwxTE1TTHBQTkwxTE5TTHBPQkYxT0JGWhQPX1BSVwCkR1BSVwppCgQUFl9QUlQAoApQSUNNpEFSMTKkUFIxMluCRztSUDE2</data>
+					<data>WFJNVg==</data>
+					<key>TgtBridge</key>
+					<data>UlAwMQ==</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>Rename XTBT to YTBT and use with SSDT-YTBT.aml for USB-C hot plug</string>
+					<key>Disabled</key>
+					<true/>
+					<key>Find</key>
+					<data>pABYVEJU</data>
+					<key>Replace</key>
+					<data>pABZVEJU</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>Rename _UPC to QUPC to avoid conflict with system SSDT-4-xh_cfhd4 - system boots, but no USB or BTLE is working</string>
+					<key>Disabled</key>
+					<true/>
+					<key>Find</key>
+					<data>X1VQQw==</data>
+					<key>Replace</key>
+					<data>UVVQQw==</data>
 				</dict>
 			</array>
 		</dict>
-		<key>DisabledAML</key>
-		<array>
-			<string>SSDT.aml</string>
-			<string>SSDT-XCPM.aml</string>
-			<string>SSDT-PluginType1.aml</string>
-		</array>
 		<key>DropTables</key>
 		<array>
 			<dict>
@@ -231,9 +216,15 @@
 				<key>TableId</key>
 				<string>xh_rvp10</string>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>xh_cfhd4 contains duplicate definitions for _SB.PCI0.XHC.RHUB.HS01._UPC with DSDT, so this allows iasl to compile without error</string>
+				<key>Signature</key>
+				<string>SSDT</string>
+				<key>TableId</key>
+				<string>xh_cfhd4</string>
+			</dict>
 		</array>
-		<key>FixHeaders</key>
-		<true/>
 		<key>SSDT</key>
 		<dict>
 			<key>DropOem</key>
@@ -246,39 +237,13 @@
 			<key>NoOemTableId</key>
 			<false/>
 		</dict>
-		<key>SortedOrder</key>
-		<array>
-			<string>SSDT-XOSI.aml</string>
-			<string>SSDT-RMCF.aml</string>
-			<string>SSDT-SMBUS.aml</string>
-			<string>SSDT-MCHC.aml</string>
-			<string>SSDT-ALS0.aml</string>
-			<string>SSDT-DMAC.aml</string>
-			<string>SSDT-PMCR.aml</string>
-			<string>SSDT-MEM2.aml</string>
-			<string>SSDT-FANS.aml</string>
-			<string>SSDT-DeepIdle.aml</string>
-			<string>SSDT-LPC.aml</string>
-			<string>SSDT-UIAC.aml</string>
-			<string>SSDT-USBX.aml</string>
-			<string>SSDT-PNLF.aml</string>
-			<string>SSDT-BRT6.aml</string>
-			<string>SSDT-UPRW.aml</string>
-			<string>SSDT-HWP.aml</string>
-			<string>SSDT-RMDGPU.aml</string>
-			<string>SSDT-PTSWAK.aml</string>
-			<string>SSDT-IGPU.aml</string>
-			<string>SSDT-HDEF.aml</string>
-			<string>SSDT-TYPC.aml</string>
-			<string>SSDT-YTBT.aml</string>
-		</array>
 	</dict>
 	<key>Boot</key>
 	<dict>
 		<key>#DefaultVolume</key>
 		<string>LastBootedVolume</string>
 		<key>Arguments</key>
-		<string>dart=0 nv_disable=1 -disablegfxfirmware -cdfon</string>
+		<string>dart=0 nv_disable=1 -disablegfxfirmware -cdfon -v</string>
 		<key>NeverHibernate</key>
 		<true/>
 		<key>Secure</key>
@@ -288,122 +253,22 @@
 	</dict>
 	<key>Devices</key>
 	<dict>
-		<key>AddProperties</key>
-		<array>
-			<dict>
-				<key>Comment</key>
-				<string>Inject &quot;name&quot; as (data)&quot;#display&quot; to disable graphics drivers on NVidia</string>
-				<key>Device</key>
-				<string>NVidia</string>
-				<key>Key</key>
-				<string>name</string>
-				<key>Value</key>
-				<data>I2Rpc3BsYXkA</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Inject &quot;IOName&quot; as &quot;#display&quot; to disable graphics drivers on NVidia</string>
-				<key>Device</key>
-				<string>NVidia</string>
-				<key>Key</key>
-				<string>IOName</string>
-				<key>Value</key>
-				<string>#display</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Inject bogus class-code to prevent graphics drivers loading for NVidia</string>
-				<key>Device</key>
-				<string>NVidia</string>
-				<key>Key</key>
-				<string>class-code</string>
-				<key>Value</key>
-				<data>/////w==</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Inject &quot;name&quot; as (data)&quot;#display&quot; to disable graphics drivers on AMD</string>
-				<key>Device</key>
-				<string>ATI</string>
-				<key>Key</key>
-				<string>name</string>
-				<key>Value</key>
-				<data>I2Rpc3BsYXkA</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Inject &quot;IOName&quot; as &quot;#display&quot; to disable graphics drivers on AMD</string>
-				<key>Device</key>
-				<string>ATI</string>
-				<key>Key</key>
-				<string>IOName</string>
-				<key>Value</key>
-				<string>#display</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Inject bogus class-code to prevent graphics drivers loading for AMD</string>
-				<key>Device</key>
-				<string>ATI</string>
-				<key>Key</key>
-				<string>class-code</string>
-				<key>Value</key>
-				<data>/////w==</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Inject bogus vendor-id to prevent graphics drivers loading for AMD</string>
-				<key>Device</key>
-				<string>ATI</string>
-				<key>Key</key>
-				<string>vendor-id</string>
-				<key>Value</key>
-				<data>//8AAA==</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Inject bogus device-id to prevent graphics drivers loading for AMD</string>
-				<key>Device</key>
-				<string>ATI</string>
-				<key>Key</key>
-				<string>device-id</string>
-				<key>Value</key>
-				<data>//8AAA==</data>
-			</dict>
-		</array>
-		<key>Audio</key>
-		<dict>
-			<key>Inject</key>
-			<integer>0</integer>
-		</dict>
 		<key>FakeID</key>
 		<dict>
-			<key>#IntelGFX</key>
-			<string>0x59168086</string>
 			<key>#Kaby Lake-Comment</key>
 			<string>To avoid automatic Clover fake device-id (Skylake) injection</string>
-		</dict>
-		<key>Properties</key>
-		<dict>
-			<key>PciRoot(0)/Pci(0x1f,3)</key>
-			<dict>
-				<key>#PinConfigurations</key>
-				<data></data>
-				<key>layout-id</key>
-				<integer>13</integer>
-			</dict>
+			<key>#IntelGFX</key>
+			<string>0x3e9b8086</string>
 		</dict>
 		<key>USB</key>
 		<dict>
-			<key>AddClockID</key>
-			<true/>
 			<key>FixOwnership</key>
-			<true/>
+			<false/>
+			<key>AddClockID</key>
+			<false/>
 			<key>Inject</key>
-			<true/>
+			<false/>
 		</dict>
-		<key>UseIntelHDMI</key>
-		<false/>
 	</dict>
 	<key>DisableDrivers</key>
 	<array>

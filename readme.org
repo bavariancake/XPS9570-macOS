@@ -119,6 +119,20 @@ to use UTC as well, with =regedit=:
      (Fixed by new the link rate patch in the graphics section)
    - +Constant CPU activity in =kernel_task=+
      (Symptom of broken audio patch - either fix or remove)
+* DSDT/SSDT patching based on [[https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/][DSDT/SSDT guide]] and [[https://www.tonymacx86.com/threads/guide-using-clover-to-hotpatch-acpi.200137/][hotpatching guide]]
+** Hotpatching
+*** Extract patches on running system with [[https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/][patchmatic]]
+This will "will write all injected DSDT.aml and SSDT*.aml in the order they were injected by Clover" (hotpatching guide).
+
+#+BEGIN_SRC sh
+  patchmatic -extract
+  # then disassemble:
+  iasl -da -dl *.aml
+#+END_SRC
+** Extracting tables for static patching (replaced by hotpatching)
+   - Extract with clover: Press F4 on Clover boot screen, then see =EFI/CLOVER/ACPI/origin= for extraced .aml files.
+   - Remove =SSDT-4-xh_cfhd4.aml= - contains duplicate definitions for several other files
+   - =$ iasl -da -dl DSDT.aml SSDT*.aml=
 * Installation and system updates
 ** Installation from scratch
 *** Preparing the XPS 9570
@@ -153,7 +167,6 @@ Begin with the default Windows 10 installation (or install Windows 10 if using a
   Installing updates is possible when injecting Intel graphics, with invalid platform id, e.g. 0x12345678, and disabling kext patches.
   Perhaps it makes sense to have a special macOS install CLOVER folder, that disables any brightness 'fixes' that cause the display to be dimmed. TBD.
 * Versions
-  - WhateverGreen: 1.2.4 (RELEASE)
   - Clover: v2.4k r4701 RM-4963
 * Miscellaneous Notes
 ** Installing kexts
