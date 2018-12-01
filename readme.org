@@ -108,31 +108,52 @@ to use UTC as well, with =regedit=:
    - Right-side USB port appears as an internal port, so devices attached to it can't be ejected
    - iMessage does not work by default (haven't tried)
    - Drive encryption is disabled (not tested)
+     (note to self: see Clover installer for "FileVault 2" UEFI drivers)
    - Temporary hang whenever Touch ID is requested (TODO: disable Touch ID, look into fingerprint sensor)
    - Use Goodix fingerprint reader for Touch ID?
-   - Fix WiFi
+   - WiFi not working with built-in Killer card
+   - Thunderbolt not working (haven't tried)
    - SD card reader not present
    - Suspend and resume working?
    - Hangs on boot with Apple logo intermittently (TBD: may be fixed by new link rate patch, still testing)
-     (note to self: see Clover installer for "FileVault 2" UEFI drivers)
    - +Graphics acceleration becomes poor after display goes to sleep+
      (Fixed by new the link rate patch in the graphics section)
    - +Constant CPU activity in =kernel_task=+
      (Symptom of broken audio patch - either fix or remove)
-* DSDT/SSDT patching based on [[https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/][DSDT/SSDT guide]] and [[https://www.tonymacx86.com/threads/guide-using-clover-to-hotpatch-acpi.200137/][hotpatching guide]]
-** Hotpatching
-*** Extract patches on running system with [[https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/][patchmatic]]
-This will "will write all injected DSDT.aml and SSDT*.aml in the order they were injected by Clover" (hotpatching guide).
+* ACPI DSDT/SSDT patching
+Most of the ACPI patching info is based on the [[https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/][laptop DSDT/SSDT guide]] and [[https://www.tonymacx86.com/threads/guide-using-clover-to-hotpatch-acpi.200137/][hotpatching guide]].
 
-#+BEGIN_SRC sh
-  patchmatic -extract
-  # then disassemble:
-  iasl -da -dl *.aml
-#+END_SRC
-** Extracting tables for static patching (replaced by hotpatching)
-   - Extract with clover: Press F4 on Clover boot screen, then see =EFI/CLOVER/ACPI/origin= for extraced .aml files.
-   - Remove =SSDT-4-xh_cfhd4.aml= - contains duplicate definitions for several other files
-   - =$ iasl -da -dl DSDT.aml SSDT*.aml=
+Many ACPI patches depend on starting out with a working set of ACPI tables (accomplished via
+patching if needed), so it's useful to test if this is the case and fix any errors before attempting
+further changes.
+
+To do this, we can look through the macOS boot logs for ACPI errors, dump the unmodified ACPI
+tables, and dump the ACPI tables as modified by Clover. Making changes as needed, rebooting, and
+re-inspecting system logs, we can iterate until there are no more ACPI problems as seen by macOS.
+
+Note: this process wasn't clear to me from reading the patching guides initially, but it may not be
+the best way to do it - caveat emptor.
+
+1. Inspect system logs for errors
+   Immediately after bootup, dump system log for the last 10 minutes (adjust as needed):
+   =log show --predicate 'process == "kernel"' --style syslog --source --debug --last 10m > sys_log.txt=
+   Then search =sys_log.txt= for "ACPI Error" or "ACPI Exception".
+2. Dump unmodified ACPI tables
+   Press F4 on Clover boot screen (no output will show), then mount EFI partition and look for
+   ACPI tables in =CLOVER/ACPI/origin=.
+3. Check unmodified tables for errors with iasl
+   Disassembling all tables from a single namespace with the =-da= option should yield no errors:
+   =iasl -da -dl DSDT.aml SSDT-*.aml=
+   Although, some duplicate definitions with the error AE_ALREADY_EXISTS may not be a problem (TBD).
+4. Check modified tables as injected by Clover with patchmatic and iasl
+   #+BEGIN_SRC sh
+   patchmatic -extract
+   iasl -da -dl DSDT.aml SSDT-*.aml
+   #+END_SRC
+   Again, this should yield no errors. If a duplicate definition is found with AE_ALREADY_EXISTS,
+   try disassembling the tables without the =-da= option:
+   =iasl -dl DSDT.aml SSDT-*.aml=
+   If this still fails, there is likely a problem that needs to be fixed.
 * Installation and system updates
 ** Installation from scratch
 *** Preparing the XPS 9570
