@@ -12,8 +12,11 @@ for other kexts/patches/solutions/etc.
   - Intel i9-8950HK
   - 32GB RAM
   - Toshiba 2TB SSD
-  - BIOS: 1.5.0
+  - Goodix fingerprint reader
+  - Wacom touchscreen
+  - TODO: Touchpad manufacturer?
 - Software environment
+  - BIOS: 1.5.0
   - Dual-booting Windows 10
 * Hardware
 ** Intel UHD 630 Graphics
@@ -162,7 +165,6 @@ to use UTC as well, with =regedit=:
   - create new DWORD (32-bit) =RealTimeIsUniversal= with value '1'
 ** Known problems/caveats
    - Internal keyboard behaves strangely with [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][OS-X-Voodoo-PS2-Controller]], poor touchpad support
-   - Right-side USB port appears as an internal port, so devices attached to it can't be ejected
    - iMessage does not work by default (haven't tried)
    - Drive encryption is disabled (not tested)
      (note to self: see Clover installer for "FileVault 2" UEFI drivers)
@@ -170,11 +172,11 @@ to use UTC as well, with =regedit=:
    - Use Goodix fingerprint reader for Touch ID?
    - WiFi not working with built-in Killer card
    - Thunderbolt not working (haven't tried)
-   - SD card reader not present
    - Suspend and resume working?
-   - Hangs on boot with Apple logo intermittently (TBD: may be fixed by new link rate patch, still testing)
+   - SD card reader not present
+   - +Right-side USB port appears as an internal port, so devices attached to it can't be ejected+
+   - +Hangs on boot with Apple logo intermittently+
    - +Graphics acceleration becomes poor after display goes to sleep+
-     (Fixed by new the link rate patch in the graphics section)
    - +Constant CPU activity in =kernel_task=+
      (Symptom of broken audio patch - either fix or remove)
 * ACPI DSDT/SSDT patching
