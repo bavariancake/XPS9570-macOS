@@ -2,13 +2,17 @@
   https://github.com/RehabMan/OS-X-ACPI-Battery-Driver
   ACPIBatteryManager by RehabMan
 
-- AppleBacklightFixup.kext (
-  https://github.com/RehabMan/AppleBacklightFixup (2018-1013)
+- AppleBacklightFixup.kext (2018-1013)
+  https://github.com/RehabMan/AppleBacklightFixup
   Implement backlight control for laptop internal displays on macOS/OS X
 
 - Lilu.kext (1.2.8)
   https://github.com/acidanthera/Lilu
   An open source kernel extension bringing a platform for arbitrary kext, library, and program patching throughout the system for macOS.
+
+- USBInjectAll (2018-1108)
+  https://github.com/RehabMan/OS-X-USB-Inject-All
+  Inject custom USB port properties to work around buggy ACPI tables
 
 - WhateverGreen.kext (1.2.4)
   https://github.com/acidanthera/WhateverGreen

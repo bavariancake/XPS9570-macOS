@@ -3,6 +3,11 @@
   https://www.tonymacx86.com/threads/guide-native-power-management-for-laptops.175801/
   Record CPU p-state info to test power management - loaded manually for debugging only.
 
+- IORegistryExplorer (2.1)
+  https://www.tonymacx86.com/audio/58368-guide-how-make-copy-ioreg.html
+  Used to view device tree and debug many harware and ACPI issues.
+  Should use v2.1, not a later version, which has new and un-fixed bugs.
+
 - MaciASL.app (2018-0507)
   https://github.com/RehabMan/OS-X-MaciASL-patchmatic
   ACPI editor/compiler for DSDT patching.

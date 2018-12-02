@@ -40,9 +40,9 @@
 				<key>FixTMR</key>
 				<false/>
 				<key>Comment-FixUSB</key>
-				<string>Haven&apos;t tested this yet - docs are not clear on what this does</string>
+				<string>Definitely no - injects USB-specific _DSM into IGPU region, which we don&apos;t want</string>
 				<key>FixUSB</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>Patches</key>
 			<array>
@@ -130,7 +130,7 @@
 					<key>Comment</key>
 					<string>Rename method UPRW to XPRW and use with SSDT-UPRW.aml to fix USB &quot;instant wake&quot; on sleep</string>
 					<key>Disabled</key>
-					<true/>
+					<false/>
 					<key>Find</key>
 					<data>FBJVUFJXAHA=</data>
 					<key>Replace</key>
@@ -140,7 +140,7 @@
 					<key>Comment</key>
 					<string>Rename method GPRW to YPRW and use with SSDT-UPRW.aml to fix USB &quot;instant wake&quot; on sleep</string>
 					<key>Disabled</key>
-					<true/>
+					<false/>
 					<key>Find</key>
 					<data>FEAGR1BSVwI=</data>
 					<key>Replace</key>
@@ -218,7 +218,7 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>xh_cfhd4 contains duplicate definitions for _SB.PCI0.XHC.RHUB.HS01._UPC with DSDT, so this allows iasl to compile without error</string>
+				<string>xh_cfhd4 contains duplicate definitions for e.g. _SB.PCI0.XHC.RHUB.HS01._UPC with DSDT</string>
 				<key>Signature</key>
 				<string>SSDT</string>
 				<key>TableId</key>
