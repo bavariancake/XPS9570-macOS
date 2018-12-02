@@ -172,12 +172,12 @@ to use UTC as well, with =regedit=:
    - Use Goodix fingerprint reader for Touch ID?
    - WiFi not working with built-in Killer card
    - Thunderbolt not working (haven't tried)
-   - Suspend and resume working?
+   - Suspend and resume a little wonky
    - SD card reader not present
    - +Right-side USB port appears as an internal port, so devices attached to it can't be ejected+
-   - +Hangs on boot with Apple logo intermittently+
+   - +Hang on boot with Apple logo intermittently+
    - +Graphics acceleration becomes poor after display goes to sleep+
-   - +Constant CPU activity in =kernel_task=+
+   - +Constant CPU activity in kernel_task process+
      (Symptom of broken audio patch - either fix or remove)
 * ACPI DSDT/SSDT patching
 Most of the ACPI patching info is based on the [[https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/][laptop DSDT/SSDT guide]] and [[https://www.tonymacx86.com/threads/guide-using-clover-to-hotpatch-acpi.200137/][hotpatching guide]].
