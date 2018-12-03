@@ -188,16 +188,6 @@
 					<key>Replace</key>
 					<data>pABZVEJU</data>
 				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>Rename _UPC to QUPC to avoid conflict with system SSDT-4-xh_cfhd4 - system boots, but no USB or BTLE is working</string>
-					<key>Disabled</key>
-					<true/>
-					<key>Find</key>
-					<data>X1VQQw==</data>
-					<key>Replace</key>
-					<data>UVVQQw==</data>
-				</dict>
 			</array>
 		</dict>
 		<key>DropTables</key>
