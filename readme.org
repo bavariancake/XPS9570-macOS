@@ -100,55 +100,38 @@ One symptom of broken audio drivers is constant CPU activity in a =kernel_task= 
 
 The recommended audio patch is [[https://github.com/acidanthera/AppleALC][AppleALC]].
 ** USB
+The XPS 9570 DSDT table has a few incorrect USB properties, for example the right side type A port
+is marked as being internal, so an attached disk can't be easily ejected. The correct properties are
+injected via USBInjectAll and in [[file:CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-UIAC.dsl]].
+
 Based on [[https://www.tonymacx86.com/threads/guide-10-11-usb-changes-and-solutions.173616/][USB guide]] and [[https://www.tonymacx86.com/threads/guide-creating-a-custom-ssdt-for-usbinjectall-kext.211311/][companion guide.]]
 
-The XPS 9570 DSDT table has a few buggy USB properties, which are fixed via USBInjectAll and custom
-properties in [[file:CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-UIAC.dsl]].
-
-USB config reported by DSDT:
-
-| Port | Connectable | Visible | Type        |
-|------+-------------+---------+-------------|
-| HS01 | Yes         | Yes     | Proprietary |
-| HS02 | Yes         | Yes     | A           |
-| HS03 | No          | No      | Proprietary |
-| HS04 | Yes         | No      | Proprietary |
-| HS05 | Yes         | Yes     | Proprietary |
-| HS06 | No          | No      | Proprietary |
-| HS07 | Yes         | No      | Proprietary |
-| HS08 | No          | No      | Proprietary |
-| HS09 | Yes         | No      | Proprietary |
-| HS10 | No          | No      | Proprietary |
-| HS11 | No          | No      | Proprietary |
-| HS12 | Yes         | No      | Proprietary |
-| HS13 | No          | No      | Proprietary |
-| HS14 | No          | No      | Proprietary |
-| SS01 | Yes         | Yes     | Proprietary |
-| SS02 | Yes         | Yes     | Proprietary |
-| SS03 | No          | No      | Proprietary |
-| SS04 | No          | No      | Proprietary |
-| SS05 | No          | No      | Proprietary |
-| SS06 | No          | No      | Proprietary |
-| SS07 | No          | No      | Proprietary |
-| SS08 | No          | No      | Proprietary |
-| SS09 | No          | No      | Proprietary |
-| SS10 | No          | No      | Proprietary |
-| USR1 | No          | No      | Proprietary |
-| USR2 | No          | No      | Proprietary |
+USB config reported by DSDT (connectable ports only):
+| Port | Visible | Type        |
+|------+---------+-------------|
+| HS01 | Yes     | Proprietary |
+| HS02 | Yes     | Type A      |
+| HS04 | No      | Proprietary |
+| HS05 | Yes     | Proprietary |
+| HS07 | No      | Proprietary |
+| HS09 | No      | Proprietary |
+| HS12 | No      | Proprietary |
+| SS01 | Yes     | Proprietary |
+| SS02 | Yes     | Proprietary |
 
 Actual hwardware config:
+| Port      | Type        | User Visible* | Description                                |
+|-----------+-------------+---------------+--------------------------------------------|
+| HS01/SS01 | Type A      | Yes           | Right side                                 |
+| HS02/SS02 | Type A      | Yes           | Left side                                  |
+| HS04      | Proprietary | No            | Bluetooth                                  |
+| HS05      | Type C      | Yes           | Left side                                  |
+| HS07      | Proprietary | No            | Goodix fingerprint reader                  |
+| HS09      | Proprietary | No            | No longer used; touchscreen on prior model |
+| HS12      | Proprietary | No            | Webcam                                     |
 
-| Port | Connectable | Type        | Visible | Description                                                      |
-|------+-------------+-------------+---------+------------------------------------------------------------------|
-| HS01 | Yes         | A           | Yes     | Right side type A                                                |
-| HS02 | Yes         | A           | Yes     | Left side type A                                                 |
-| HS04 | Yes         | Proprietary | No      | Bluetooth controller?                                            |
-| HS05 | Yes         | C           | Yes     | Left side C-type                                                 |
-| HS07 | Yes         | Proprietary | No      | Goodix fingerprint reader                                        |
-| HS09 | Yes         | Proprietary | No      | Was used for touchscreen on XPS 9560, which is now I2C - removed |
-| HS12 | Yes         | Proprietary | No      | Webcam                                                           |
-| SS01 | Yes         | A           | Yes     | Right side type A                                                |
-| SS02 | Yes         | A           | Yes     | Left side type A                                                 |
+(*) "Set if the device connection point can be seen by the user without disassembly" according to
+ACPI 6.2 A, 6.1.8, _PLD (Physical Location of Device)
 *** Implementing USB port fixes and removing unused ports
 - Include [[https://github.com/RehabMan/OS-X-USB-Inject-All][USBInjectAll]] [[file:kexts/USBInjectAll.kext][kext]]
 - Include [[file:CLOVER/ACPI/patched/SSDT-UIAC.aml][SSDT-UIAC.aml]] ([[file:CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-UIAC.dsl]]) - based on [[https://github.com/RehabMan/OS-X-USB-Inject-All/blob/master/SSDT-UIAC-ALL.dsl][SSDT-UIAC-ALL.dsl]] and customized for XPS 9570
