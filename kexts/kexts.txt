@@ -14,6 +14,10 @@
   https://github.com/RehabMan/OS-X-USB-Inject-All
   Inject custom USB port properties to work around buggy ACPI tables
 
+- VoodooPS2Controller (2018-1008)
+  https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller
+  Support internal PS/2 keyboard
+
 - WhateverGreen.kext (1.2.4)
   https://github.com/acidanthera/WhateverGreen
   Lilu plugin providing patches to select GPUs on macOS.
