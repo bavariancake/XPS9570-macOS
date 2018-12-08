@@ -188,6 +188,16 @@
 					<key>Replace</key>
 					<data>pABZVEJU</data>
 				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>Rename BRT6 to BRTX, use with SSDT-BRT6.aml, SSDT-PNLF.aml, AppleBacklightInjector.kext, and VoodooPS2Controller.kext to fix brightness keys</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>FCBCUlQ2Ag==</data>
+					<key>Replace</key>
+					<data>FCBCUlRYAg==</data>
+				</dict>
 			</array>
 		</dict>
 		<key>DropTables</key>
