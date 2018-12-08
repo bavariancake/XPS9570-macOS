@@ -33,7 +33,7 @@ Side note: Some threads discuss setting DVMT pre-alloc in the BIOS, which is not
 laptops, including the XPS 9570. However, the default of 64MB DVMT is sufficient, so fortunately
 nothing needs to be done here.
 *** Enabling acceleration
-- [[file:CLOVER/config.plist][config.plist]] changes (enable patch for 10.14 or 10.14.1, as needed)
+- [[file:CLOVER/config.plist][config.plist]]
   - Graphics/Inject/Intel=yes
   - Graphics/ig-platform-id=0x3e9b0000
   - KernelAndKextPatches/KextsToPatch/Item 1 (Maximum link rate 0x14 (HBR2) - works for 4K XPS 9570)
@@ -122,6 +122,14 @@ should run IORegistryExplorer and verify that X86PlatformPlugin is loading under
 *** Testing power management (WIP)
 Use [[https://software.intel.com/en-us/articles/intel-power-gadget-20][Intel Power Gadget]] to graph CPU power/frequency/temp over time.
 *** TODO Disable discrete NVIDIA GPU to save more power
+** System sleep (work in progress)
+Sleep depends on many pieces working together correclty, and is still a work in progress.
+
+A temporary workaround is to enable "Prevent computer from sleeping automatically when the display
+is off" in Sys. Prefs. -> Energy Saver, allowing at least the display to turn off when idle.
+
+To test sleep, ensure this setting is off. Enable the keyboard backlight, then sleep the system -
+the backlight will turn off when the system is actually asleep. This takes about 30 seconds.
 ** Audio
 Audio does not work by default.
 
