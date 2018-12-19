@@ -8,7 +8,14 @@
 
 - Lilu.kext (1.2.8)
   https://github.com/acidanthera/Lilu
-  An open source kernel extension bringing a platform for arbitrary kext, library, and program patching throughout the system for macOS.
+  An open source kernel extension bringing a platform for arbitrary
+  kext, library, and program patching throughout the system for macOS.
+
+- NoTouchID.kext (1.0.1)
+  https://github.com/al3xtjames/NoTouchID
+  Disables support for Touch ID, which is useful to prevent lags on
+  auth dialogs. This occurs on SMBIOS versions where Touch ID is
+  expected, e.g. MacBookPro15,1 that we're using for the XPS 9570.
 
 - USBInjectAll (2018-1108)
   https://github.com/RehabMan/OS-X-USB-Inject-All
@@ -21,3 +28,5 @@
 - WhateverGreen.kext (1.2.4)
   https://github.com/acidanthera/WhateverGreen
   Lilu plugin providing patches to select GPUs on macOS.
+
+Note: All kexts are release versions, if both debug and release are provided.

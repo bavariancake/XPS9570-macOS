@@ -8,10 +8,11 @@ know. I'm hoping this will become the definitive guide for running macOS on the 
 
 This repo and many pieces are based on the-darkvoid's [[https://github.com/the-darkvoid/XPS9360-macOS][XPS9360-macOS repo]], which is also a good guide
 for other kexts/patches/solutions/etc.
-** Tested configuration
+** Tested hardware configuration
 - Dell XPS 9570
   - Intel i9-8950HK
   - 32GB RAM
+  - 4K display
   - Toshiba 2TB SSD
   - Goodix fingerprint reader
   - Wacom touchscreen
@@ -19,6 +20,10 @@ for other kexts/patches/solutions/etc.
 - Software environment
   - BIOS: 1.5.0
   - Dual-booting Windows 10
+** Tested software configuration
+- macOS 10.14.0: OK
+- macOS 10.14.1: OK
+- macOS 10.14.2: OK (current)
 * Hardware
 ** Intel UHD 630 graphics
 Intel graphics is supported by [[https://www.tonymacx86.com/threads/fix-coffee-lake-intel-uhd-graphics-630-on-macos-mojave-kernel-panic-due-to-divide-by-zero.261687/][setting the maximum link rate in DPCD buffer]]. This may need to be
@@ -176,6 +181,20 @@ ACPI 6.2 A, 6.1.8, _PLD (Physical Location of Device)
 Will likely work when USB type C and/or Thunderbolt fixes are added.
 *** Unintended side effect: *intermittently* causes screen brightness to work without 3 min. delay
 This occurs without a port limit patch, without SSDT-UIAC.aml, and boot flags "-uia_exclude_hs uia_include=HS04".
+** Touch ID / Goodix fingerprint sensor
+It's [[https://www.tonymacx86.com/threads/solved-asus-ux430ua-fingerprint-trackpad-touch-id.230671/#post-1572495][not possible]] to use fingerprint sensor for Touch ID according to RehabMan. Perhaps the
+integrated Goodix fingerprint sensor can be used, and enabled with PAM (TBD).
+
+Since we're using the =MacBookPro15,1= SMBIOS, macOS is expecting Touch ID to be available, causing
+lag on password prompts. This can be disabled for now with the NoTouchID kext.
+
+- Install [[https://github.com/al3xtjames/NoTouchID][NoTouchID]] [[file:kexts/NoTouchID.kext][kext]]
+** FakeSMC/VirtualSMC
+
+One of these is required to boot macOS.
+
+[[https://github.com/acidanthera/VirtualSMC][VirtualSMC]] and [[https://github.com/RehabMan/OS-X-FakeSMC-kozlek][FakeSMC]]
+
 ** Windows compatibility
 *** Real-time clock
 macOS sets BIOS clock to UTC, but Windows sets clock to local time. The solution is to set Windows
@@ -184,17 +203,17 @@ to use UTC as well, with =regedit=:
 - regedit -> =HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation=
 - create new DWORD (32-bit) =RealTimeIsUniversal= with value '1'
 ** Known problems/caveats
-- Temporary hang whenever Touch ID is requested (TODO: disable Touch ID, look into fingerprint sensor)
 - Internal keyboard behaves strangely with [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][OS-X-Voodoo-PS2-Controller]], poor touchpad support
 - iMessage does not work by default (haven't tried)
 - Drive encryption is disabled (not tested)
   (note to self: see Clover installer for "FileVault 2" UEFI drivers)
-- Use Goodix fingerprint reader for Touch ID?
 - WiFi not working with built-in Killer card
 - Bluetooth can't be disabled, and doesn't wake system from sleep
 - Thunderbolt not working (haven't tried)
 - Suspend and resume a little wonky
+- Use Goodix fingerprint reader for Touch ID and PAM?
 - SD card reader not present
+- +Temporary hang whenever Touch ID is requested+
 - +Right-side USB port appears as an internal port, so devices attached to it can't be ejected+
 - +Hang on boot with Apple logo intermittently+
 - +Graphics acceleration becomes poor after display goes to sleep+
