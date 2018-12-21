@@ -190,13 +190,13 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>Rename BRT6 to BRTX, use with SSDT-BRT6.aml, SSDT-PNLF.aml, AppleBacklightInjector.kext, and VoodooPS2Controller.kext to fix brightness keys</string>
+					<string>Rename BRT6 to BRTX, use with SSDT-BRT6.aml, SSDT-PNLF.aml, AppleBacklightInjector.kext, and VoodooPS2Controller.kext to fix brightness keys. See readme!</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
-					<data>FCBCUlQ2Ag==</data>
+					<data>QlJUNgKg</data>
 					<key>Replace</key>
-					<data>FCBCUlRYAg==</data>
+					<data>QlJUWAKg</data>
 				</dict>
 			</array>
 		</dict>
@@ -393,10 +393,10 @@
 				<string>To implement correct brightness levels, change F%uT%04x to F%uTxxxx in AppleBacklightInjector.kext (RehabMan)</string>
 				<key>Disabled</key>
 				<false/>
-				<key>Find</key>
-				<data>RiV1VCUwNHgA</data>
 				<key>Name</key>
 				<string>com.apple.driver.AppleBacklight</string>
+				<key>Find</key>
+				<data>RiV1VCUwNHgA</data>
 				<key>Replace</key>
 				<data>RiV1VHh4eHgA</data>
 			</dict>
