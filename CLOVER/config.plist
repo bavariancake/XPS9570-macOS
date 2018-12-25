@@ -243,7 +243,7 @@
 		<key>#DefaultVolume</key>
 		<string>LastBootedVolume</string>
 		<key>Arguments</key>
-		<string>dart=0 nv_disable=1 -disablegfxfirmware -cdfon -v</string>
+		<string>dart=0 nv_disable=1 -cdfon -v</string>
 		<key>NeverHibernate</key>
 		<true/>
 		<key>Secure</key>
