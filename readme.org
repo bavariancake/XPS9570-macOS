@@ -21,9 +21,13 @@ for other kexts/patches/solutions/etc.
   - BIOS: 1.5.0
   - Dual-booting Windows 10
 ** Tested software configuration
-- macOS 10.14.0: OK
-- macOS 10.14.1: OK
-- macOS 10.14.2: OK (current)
+- macOS 10.14.0 - 10.14.2: OK
+- BIOS 1.5.0 OK
+
+Note that BIOS 1.6.0 has been released, but I would recommend not updating unless the [[https://www.dell.com/support/home/en/en/nodhs1/drivers/driversdetails?driverId=DDNHT&osCode=WT64A&productCode=xps-15-9570-laptop][release notes]]
+contain a must-have for you. BIOS updates can change ACPI tables, so the risk is breaking features
+that work currently. Dell also releases BIOS updates frequently, suggesting they are still ironing
+out more bugs.
 * Hardware
 ** Intel UHD 630 graphics
 Intel graphics is supported by [[https://www.tonymacx86.com/threads/fix-coffee-lake-intel-uhd-graphics-630-on-macos-mojave-kernel-panic-due-to-divide-by-zero.261687/][setting the maximum link rate in DPCD buffer]]. This may need to be
