@@ -6,7 +6,7 @@
   https://github.com/RehabMan/AppleBacklightFixup
   Implement backlight control for laptop internal displays on macOS/OS X
 
-- Lilu.kext (1.2.8)
+- Lilu.kext (1.2.9)
   https://github.com/acidanthera/Lilu
   An open source kernel extension bringing a platform for arbitrary
   kext, library, and program patching throughout the system for macOS.
@@ -25,7 +25,7 @@
   https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller
   Support internal PS/2 keyboard
 
-- WhateverGreen.kext (1.2.4)
+- WhateverGreen.kext (1.2.5)
   https://github.com/acidanthera/WhateverGreen
   Lilu plugin providing patches to select GPUs on macOS.
 

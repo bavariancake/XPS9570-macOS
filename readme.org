@@ -43,17 +43,24 @@ nothing needs to be done here.
   - Graphics/ig-platform-id=0x3e9b0000
   - KernelAndKextPatches/KextsToPatch/Item 1 (Maximum link rate 0x14 (HBR2) - works for 4K XPS 9570)
   - KernelAndKextPatches/KextsToPatch/Item 2 (Maximum link rate 0x0A (HBR) - needed for 1080p XPS 9570? TBD)
+- Install [[https://github.com/acidanthera/Lilu][Lilu]] [[file:kexts/Lilu.kext][kext]]
 - Install [[https://github.com/acidanthera/WhateverGreen][WhateverGreen]] [[file:kexts/WhateverGreen.kext][kext]]
 *** Enabling backlight control via slider in Sys. Prefs. -> Displays
-Patched via kext and SSDT patch ([[https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightfixup-kext.218222/][discussion]]).  Can use pre-built [[https://bitbucket.org/RehabMan/applebacklightfixup/downloads/][kext and SSDT-PNLF.aml]], but the
-.aml file should be the same as [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl][SSDT-PNLF.dsl]] from [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config][OS-X-Clover-Laptop-Config]].
+Patched via kext and SSDT patch ([[https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightfixup-kext.218222/][discussion]]). Can use pre-built [[https://bitbucket.org/RehabMan/applebacklightfixup/downloads/][kext and SSDT-PNLF.aml]], but is
+identical to SSDT-PNLF.aml compiled from [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl][SSDT-PNLF.dsl]] in [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config][OS-X-Clover-Laptop-Config]].
 - Include [[https://github.com/RehabMan/AppleBacklightFixup][AppleBacklightFixup]] [[file:kexts/AppleBacklightFixup.kext][kext]]
-- Include [[file:CLOVER/ACPI/patched/SSDT-PNLF.aml][SSDT-PNLF.aml]] ([[file:CLOVER/ACPI/patched/SSDT-PNLF.dsl][SSDT-PNLF.dsl]])
-*** Known issue: [[https://www.tonymacx86.com/threads/bug-black-screen-3-minutes-after-booting-coffeelake-uhd-630.261131/][Black/dark screen 3 minutes after booting with CoffeeLake UHD 630]]
-Workaround: wait 3 minutes until a proper solution is found (TBD).
-
-This problem seems to be surprisingly difficult to fix, partly because the people who are likely to
-find a solution do not yet have UHD 630 hardware.
+- +Include [[file:CLOVER/ACPI/patched/SSDT-PNLF.aml][SSDT-PNLF.aml]] ([[file:CLOVER/ACPI/patched/SSDT-PNLF.dsl][SSDT-PNLF.dsl]])+
+- Include [[file:CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] ([[file:CLOVER/ACPI/patched/SSDT-PNLFCFL.dsl][SSDT-PNLFCFL.dsl]]); possibly temporary until fix is included in SSDT-PNLF.
+*** Preventing black/dark screen 3 minutes after booting
+This was a complex issue with a [[https://www.tonymacx86.com/threads/bug-black-screen-3-minutes-after-booting-coffeelake-uhd-630.261131/][long thread]] to find a solution. This fix is possibly not perfect
+yet; if you do run into this problem despite the fix, open an issue in this repo and/or reply to the
+thread with the discussion.
+- [[file:CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] is already included in step above
+- Use Lilu 1.2.9 or higher
+- Use WhateverGreen 1.2.5 or higher
+- Remember to update kext cache whenever a kext is added or updated (note to self: stop forgetting that ugh)
+If brightness controls still don't work on boot, or the screen goes black periodically, try booting
+with WhateverGreen boot argument =igfxcflbklt=1=. This force-enables the Coffee Lake backlight fix.
 ** PS/2 Keyboard
 The internal keyboard is a PS/2 device, but macOS does not support PS/2. This can be implemented
 with VoodooPS2Controller.
@@ -213,6 +220,7 @@ to use UTC as well, with =regedit=:
 - Suspend and resume a little wonky
 - Use Goodix fingerprint reader for Touch ID and PAM?
 - SD card reader not present
+- +Black/dark screen 3 minutes after booting+
 - +Temporary hang whenever Touch ID is requested+
 - +Right-side USB port appears as an internal port, so devices attached to it can't be ejected+
 - +Hang on boot with Apple logo intermittently+
