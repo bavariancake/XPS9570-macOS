@@ -18,6 +18,8 @@
 // | 0x09 | Type C connector - USB2 and SS with Switch                         |
 // | 0x0A | Type C connector - USB2 and SS without Switch                      |
 // | 0xFF | Proprietary connector                                              |
+//
+// Credit bavariancake: https://github.com/bavariancake/XPS9570-macOS
 
 DefinitionBlock ("", "SSDT", 2, "hack", "_UIAC", 0)
 {
