@@ -88,7 +88,7 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>Change HDAS to HDEF (needed for audio)</string>
+					<string>Change HDAS to HDEF for audio device</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
@@ -268,6 +268,16 @@
 			<false/>
 			<key>Inject</key>
 			<false/>
+		</dict>
+		<key>Properties</key>
+		<dict>
+			<key>PciRoot(0)/Pci(0x1f,3)</key>
+			<dict>
+				<key>Comment-layout-id</key>
+				<string>AppleALC layout-id for ALC298 (ALC3266 according to Dell) audio</string>
+				<key>layout-id</key>
+				<integer>30</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>DisableDrivers</key>
