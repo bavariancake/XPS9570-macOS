@@ -1,0 +1,40 @@
+#+STARTUP: indent
+* Display/Graphics
+** WhateverGreen.kext (1.2.5)
+https://github.com/acidanthera/WhateverGreen
+Lilu plugin providing patches for GPUs on macOS.
+** AppleBacklightFixup.kext (2018-1013)
+https://github.com/RehabMan/AppleBacklightFixup
+Implement backlight control for laptop internal displays on macOS/OS X
+* Wi-Fi/Bluetooth
+See readme for more info on Wi-Fi and Bluetooth - different options may be needed depending on the
+Broadcom card used.
+** AirportBrcmFixup.kext (1.1.9)
+https://github.com/acidanthera/AirportBrcmFixup
+Fixes WiFi card to appear as Airport Extreme, and makes the card appear to be native.
+** BrcmFirmwareRepo.kext and BrcmPatchRAM2.kext (2018-050)
+https://github.com/RehabMan/OS-X-BrcmPatchRAM
+Enables Bluetooth on supported Broadcom cards. Use BrcmFirmwareData.kext instead of
+BrcmFirmwareRepo.kext if installing to CLOVER/kexts/Other.
+* ACPIBatteryManager.kext (2018-1005)
+https://github.com/RehabMan/OS-X-ACPI-Battery-Driver
+Indicates battery percentage and status.
+* AppleALC (1.3.4)
+https://github.com/acidanthera/AppleALC
+Enables audio for Realtek ALC298 (ALC3266 according to Dell).
+* NoTouchID.kext (1.0.1)
+https://github.com/al3xtjames/NoTouchID
+Disables support for Touch ID, which is useful to prevent lags on auth dialogs. This occurs on
+SMBIOS versions where Touch ID is expected, e.g. MacBookPro15,1 that we're using for the XPS 9570.
+* USBInjectAll (2018-1108)
+https://github.com/RehabMan/OS-X-USB-Inject-All
+Inject custom USB port properties to work around buggy ACPI tables.
+* VoodooPS2Controller (2018-1008)
+https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller
+Support internal PS/2 keyboard.
+* Lilu.kext (1.3.1)
+https://github.com/acidanthera/Lilu
+An open source kernel extension bringing a platform for arbitrary kext, library, and program
+patching throughout the macOS. Required by WhateverGreen and other kexts.
+* Notes
+All kexts are release versions, if both debug and release are provided.
