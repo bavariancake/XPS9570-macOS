@@ -1,11 +1,11 @@
 #+STARTUP: indent
 * Display/Graphics
-** WhateverGreen.kext (1.2.5)
+** WhateverGreen.kext (1.2.6)
 https://github.com/acidanthera/WhateverGreen
 Lilu plugin providing patches for GPUs on macOS.
 ** AppleBacklightFixup.kext (2018-1013)
 https://github.com/RehabMan/AppleBacklightFixup
-Implement backlight control for laptop internal displays on macOS/OS X
+Implement backlight control for laptop internal displays on macOS
 * Wi-Fi/Bluetooth
 See readme for more info on Wi-Fi and Bluetooth - different options may be needed depending on the
 Broadcom card used.
