@@ -19,16 +19,11 @@ for other kexts/patches/solutions/etc.
   - Wacom touchscreen
   - TODO: Touchpad manufacturer?
 - Software environment
-  - BIOS: 1.5.0
+  - BIOS: 1.7.0
   - Dual-booting Windows 10
-** Tested software configuration
-- macOS 10.14.0 - 10.14.2: OK
-- BIOS: 1.5.0 OK
-
-Note that BIOS 1.6.0 has been released, but I would recommend not updating unless the [[https://www.dell.com/support/home/en/en/nodhs1/drivers/driversdetails?driverId=DDNHT&osCode=WT64A&productCode=xps-15-9570-laptop][release notes]]
-contain a must-have for you. BIOS updates can change ACPI tables, so the risk is breaking features
-that work currently. Dell also releases BIOS updates frequently, suggesting they are still ironing
-out more bugs.
+** Tested software configurations
+- macOS: 10.14.0, 10.14.1, 10.14.2, 10.14.3
+- BIOS: 1.5.0, 1.7.0
 * Hardware
 ** Intel UHD 630 graphics
 Intel graphics is supported by [[https://www.tonymacx86.com/threads/fix-coffee-lake-intel-uhd-graphics-630-on-macos-mojave-kernel-panic-due-to-divide-by-zero.261687/][setting the maximum link rate in DPCD buffer]]. This likely causes
@@ -107,9 +102,9 @@ to about 800Mbps.
 
 Connectors J0, J1, J2 should be connected as follows (see [[file:images/3rd_antenna.jpg][installation example]]):
 
-  J0: white antenna cable to display (primary)
-  J1: black antenna cable to display (Bluetooth/secondary)
-  J2: extra retrofitted antenna next to battery
+  - J0: white antenna cable to display (primary)
+  - J1: black antenna cable to display (Bluetooth/secondary)
+  - J2: extra retrofitted antenna next to battery
 
 The DW1830 Wi-Fi card is based on the Broadcom BCM943602BAED, using BCM43602 for Wi-Fi and BCM20703
 for Bluetooth. While Wi-Fi works by default, it shows up as a "Third-Party Wireless Card" in System
