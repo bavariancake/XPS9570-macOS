@@ -348,9 +348,13 @@
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
+		<key>Comment-AppleIntelCPUPM</key>
+		<string>Not needed for PM Haswell or later</string>
 		<key>AppleIntelCPUPM</key>
-		<true/>
-		<key>AppleRTC</key>
+		<false/>
+		<key>Comment-KernelPm</key>
+		<string>Used for PM on Haswell or later</string>
+		<key>KernelPm</key>
 		<true/>
 		<key>DellSMBIOSPatch</key>
 		<true/>
@@ -360,8 +364,6 @@
 			<string>\System\Library\Extensions\IONetworkingFamily.kext</string>
 		</array>
 		<key>KernelLapic</key>
-		<true/>
-		<key>KernelPm</key>
 		<true/>
 		<key>KernelToPatch</key>
 		<array>

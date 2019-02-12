@@ -95,7 +95,7 @@ this card here (purchased on EBay), although it's currently a bit expensive at a
 longer offers this card directly.
 
 This card has three antennas, while the XPS 9570 has only two antennas in the display. To get full
-Wi-Fi speed, a third antenna with a U.Fl connector must be added. This antenna can be placed in a
+Wi-Fi speed, a third antenna with a U.FL connector must be added. This antenna can be placed in a
 small gap next to the battery. It's OK to leave J2 unconnected, however - modern network cards
 should recognize this and disable the 3rd port. Without the 3rd antenna, I'm able to get speeds up
 to about 800Mbps.
@@ -128,12 +128,12 @@ By default, AirportBrcmFixup seems to limit Wi-Fi channel width for 802.11ac to 
 setting with the boot flag =brcmfx-country=#a= ([[file:CLOVER/config.plist][config.plist]]).
 
 If you have an 802.11ac capable access point, place the XPS 9570 next to it and option-click on the
-Wi-Fi icon. After a few minutes, you should see a line like =Channel: 165 (5 GHz, 80 MHz= with a =Tx
-Rate= below of 800 Mbps or higher. A congested Wi-Fi environment in an apartment building could
+Wi-Fi icon. After a few minutes, you should see a line like =Channel: 165 (5 GHz, 80 MHz)= with =Tx
+Rate= below it of 800 Mbps or higher. A congested Wi-Fi environment in an apartment building could
 reduce this rate.
 *** Messages and FaceTime setup
-The above installation steps prepare the way for Messages and FaceTime work as well, but there are
-more in-depth guides to Messages [[https://www.tonymacx86.com/threads/an-idiots-guide-to-imessage.196827/][here]] and [[https://www.tonymacx86.com/threads/how-to-fix-imessage.110471/][here]] if needed.
+The above installation steps prepare the way for Messages and FaceTime to work as well, but there
+are more in-depth guides to Messages [[https://www.tonymacx86.com/threads/an-idiots-guide-to-imessage.196827/][here]] and [[https://www.tonymacx86.com/threads/how-to-fix-imessage.110471/][here]] if needed.
 
 If there are issues with continuity (switching calls between macOS and iPhone for example),
 BT4LEContiunityFixup.kext may help fix those, but seems to not be needed for the DW1830.
@@ -188,20 +188,7 @@ injected via USBInjectAll and in [[file:CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-
 
 Based on [[https://www.tonymacx86.com/threads/guide-10-11-usb-changes-and-solutions.173616/][USB guide]] and [[https://www.tonymacx86.com/threads/guide-creating-a-custom-ssdt-for-usbinjectall-kext.211311/][companion guide.]]
 
-USB config reported by DSDT (connectable ports only):
-| Port | Visible | Type        |
-|------+---------+-------------|
-| HS01 | Yes     | Proprietary |
-| HS02 | Yes     | Type A      |
-| HS04 | No      | Proprietary |
-| HS05 | Yes     | Proprietary |
-| HS07 | No      | Proprietary |
-| HS09 | No      | Proprietary |
-| HS12 | No      | Proprietary |
-| SS01 | Yes     | Proprietary |
-| SS02 | Yes     | Proprietary |
-
-Actual hwardware config:
+Hardware config of the XPS 9570:
 | Port      | Type        | User Visible* | Description                                |
 |-----------+-------------+---------------+--------------------------------------------|
 | HS01/SS01 | Type A      | Yes           | Right side                                 |
@@ -219,8 +206,7 @@ ACPI 6.2 A, 6.1.8, _PLD (Physical Location of Device)
 - Include [[file:CLOVER/ACPI/patched/SSDT-UIAC.aml][SSDT-UIAC.aml]] ([[file:CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-UIAC.dsl]]) - based on [[https://github.com/RehabMan/OS-X-USB-Inject-All/blob/master/SSDT-UIAC-ALL.dsl][SSDT-UIAC-ALL.dsl]] and customized for XPS 9570
 *** Known issue: left side type C port only works in HS mode, not SS
 Will likely work when USB type C and/or Thunderbolt fixes are added.
-*** Unintended side effect: intermittently causes screen brightness to work without 3 min. delay
-This occurs without a port limit patch, without SSDT-UIAC.aml, and boot flags "-uia_exclude_hs uia_include=HS04".
+*** To-Do: Add [[https://www.tonymacx86.com/threads/guide-usb-power-property-injection-for-sierra-and-later.222266/][USB power property injection]]
 ** Touch ID / Goodix fingerprint sensor
 It's [[https://www.tonymacx86.com/threads/solved-asus-ux430ua-fingerprint-trackpad-touch-id.230671/#post-1572495][not possible]] to use fingerprint sensor for Touch ID according to RehabMan. Perhaps the
 integrated Goodix fingerprint sensor can be used, and enabled with PAM (TBD).
@@ -229,6 +215,63 @@ Since we're using the =MacBookPro15,1= SMBIOS, macOS is expecting Touch ID to be
 lag on password prompts. This can be disabled for now with the NoTouchID kext.
 
 - Install [[https://github.com/al3xtjames/NoTouchID][NoTouchID]] [[file:kexts/NoTouchID.kext][kext]]
+** Power management
+
+Note: There is some information in power management guides that only applies pre-Coffee Lake. See
+section below to avoid unnecessary changes.
+
+Based on the [[https://www.tonymacx86.com/threads/guide-native-power-management-for-laptops.175801/][laptop power management guide]] by RehabMan, as well as [[https://www.tonymacx86.com/threads/macos-native-cpu-igpu-power-management.222982/][macOS native power management]] by toleda.
+
+*** Set up power managemnt
+- Disable hibernation (suspend to disk or S4 sleep)
+  macOS combines sleep and hibernation into one feature, where closing the lid initially sleeps the
+  laptop, and eventually hibernates it. In any event, hibernation is not supported on hackintosh,
+  and should be disabled/checked after updates.
+
+  #+BEGIN_SRC sh
+  sudo pmset -a hibernatemode 0
+  sudo rm -f /var/vm/sleepimage
+  sudo mkdir /var/vm/sleepimage # try to prevent update from re-enabling
+  sudo pmset -a standby 0
+  sudo pmset -a autopoweroff 0
+  #+END_SRC
+- config.plist/ACPI/SSDT/Generate/PluginType=YES
+- Verify that X86PlatformPlugin is loaded (see testing section)
+- config.plist/KernelAndKextPatches/KernelPm=YES
+- Enable xcpm_idle patch to prevent reboot with HWP (hardare P-state coordination)
+  - config.plist/KernelAndKextPatches/KernelToPatch/Item n
+    - Key=Find, Type=Data, Value=<20b9e200 00000f30>
+    - Key=Replace, Type=Data, Value=<20b9e200 00009090>
+*** Items that are no longer relevant to Coffee Lake (DO NOT USE)
+- config.plist/KernelAndKextPatches/AppleIntelCPUPM=YES
+- =ssdtPRgen.sh=
+- =HWPEnabler=
+*** Testing power management (WIP)
+- Use [[https://software.intel.com/en-us/articles/intel-power-gadget-20][Intel Power Gadget]] to graph CPU power/frequency/temp over time
+- Verify X86PlatformPlugin is loading under PR00 in IORegistryExplorer
+  - Root -> MacBookPro15,1 -> AppleACPIPlatformExpert -> PR00@0 -> AppleACPICPU -> X86PlatformPlugin
+- Testing Power Management
+  Load [[file:tools/AppleIntelInfo.kext][AppleIntelInfo.kext]] (but don't install it):
+
+  #+BEGIN_SRC sh
+  sudo chown -R root:wheel AppleIntelInfo.kext
+  sudo kextload AppleIntelInfo.kext
+  #+END_SRC
+
+  Then use the system for a few minutes, perform some work, let it idle, etc.
+  Finally, copy results file to where you want to save it:
+
+  #+BEGIN_SRC sh
+  sudo kextunload AppleIntelInfo.kext
+  sudo cp /tmp/AppleIntelInfo.dat ~/AppleIntelInfo.txt
+  sudo chmod g+rw ~/AppleIntelInfo.txt
+  #+END_SRC
+
+  AppleIntelInfo.txt should contain the line:
+  =IA32_PM_ENABLE...................(0x770) : 0x1 (HWP Supported and Enabled)=
+
+  However, there is little information on what everything in this report means. This could be
+  improved.
 ** FakeSMC/VirtualSMC
 
 One of these is required to boot macOS.

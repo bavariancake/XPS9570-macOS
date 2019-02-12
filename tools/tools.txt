@@ -1,7 +1,8 @@
-- AppleIntelInfo.kext (1.4)
-  From power management guide:
-  https://www.tonymacx86.com/threads/guide-native-power-management-for-laptops.175801/
+- AppleIntelInfo.kext (2.9)
+  https://github.com/Piker-Alpha/AppleIntelInfo
   Record CPU p-state info to test power management - loaded manually for debugging only.
+  Manually compiled with Xcode. Used with power management guide:
+  https://www.tonymacx86.com/threads/guide-native-power-management-for-laptops.175801/
 
 - IORegistryExplorer (2.1)
   https://www.tonymacx86.com/audio/58368-guide-how-make-copy-ioreg.html
