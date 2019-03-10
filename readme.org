@@ -22,7 +22,7 @@ for other kexts/patches/solutions/etc.
   - BIOS: 1.8.1
   - Dual-booting Windows 10
 ** Tested software configurations
-- macOS: 10.14.0, 10.14.1, 10.14.2, 10.14.3
+- macOS: 10.14.0, 10.14.1, 10.14.2, 10.14.3, 10.14.3 supplemental update (18D109)
 - BIOS: 1.5.0, 1.7.0, 1.8.1 (BIOS update recommended: "fixes BIOS recovery function" according to Dell)
 * Hardware
 ** Intel UHD 630 graphics
