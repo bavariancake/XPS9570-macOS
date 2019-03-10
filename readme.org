@@ -19,11 +19,11 @@ for other kexts/patches/solutions/etc.
   - Wacom touchscreen
   - TODO: Touchpad manufacturer?
 - Software environment
-  - BIOS: 1.7.0
+  - BIOS: 1.8.1
   - Dual-booting Windows 10
 ** Tested software configurations
 - macOS: 10.14.0, 10.14.1, 10.14.2, 10.14.3
-- BIOS: 1.5.0, 1.7.0
+- BIOS: 1.5.0, 1.7.0, 1.8.1 (BIOS update recommended: "fixes BIOS recovery function" according to Dell)
 * Hardware
 ** Intel UHD 630 graphics
 Intel graphics is supported by [[https://www.tonymacx86.com/threads/fix-coffee-lake-intel-uhd-graphics-630-on-macos-mojave-kernel-panic-due-to-divide-by-zero.261687/][setting the maximum link rate in DPCD buffer]]. This likely causes
