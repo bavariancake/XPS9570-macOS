@@ -402,9 +402,37 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>ALT: Set the maximum link rate in DPCD buffer to 0x14 (HBR2) for laptops with 4K display (by FireWolf)</string>
+				<string>ALT: Set max link rate to 0x14 (HBR2) for laptops with 4K display for 10.14.4 (by FireWolf / bavariancake)</string>
 				<key>Disabled</key>
 				<false/>
+				<key>Name</key>
+				<string>AppleIntelCFLGraphicsFramebuffer</string>
+				<key>Find</key>
+				<data>SIPDBEiD+whysw==</data>
+				<key>Replace</key>
+				<data>gH3BAHUExkXBFA==</data>
+				<key>InfoPlistPatch</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>ALT: Set max link rate to 0x0A (HBR) for laptops with 1080p display for 10.14.4 (by FireWolf / bavariancake)</string>
+				<key>Disabled</key>
+				<true/>
+				<key>Name</key>
+				<string>AppleIntelCFLGraphicsFramebuffer</string>
+				<key>Find</key>
+				<data>SIPDBEiD+whysw==</data>
+				<key>Replace</key>
+				<data>gH3BAHUExkXBFA==</data>
+				<key>InfoPlistPatch</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>ALT: Set max link rate to 0x14 (HBR2) for laptops with 4K display for 10.14.3 and prior (by FireWolf)</string>
+				<key>Disabled</key>
+				<true/>
 				<key>Name</key>
 				<string>AppleIntelCFLGraphicsFramebuffer</string>
 				<key>Find</key>
@@ -416,11 +444,9 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>ALT: Set the maximum link rate in DPCD buffer to 0x0A (HBR) for laptops with 1080p display (by FireWolf)</string>
+				<string>ALT: Set max link rate to 0x0A (HBR) for laptops with 1080p display for 10.14.3 and prior (by FireWolf)</string>
 				<key>Disabled</key>
 				<true/>
-				<key>Name</key>
-				<string>AppleIntelCFLGraphicsFramebuffer</string>
 				<key>Find</key>
 				<data>SIPDBEiD+why0A==</data>
 				<key>Replace</key>
