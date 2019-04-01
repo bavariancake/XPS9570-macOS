@@ -419,3 +419,7 @@ minutes before seeing a progress bar.
 
 AppleIntelCFLGraphicsFramebuffer changed again, and this time the DPCD link rate patch needs to be
 updated. See changes in the Intel UHD 630 "enabling acceleration section".
+** 2019-04-01: Use WhateverGreen for DPCD link rate patching
+@0xFireWolf has added DPCD link rate patching to WhateverGreen, which is available with commit
+ab43814f45, or with the next release (1.2.8 probably). A WhateverGreen kext with these changes is
+also included with this repo.
