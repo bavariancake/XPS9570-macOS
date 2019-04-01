@@ -26,27 +26,25 @@ for other kexts/patches/solutions/etc.
 - BIOS: 1.5.0, 1.7.0, 1.8.1 (BIOS update recommended: "fixes BIOS recovery function" according to Dell)
 * Hardware
 ** Intel UHD 630 graphics
-Intel graphics is supported by [[https://www.tonymacx86.com/threads/fix-coffee-lake-intel-uhd-graphics-630-on-macos-mojave-kernel-panic-due-to-divide-by-zero.261687/][setting the maximum link rate in DPCD buffer]]. This likely causes
-problems with HDMI output, which does not work. This fix also allows the display to go to sleep
-without causing graphics to become choppy on wake-up.
+Intel graphics acceleration is handled by [[https://github.com/acidanthera/WhateverGreen][WhateverGreen]], and configured in the
+=PciRoot(0x0)/Pci(0x2,0x0)= section of config.plist.
+
+Choose a DPCD maximum link rate for your display, where 4K=0x14 (default) or 1080p=0x0a.
 
 To determine if Intel GPU acceleration is working, check: =About This Mac -> Intel UHD Graphics 630
 1536 MB=. A value less than 1536MB indicates a problem (e.g. 7MB or 31MB are common).
 
-Side note: Some threads discuss setting DVMT pre-alloc in the BIOS, which is not possible on most
-laptops, including the XPS 9570. However, the default of 64MB DVMT is sufficient, so nothing needs to be done.
+The default BIOS DVMT pre-alloc value of 64MB is sufficient and does not need to be changed.
 *** Enabling acceleration
 - [[file:CLOVER/config.plist][config.plist]]
   - Graphics/Inject/Intel=yes
   - Graphics/ig-platform-id=0x3e9b0000
-  - Set max link rate if connected display reports 0x00 to prevent kernel panic (choose one):
-    - 4K display: KernelAndKextPatches/KextsToPatch/Item n
-      - Key=Find, Type=Data, Value=<4883c304 4883fb08 72b3>
-      - Key=Replace, Type=Data, Value=<807dc100 7504c645 c114>
-    - 1080p display: KernelAndKextPatches/KextsToPatch/Item n
-      - Key=Find, Type=Data, Value=<4883c304 4883fb08 72b3>
-      - Key=Replace, Type=Data, Value=<807dc100 7504c645 c10a>
-    - Note alternate values in config.plist for 10.14.3 and below.
+  - Devices/Properties/PciRoot(0x0)/Pci(0x2,0x0)
+    - =AAPL,ig-platform-id= = =<00009b3e>=
+    - =device-id= = =<9b3e0000>=
+    - =dpcd-max-link-rate= = =<14000000>= (or =<0a000000>= for 1080p)
+    - =enable-dpcd-max-link-rate-fix= = =<01000000>=
+    - =framebuffer-patch-enable= = =<01000000>=
 - Install [[https://github.com/acidanthera/Lilu][Lilu]] [[file:kexts/Lilu.kext][kext]]
 - Install [[https://github.com/acidanthera/WhateverGreen][WhateverGreen]] [[file:kexts/WhateverGreen.kext][kext]]
 *** Enabling backlight control via slider in Sys. Prefs. -> Displays

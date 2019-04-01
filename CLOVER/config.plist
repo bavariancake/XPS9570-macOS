@@ -271,6 +271,21 @@
 		</dict>
 		<key>Properties</key>
 		<dict>
+			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AACbPg==</data>
+				<key>device-id</key>
+				<data>mz4AAA==</data>
+				<key>Comment-dpcd-max-link-rate</key>
+				<string>0x14 for 4k displays, or 0x0a for 1080p</string>
+				<key>dpcd-max-link-rate</key>
+				<data>FAAAAA==</data>
+				<key>enable-dpcd-max-link-rate-fix</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-patch-enable</key>
+				<data>AQAAAA==</data>
+			</dict>
 			<key>PciRoot(0)/Pci(0x1f,3)</key>
 			<dict>
 				<key>Comment-layout-id</key>
@@ -399,62 +414,7 @@
 			</dict>
 		</array>
 		<key>KextsToPatch</key>
-		<array>
-			<dict>
-				<key>Comment</key>
-				<string>ALT: Set max link rate to 0x14 (HBR2) for laptops with 4K display for 10.14.4 (by FireWolf / bavariancake)</string>
-				<key>Disabled</key>
-				<false/>
-				<key>Name</key>
-				<string>AppleIntelCFLGraphicsFramebuffer</string>
-				<key>Find</key>
-				<data>SIPDBEiD+whysw==</data>
-				<key>Replace</key>
-				<data>gH3BAHUExkXBFA==</data>
-				<key>InfoPlistPatch</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>ALT: Set max link rate to 0x0A (HBR) for laptops with 1080p display for 10.14.4 (by FireWolf / bavariancake)</string>
-				<key>Disabled</key>
-				<true/>
-				<key>Name</key>
-				<string>AppleIntelCFLGraphicsFramebuffer</string>
-				<key>Find</key>
-				<data>SIPDBEiD+whysw==</data>
-				<key>Replace</key>
-				<data>gH3BAHUExkXBFA==</data>
-				<key>InfoPlistPatch</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>ALT: Set max link rate to 0x14 (HBR2) for laptops with 4K display for 10.14.3 and prior (by FireWolf)</string>
-				<key>Disabled</key>
-				<true/>
-				<key>Name</key>
-				<string>AppleIntelCFLGraphicsFramebuffer</string>
-				<key>Find</key>
-				<data>SIPDBEiD+why0A==</data>
-				<key>Replace</key>
-				<data>gH3BAHUExkXBFA==</data>
-				<key>InfoPlistPatch</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>ALT: Set max link rate to 0x0A (HBR) for laptops with 1080p display for 10.14.3 and prior (by FireWolf)</string>
-				<key>Disabled</key>
-				<true/>
-				<key>Find</key>
-				<data>SIPDBEiD+why0A==</data>
-				<key>Replace</key>
-				<data>gH3BAHUExkXBCg==</data>
-				<key>InfoPlistPatch</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 	</dict>
 	<key>RtVariables</key>
 	<dict>
