@@ -27,17 +27,13 @@
 			<dict>
 				<key>Comment-IRQ Fix</key>
 				<string>The following fixes may be needed for onboard audio/USB/etc</string>
-				<key>FixHPET</key>
-				<false/>
-				<key>FixHeaders</key>
-				<false/>
-				<key>FixIPIC</key>
-				<false/>
-				<key>FixMutex</key>
+				<key>FixTMR</key>
 				<false/>
 				<key>FixRTC</key>
 				<false/>
-				<key>FixTMR</key>
+				<key>FixIPIC</key>
+				<false/>
+				<key>FixHPET</key>
 				<false/>
 				<key>Comment-FixUSB</key>
 				<string>Definitely no - injects USB-specific _DSM into IGPU region, which we don&apos;t want</string>
@@ -58,7 +54,7 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>Change _OSI to XOSI, use with SSDT-XOSI.aml</string>
+					<string>change _OSI to XOSI, pair with SSDT-XOSI.aml</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
@@ -78,7 +74,7 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>Change ECDV to EC (so Mac OS knows about the Embedded Controller)</string>
+					<string>change ECDV to EC</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
@@ -98,7 +94,7 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>Change HECI to IMEI (so Mac OS can natively use the Management Engine)</string>
+					<string>change HECI to IMEI, optionally pair with SSDT-IMEI.aml</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
@@ -108,17 +104,7 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>change MEI to IMEI</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>TUVJXw==</data>
-					<key>Replace</key>
-					<data>SU1FSQ==</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>Change GFX0 to IGPU (needed for graphics)</string>
+					<string>change GFX0 to IGPU, optionally pair with SSDT-IGPU.aml</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
@@ -128,27 +114,7 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>Rename method UPRW to XPRW and use with SSDT-UPRW.aml to fix USB &quot;instant wake&quot; on sleep</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>FBJVUFJXAHA=</data>
-					<key>Replace</key>
-					<data>FBJYUFJXAHA=</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>Rename method GPRW to YPRW and use with SSDT-UPRW.aml to fix USB &quot;instant wake&quot; on sleep</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>FEAGR1BSVwI=</data>
-					<key>Replace</key>
-					<data>FEAGWVBSVwI=</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>Rename method _PTS to ZPTS and use with SSDT-PTSWAK.aml to fix dGPU power sapping</string>
+					<string>change Method(_PTS,1,N) to ZPTS, pair with SSDT-PTSWAK.aml</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
@@ -158,7 +124,17 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>Rename method _WAK to ZWAK and use with SSDT-PTSWAK.aml to fix dGPU power sapping</string>
+					<string>change Method(_PTS,1,S) to ZPTS, pair with SSDT-PTSWAK.aml</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>X1BUUwk=</data>
+					<key>Replace</key>
+					<data>WlBUUwk=</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change Method(_WAK,1,N) to ZWAK, pair with SSDT-PTSWAK.aml</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
@@ -168,29 +144,17 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>(RP15 only) Rename _RMV to XRMV and use with SSDT-TYPC.aml for USB-C hot plug support</string>
+					<string>change Method(_WAK,1,S) to ZWAK, pair with SSDT-PTSWAK.aml</string>
 					<key>Disabled</key>
-					<true/>
+					<false/>
 					<key>Find</key>
-					<data>X1JNVg==</data>
+					<data>X1dBSwk=</data>
 					<key>Replace</key>
-					<data>WFJNVg==</data>
-					<key>TgtBridge</key>
-					<data>UlAwMQ==</data>
+					<data>WldBSwk=</data>
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>Rename XTBT to YTBT and use with SSDT-YTBT.aml for USB-C hot plug</string>
-					<key>Disabled</key>
-					<true/>
-					<key>Find</key>
-					<data>pABYVEJU</data>
-					<key>Replace</key>
-					<data>pABZVEJU</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>Rename BRT6 to BRTX, use with SSDT-BRT6.aml, SSDT-PNLF.aml, AppleBacklightInjector.kext, and VoodooPS2Controller.kext to fix brightness keys. See readme!</string>
+					<string>Rename BRT6 to BRTX, use with SSDT-BRT6.aml and SSDT-PNLF.aml</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
@@ -209,12 +173,6 @@
 			<dict>
 				<key>Signature</key>
 				<string>DMAR</string>
-			</dict>
-			<dict>
-				<key>Signature</key>
-				<string>SSDT</string>
-				<key>TableId</key>
-				<string>xh_rvp10</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -379,7 +337,9 @@
 			<string>\System\Library\Extensions\IONetworkingFamily.kext</string>
 		</array>
 		<key>KernelLapic</key>
-		<true/>
+		<false/>
+		<key>AppleRTC</key>
+		<false/>
 		<key>KernelToPatch</key>
 		<array>
 			<dict>
@@ -395,6 +355,8 @@
 			<dict>
 				<key>Comment</key>
 				<string>Disable panic kext logging on 10.13 release kernel (credit Vandroiy)</string>
+				<key>Disabled</key>
+				<false/>
 				<key>Find</key>
 				<data>igKEwHRE</data>
 				<key>MatchOS</key>
@@ -405,6 +367,8 @@
 			<dict>
 				<key>Comment</key>
 				<string>Disable panic kext logging on 10.14 release kernel (credit Vandroiy)</string>
+				<key>Disabled</key>
+				<false/>
 				<key>Find</key>
 				<data>igKEwHRC</data>
 				<key>MatchOS</key>
