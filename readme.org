@@ -37,8 +37,9 @@ To determine if Intel GPU acceleration is working, check: =About This Mac -> Int
 The default BIOS DVMT pre-alloc value of 64MB is sufficient and does not need to be changed.
 *** Enabling acceleration
 - [[file:CLOVER/config.plist][config.plist]]
-  - Graphics/Inject/Intel=yes
-  - Graphics/ig-platform-id=0x3e9b0000
+  - +Graphics/Inject/Intel=yes+
+  - Graphics/Inject/Intel=no
+  - +Graphics/ig-platform-id=0x3e9b0000+
   - Devices/Properties/PciRoot(0x0)/Pci(0x2,0x0)
     - =AAPL,ig-platform-id= = =<00009b3e>=
     - =device-id= = =<9b3e0000>=
@@ -54,17 +55,34 @@ identical to SSDT-PNLF.aml compiled from [[https://github.com/RehabMan/OS-X-Clov
 - +Include [[file:CLOVER/ACPI/patched/SSDT-PNLF.aml][SSDT-PNLF.aml]] ([[file:CLOVER/ACPI/patched/SSDT-PNLF.dsl][SSDT-PNLF.dsl]])+
 - Include [[file:CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] ([[file:CLOVER/ACPI/patched/SSDT-PNLFCFL.dsl][SSDT-PNLFCFL.dsl]]); possibly temporary until fix is included in SSDT-PNLF.
 *** Preventing black/dark screen 3 minutes after booting
-This was a complex issue with a [[https://www.tonymacx86.com/threads/bug-black-screen-3-minutes-after-booting-coffeelake-uhd-630.261131/][long thread]] to find a solution. This fix is possibly not perfect
-yet; if you do run into this problem despite the fix, open an issue in this repo and/or reply to the
-thread with the discussion.
+This was a complex issue with a [[https://www.tonymacx86.com/threads/bug-black-screen-3-minutes-after-booting-coffeelake-uhd-630.261131/][long thread]] to find a solution. The new WhateverGreen option
+=enable-cfl-backlight-fix= is probably a better way to implement this, but I have not tested it yet.
 - [[file:CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] is already included in step above
 - Use Lilu 1.2.9 or higher
 - Use WhateverGreen 1.2.5 or higher
 - Remember to update kext cache whenever a kext is added or updated (note to self: stop forgetting that ugh)
 If brightness controls still don't work on boot, or the screen goes black periodically, try booting
 with WhateverGreen boot argument =igfxcflbklt=1=. This force-enables the Coffee Lake backlight fix.
+** HDMI
+Without any options passed to WhateverGreen, a KP will occur whenever an HDMI device is
+attached. @0xFireWolf provided initial required flags in [[https://www.tonymacx86.com/threads/fix-coffee-lake-intel-uhd-graphics-630-on-macos-mojave-hdmi-output-issue-public-testing-stage.275126/][a thread]] to support HDMI 1.4 connections,
+with some quirks for HDMI 2.0 connections. Testing is still in progress.
+
+Connector 1 is for the Type C port, and connector 2 for the HDMI port. The boot argument
+=agdpmod=vit9696= is required to disable board checks, since the =MacBookPro15,1= doesn't have an
+HDMI output, and would be ignored by the OS by default.
+*** Enabling HDMI support
+- [[file:CLOVER/config.plist][config.plist]]
+  - Boot/Arguments
+    - =agdpmod=vit9696=
+  - Devices/Properties/PciRoot(0x0)/Pci(0x2,0x0)
+    - =framebuffer-con1-enable= = =<01000000>=
+    - =framebuffer-con1-alldata= = =<01050900 00040000 87010000>=
+    - =framebuffer-con2-enable= = =<01000000>=
+    - =framebuffer-con2-alldata= = =<03040a00 00080000 87010000>=
+    - =enable-hdmi20= = =<01000000>=
 *** Known problems/caveats
-- HDMI output does not work; inserting cable causes kernel panic
+- HDMI 2.0 connections may require cold booting with a monitor attached, or have sleep/resume issues. See thread linked above.
 ** PS/2 Keyboard
 The internal keyboard is a PS/2 device, but macOS does not support PS/2. This can be implemented
 with VoodooPS2Controller.
@@ -298,6 +316,7 @@ to use UTC as well, with =regedit=:
 - Wi-Fi and Bluetooth require card swap, since there are no macOS drivers for OEM Killer Qualcomm card
 - Fingerprint reader does not work (see Touch ID / fingerprint reader section)
 - SD card reader not present
+- HDMI 2.0 output has some quirks (see section), but HDMI 1.4 seems to work
 - +Black/dark screen 3 minutes after booting+
 - +Temporary hang whenever Touch ID is requested+
 - +Right-side USB port appears as an internal port, so devices attached to it can't be ejected+
@@ -396,9 +415,10 @@ cache. More complex cases can be handled by [[https://github.com/acidanthera/Lil
 which is itself installed as a [[file:kexts/Lilu.kext][kext]]. Excellent [[https://www.tonymacx86.com/threads/an-idiots-guide-to-lilu-and-its-plug-ins.260063/][guide]] to using Lilu and commonly used plugins.
 
 See also guide to [[https://www.tonymacx86.com/threads/guide-installing-3rd-party-kexts-el-capitan-sierra-high-sierra-mojave.268964/][installing 3rd party kexts]].
-** Intel FB-Patcher
-https://www.tonymacx86.com/threads/release-intel-fb-patcher-v1-6-8.254559/
-Seems to be becoming a full-featured utility to fix various issues, not just Intel graphics related.
+** Hackintool
+https://www.tonymacx86.com/threads/release-hackintool-v2-3-8.254559/ A full-featured utility to fix
+various issues, including graphics, USB, audio, etc. Requires a fair bit of reading, but is useful
+to verify an installed config or hardware.
 ** ACPI debugging
 The [[https://github.com/RehabMan/OS-X-ACPI-Debug][OS-X-ACPI-Debug]] repo allows for "debug tracing from ACPI code (DSDT) to system.log".
 Not currently installed and not tested, but should be useful if ACPI  problems come up.

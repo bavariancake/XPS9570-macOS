@@ -201,7 +201,7 @@
 		<key>#DefaultVolume</key>
 		<string>LastBootedVolume</string>
 		<key>Arguments</key>
-		<string>dart=0 nv_disable=1 -cdfon brcmfx-country=#a -v</string>
+		<string>dart=0 nv_disable=1 agdpmod=vit9696 brcmfx-country=#a -v</string>
 		<key>NeverHibernate</key>
 		<true/>
 		<key>Secure</key>
@@ -240,6 +240,20 @@
 				<key>dpcd-max-link-rate</key>
 				<data>FAAAAA==</data>
 				<key>enable-dpcd-max-link-rate-fix</key>
+				<data>AQAAAA==</data>
+				<key>Comment-con1</key>
+				<string>Type C port</string>
+				<key>framebuffer-con1-enable</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-con1-alldata</key>
+				<data>AQUJAAAEAACHAQAA</data>
+				<key>Comment-con2</key>
+				<string>HDMI port</string>
+				<key>framebuffer-con2-enable</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-con2-alldata</key>
+				<data>AwQKAAAIAACHAQAA</data>
+				<key>enable-hdmi20</key>
 				<data>AQAAAA==</data>
 				<key>framebuffer-patch-enable</key>
 				<data>AQAAAA==</data>
@@ -312,12 +326,10 @@
 			<key>ATI</key>
 			<false/>
 			<key>Intel</key>
-			<true/>
+			<false/>
 			<key>NVidia</key>
 			<false/>
 		</dict>
-		<key>ig-platform-id</key>
-		<string>0x3e9b0000</string>
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
