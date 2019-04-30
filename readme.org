@@ -307,6 +307,11 @@ to use UTC as well, with =regedit=:
 
 - regedit -> =HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation=
 - create new DWORD (32-bit) =RealTimeIsUniversal= with value '1'
+*** Sharing Bluetooth devices
+You may have noticed you need to re-pair a Bluetooth devices when booting between macOS <-> Windows,
+because the 128 bit device link key changes. This can be fixed by exporting macOS's BT keys, and
+importing them in Windows. See [[https://github.com/digitalbirdo/BT-LinkkeySync][BT-LinkkeySync]] for instructions, and [[file:tools/BT-LinkkeySync.py][BT-LinkkeySync.py]] in this repo
+(updated for Mojave).
 ** Known problems/caveats
 - Drive encryption is disabled (haven't tried)
 - Thunderbolt, USB3 on type-C port not working (haven't tried; should be possible)

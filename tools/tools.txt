@@ -4,6 +4,12 @@
   Manually compiled with Xcode. Used with power management guide:
   https://www.tonymacx86.com/threads/guide-native-power-management-for-laptops.175801/
 
+- BT-LinkkeySync.py (modified to work with Mojave)
+  https://github.com/digitalbirdo/BT-LinkkeySync
+  Export Bluetooth 128 bit link keys from macOS so that Bluetooth
+  devices work when booting macOS or Windows without re-pairing
+  constantly.
+
 - IORegistryExplorer (2.1)
   https://www.tonymacx86.com/audio/58368-guide-how-make-copy-ioreg.html
   Used to view device tree and debug many harware and ACPI issues.
