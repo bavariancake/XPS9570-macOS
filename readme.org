@@ -19,11 +19,11 @@ for other kexts/patches/solutions/etc.
   - Wacom touchscreen
   - TODO: Touchpad manufacturer?
 - Software environment
-  - BIOS: 1.8.1
+  - BIOS: 1.9.1
   - Dual-booting Windows 10
 ** Tested software configurations
 - macOS: 10.14.0, 10.14.1, 10.14.2, 10.14.3 and supp. update (18D109), 10.14.4
-- BIOS: 1.5.0, 1.7.0, 1.8.1 (BIOS update recommended: "fixes BIOS recovery function" according to Dell)
+- BIOS: 1.5.0, 1.7.0, 1.8.1, 1.9.1
 * Hardware
 ** Intel UHD 630 graphics
 Intel graphics acceleration is handled by [[https://github.com/acidanthera/WhateverGreen][WhateverGreen]], and configured in the
