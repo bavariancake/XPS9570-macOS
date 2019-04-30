@@ -1,13 +1,10 @@
 #+STARTUP: indent
 * Overview
-This repository contains a sample configuration to run macOS Mojave (10.14) on a Dell XPS 9570.
+Run macOS Mojave (10.14) on a Dell XPS 9570.
 
-This guide is currently a work in progress, since the XPS 9570 isn't perfectly supported yet. I will
-update this guide as I test new fixes or updates. If you find any errors or problems, please let me
-know. I'm hoping this will become the definitive guide for running macOS on the XPS 9570.
-
-This repo and many pieces are based on the-darkvoid's [[https://github.com/the-darkvoid/XPS9360-macOS][XPS9360-macOS repo]], which is also a good guide
-for other kexts/patches/solutions/etc.
+Most pieces are fully supported, and this setup can be used as your main machine. A few pieces are
+missing (and some will probably never be supported); see Known Problems/Caveats in the Hardware
+section.
 ** Tested hardware configuration
 - Dell XPS 9570
   - Intel i9-8950HK
@@ -16,8 +13,7 @@ for other kexts/patches/solutions/etc.
   - Toshiba SSD
   - Realtek ALC298 (ALC3266 according to Dell)
   - Goodix fingerprint reader
-  - Wacom touchscreen
-  - TODO: Touchpad manufacturer?
+  - Touchpad/Touchscreen
 - Software environment
   - BIOS: 1.9.1
   - Dual-booting Windows 10
@@ -288,12 +284,6 @@ Based on the [[https://www.tonymacx86.com/threads/guide-native-power-management-
   sudo cp /tmp/AppleIntelInfo.dat ~/AppleIntelInfo.txt
   sudo chmod g+rw ~/AppleIntelInfo.txt
   #+END_SRC
-
-  AppleIntelInfo.txt should contain the line:
-  =IA32_PM_ENABLE...................(0x770) : 0x1 (HWP Supported and Enabled)=
-
-  However, there is little information on what everything in this report means. This could be
-  improved.
 ** FakeSMC/VirtualSMC
 
 One of these is required to boot macOS.
@@ -345,7 +335,9 @@ the best way to do it - caveat emptor.
 
 1. Inspect system logs for errors
    Immediately after bootup, dump system log for the last 10 minutes (adjust as needed):
-   =log show --predicate 'process == "kernel"' --style syslog --source --debug --last 10m > sys_log.txt=
+   #+BEGIN_SRC sh
+   log show --predicate 'process == "kernel"' --style syslog --source --debug --last 10m > sys_log.txt
+   #+END_SRC
    Then search =sys_log.txt= for "ACPI Error" or "ACPI Exception".
 2. Dump unmodified ACPI tables
    Press F4 on Clover boot screen (no output will show), then mount EFI partition and look for
@@ -438,13 +430,16 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+** 2019-04-29: Add initial HDMI support
+@0xFireWolf created patches to enable Type C and HDMI connected output. This will likely require
+more changes to support HDMI 2.0 fully.
+** 2019-04-01: Use WhateverGreen for DPCD link rate patching
+@0xFireWolf has added DPCD link rate patching to WhateverGreen, which is available with commit
+ab43814f45, or with the next release (1.2.8 probably). A WhateverGreen kext with these changes is
+also included with this repo.
 ** 2019-03-26: Upgrade to 10.14.4
 This update takes quite some time on initial install, so it may be necessary to wait more than 20
 minutes before seeing a progress bar.
 
 AppleIntelCFLGraphicsFramebuffer changed again, and this time the DPCD link rate patch needs to be
 updated. See changes in the Intel UHD 630 "enabling acceleration section".
-** 2019-04-01: Use WhateverGreen for DPCD link rate patching
-@0xFireWolf has added DPCD link rate patching to WhateverGreen, which is available with commit
-ab43814f45, or with the next release (1.2.8 probably). A WhateverGreen kext with these changes is
-also included with this repo.
