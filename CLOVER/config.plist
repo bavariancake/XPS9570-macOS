@@ -201,7 +201,7 @@
 		<key>DefaultVolume</key>
 		<string>LastBootedVolume</string>
 		<key>Arguments</key>
-		<string>dart=0 nv_disable=1 agdpmod=vit9696 brcmfx-country=#a -v</string>
+		<string>dart=0 nv_disable=1 -cdfon agdpmod=vit9696 brcmfx-country=#a -v</string>
 		<key>NeverHibernate</key>
 		<true/>
 		<key>Secure</key>
