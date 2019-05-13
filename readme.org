@@ -21,16 +21,22 @@ section.
 - macOS: 10.14.0, 10.14.1, 10.14.2, 10.14.3 and supp. update (18D109), 10.14.4
 - BIOS: 1.5.0, 1.7.0, 1.8.1, 1.9.1, 1.10.1
 * Hardware
-** Intel UHD 630 graphics
-Intel graphics acceleration is handled by [[https://github.com/acidanthera/WhateverGreen][WhateverGreen]], and configured in the
-=PciRoot(0x0)/Pci(0x2,0x0)= section of config.plist.
+** Graphics
+Integrated Intel UHD Graphics 630 support is handled by [[https://github.com/acidanthera/WhateverGreen][WhateverGreen]], and configured in the
+=PciRoot(0x0)/Pci(0x2,0x0)= section of config.plist. The Nvidia GPU is not supported due to hardware
+differences and lack of driver support in macOS. It is disabled to save power.
 
 Choose a DPCD maximum link rate for your display, where 4K=0x14 (default) or 1080p=0x0a.
 
-To determine if Intel GPU acceleration is working, check: =About This Mac -> Intel UHD Graphics 630
+To determine if Intel GPU (IGPU) acceleration is working, check: =About This Mac -> Intel UHD Graphics 630
 1536 MB=. A value less than 1536MB indicates a problem (e.g. 7MB or 31MB are common).
 
 The default BIOS DVMT pre-alloc value of 64MB is sufficient and does not need to be changed.
+
+The IGPU supports [[https://www.intel.com/content/www/us/en/support/articles/000025672/graphics-drivers.html][up to 3 displays]] simultaneously, including the internal LCD. The type C port
+supports up to two DisplayPort connections with an adapter. Even though you could connect three
+external displays (HDMI + 2 DisplayPort via type C), one of these displays would remain powered
+off. This is a limitation of IGPU, which has 3 pipelines for driving displays, one per display.
 *** Enabling acceleration
 - [[file:CLOVER/config.plist][config.plist]]
   - +Graphics/Inject/Intel=yes+
@@ -59,23 +65,30 @@ This was a complex issue with a [[https://www.tonymacx86.com/threads/bug-black-s
 - Remember to update kext cache whenever a kext is added or updated (note to self: stop forgetting that ugh)
 If brightness controls still don't work on boot, or the screen goes black periodically, try booting
 with WhateverGreen boot argument =igfxcflbklt=1=. This force-enables the Coffee Lake backlight fix.
-** HDMI
+*** Enabling external display support
 Without any options passed to WhateverGreen, a KP will occur whenever an HDMI device is
 attached. @0xFireWolf provided initial required flags in [[https://www.tonymacx86.com/threads/fix-coffee-lake-intel-uhd-graphics-630-on-macos-mojave-hdmi-output-issue-public-testing-stage.275126/][a thread]] to support HDMI 1.4 connections,
 with some quirks for HDMI 2.0 connections. Testing is still in progress.
 
-Connector 1 is for the Type C port, and connector 2 for the HDMI port. The boot argument
-=agdpmod=vit9696= is required to disable board checks, since the =MacBookPro15,1= doesn't have an
-HDMI output, and would be ignored by the OS by default.
-*** Enabling HDMI support
+Up to two 4k@60Hz DisplayPort connections are supported via type C with adapter, and HDMI can also
+be connected. However, the internal display will turn off if three external displays are connected
+(see Intel GPU limitation above).
+
+Connector 0 is the internal LCD, connectors 1 and 2 are DisplayPort via type C, and connector 3 is
+HDMI. The boot argument =agdpmod=vit9696= is required to disable board checks, since the
+=MacBookPro15,1= doesn't have an HDMI output, and would be ignored by the OS by default.
+**** Enabling HDMI and DisplayPort via type C connector
 - [[file:CLOVER/config.plist][config.plist]]
   - Boot/Arguments
     - =agdpmod=vit9696=
   - Devices/Properties/PciRoot(0x0)/Pci(0x2,0x0)
+    - =framebuffer-portcount= = =<04000000>=
     - =framebuffer-con1-enable= = =<01000000>=
     - =framebuffer-con1-alldata= = =<01050900 00040000 87010000>=
     - =framebuffer-con2-enable= = =<01000000>=
-    - =framebuffer-con2-alldata= = =<03040a00 00080000 87010000>=
+    - =framebuffer-con2-alldata= = =<02060900 00040000 87010000>=
+    - =framebuffer-con3-enable= = =<01000000>=
+    - =framebuffer-con3-alldata= = =<03040a00 00080000 87010000>=
     - =enable-hdmi20= = =<01000000>=
 *** Known problems/caveats
 - HDMI 2.0 connections may require cold booting with a monitor attached, or have sleep/resume issues. See thread linked above.

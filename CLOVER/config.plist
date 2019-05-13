@@ -241,17 +241,25 @@
 				<data>FAAAAA==</data>
 				<key>enable-dpcd-max-link-rate-fix</key>
 				<data>AQAAAA==</data>
-				<key>Comment-con1</key>
-				<string>Type C port</string>
+				<key>Comment-fb-portcount</key>
+				<string>There are 4 ports: internal LCD, Type C DP 1 and 2, and HDMI</string>
+				<key>framebuffer-portcount</key>
+				<data>BAAAAA==</data>
+				<key>Comment-con1-con2</key>
+				<string>Type C port; can have 2 DisplayPort connections</string>
 				<key>framebuffer-con1-enable</key>
 				<data>AQAAAA==</data>
 				<key>framebuffer-con1-alldata</key>
 				<data>AQUJAAAEAACHAQAA</data>
-				<key>Comment-con2</key>
-				<string>HDMI port</string>
 				<key>framebuffer-con2-enable</key>
 				<data>AQAAAA==</data>
 				<key>framebuffer-con2-alldata</key>
+				<data>AgYJAAAEAACHAQAA</data>
+				<key>Comment-con3</key>
+				<string>HDMI port</string>
+				<key>framebuffer-con3-enable</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-con3-alldata</key>
 				<data>AwQKAAAIAACHAQAA</data>
 				<key>enable-hdmi20</key>
 				<data>AQAAAA==</data>
