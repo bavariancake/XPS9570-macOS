@@ -238,6 +238,11 @@ ACPI 6.2 A, 6.1.8, _PLD (Physical Location of Device)
 *** Known issue: left side type C port only works in HS mode, not SS
 Will likely work when USB type C and/or Thunderbolt fixes are added.
 *** To-Do: Add [[https://www.tonymacx86.com/threads/guide-usb-power-property-injection-for-sierra-and-later.222266/][USB power property injection]]
+** Thunderbolt 3
+Thunderbolt 3 can be made to work if "BIOS assist enumeration" is enabled for Thunderbolt in the
+BIOS. Install the latest Thunderbolt firmware update from Dell, then boot into Windows with TB
+peripheral attached. Set device to "always allow". TB device will work in macOS when attached prior
+to boot, but will lose functionality when hotplugged.
 ** Touch ID / Goodix fingerprint sensor
 It's [[https://www.tonymacx86.com/threads/solved-asus-ux430ua-fingerprint-trackpad-touch-id.230671/#post-1572495][not possible]] to use fingerprint sensor for Touch ID according to RehabMan. Perhaps the
 integrated Goodix fingerprint sensor can be used, and enabled with PAM (TBD).
