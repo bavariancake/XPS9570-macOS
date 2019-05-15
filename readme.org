@@ -327,7 +327,8 @@ importing them in Windows. See [[https://github.com/digitalbirdo/BT-LinkkeySync]
 (updated for Mojave).
 ** Known problems/caveats
 - Drive encryption is disabled (haven't tried)
-- Thunderbolt, USB3 on type-C port not working (haven't tried; should be possible)
+- Thunderbolt 3 requires Windows configuration (one time), no hotplug support
+- USB3 on type-C port not working? Maybe requires cold booting?
 - Suspend and resume not implemented properly - power button should wake however
 - Internal keyboard behaves strangely when Keyboard SysPrefs are changed - must use SSDT to configure VoodooPS2Controller
 - VoodooPS2Controller provides poor touchpad support (should be implemented with VoodooI2C probably, TODO)
@@ -335,13 +336,6 @@ importing them in Windows. See [[https://github.com/digitalbirdo/BT-LinkkeySync]
 - Fingerprint reader does not work (see Touch ID / fingerprint reader section)
 - SD card reader not present
 - HDMI 2.0 output has some quirks (see section), but HDMI 1.4 seems to work
-- +Black/dark screen 3 minutes after booting+
-- +Temporary hang whenever Touch ID is requested+
-- +Right-side USB port appears as an internal port, so devices attached to it can't be ejected+
-- +Hang on boot with Apple logo intermittently+
-- +Graphics acceleration becomes poor after display goes to sleep+
-- +Constant CPU activity in kernel_task process+
-- +Messages does not work by default+
 * ACPI DSDT/SSDT patching
 Most of the ACPI patching info is based on the [[https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/][laptop DSDT/SSDT guide]] and [[https://www.tonymacx86.com/threads/guide-using-clover-to-hotpatch-acpi.200137/][hotpatching guide]].
 
