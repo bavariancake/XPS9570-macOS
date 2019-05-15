@@ -443,6 +443,10 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+** 2019-05-13: Add support for dual DisplayPort via type C
+The type C connector supports up to two 4k@60Hz DisplayPort outputs with an adapter. The HDMI output
+can be used simultaneously, for up to three displays (including the LCD). A Thunderbolt 3 adapter
+is recommended to get 60Hz and other benefits.
 ** 2019-04-29: Add initial HDMI support
 @0xFireWolf created patches to enable Type C and HDMI connected output. This will likely require
 more changes to support HDMI 2.0 fully.
