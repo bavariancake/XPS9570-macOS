@@ -251,13 +251,18 @@ Since we're using the =MacBookPro15,1= SMBIOS, macOS is expecting Touch ID to be
 lag on password prompts. This can be disabled for now with the NoTouchID kext.
 
 - Install [[https://github.com/al3xtjames/NoTouchID][NoTouchID]] [[file:kexts/NoTouchID.kext][kext]]
-** Power management
+** Touchpad
+The touchpad is supported via [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]]. Although touchpad functionality is a bit lacking
+with this driver, it is reliable.
 
+An alternative would be [[https://github.com/alexandred/VoodooI2C][VoodooI2C]], but this driver is currently not stable and appears to cause
+memory access violations. I do not recommend it for now (May 2019). If you notice KPs or disk write
+errors after running VoodooI2C, revert to VoodooPS2Controller.
+** Power management
 Note: There is some information in power management guides that only applies pre-Coffee Lake. See
 section below to avoid unnecessary changes.
 
 Based on the [[https://www.tonymacx86.com/threads/guide-native-power-management-for-laptops.175801/][laptop power management guide]] by RehabMan, as well as [[https://www.tonymacx86.com/threads/macos-native-cpu-igpu-power-management.222982/][macOS native power management]] by toleda.
-
 *** Set up power managemnt
 - Disable hibernation (suspend to disk or S4 sleep)
   macOS combines sleep and hibernation into one feature, where closing the lid initially sleeps the
