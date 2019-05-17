@@ -18,7 +18,7 @@ section.
   - BIOS: 1.10.1
   - Dual-booting Windows 10
 ** Tested software configurations
-- macOS: 10.14.0, 10.14.1, 10.14.2, 10.14.3 and supp. update (18D109), 10.14.4
+- macOS: 10.14.0, 10.14.1, 10.14.2, 10.14.3 and supp. update (18D109), 10.14.4, 10.14.5
 - BIOS: 1.5.0, 1.7.0, 1.8.1, 1.9.1, 1.10.1
 * Hardware
 ** Graphics
@@ -447,18 +447,25 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
-** 2019-05-13: Add support for dual DisplayPort via type C
+*** 2019-05-17: Upgrade to 10.14.5
+Noticed a few kextd stalls with the message:
+#+BEGIN_SRC sh
+busy timeout[0], (240s) kextd wait(0): 'AppleACPICPU'
+#+END_SRC
+
+Update completes after waiting a while.
+*** 2019-05-13: Add support for dual DisplayPort via type C
 The type C connector supports up to two 4k@60Hz DisplayPort outputs with an adapter. The HDMI output
 can be used simultaneously, for up to three displays (including the LCD). A Thunderbolt 3 adapter
 is recommended to get 60Hz and other benefits.
-** 2019-04-29: Add initial HDMI support
+*** 2019-04-29: Add initial HDMI support
 @0xFireWolf created patches to enable Type C and HDMI connected output. This will likely require
 more changes to support HDMI 2.0 fully.
-** 2019-04-01: Use WhateverGreen for DPCD link rate patching
+*** 2019-04-01: Use WhateverGreen for DPCD link rate patching
 @0xFireWolf has added DPCD link rate patching to WhateverGreen, which is available with commit
 ab43814f45, or with the next release (1.2.8 probably). A WhateverGreen kext with these changes is
 also included with this repo.
-** 2019-03-26: Upgrade to 10.14.4
+*** 2019-03-26: Upgrade to 10.14.4
 This update takes quite some time on initial install, so it may be necessary to wait more than 20
 minutes before seeing a progress bar.
 
