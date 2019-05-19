@@ -9,8 +9,8 @@ https://github.com/digitalbirdo/BT-LinkkeySync
 Export Bluetooth 128 bit link keys from macOS so that Bluetooth
 devices work when booting macOS or Windows without re-pairing
 constantly.
-* Clover (v2.4k_r4701.RM-4963.ca6cca7c)
-https://github.com/RehabMan/Clover
+* Clover (v2.4k_r4928)
+https://github.com/Dids/clover-builder
 Clover EFI boot manager. Required to boot macOS.
 * IORegistryExplorer (2.1)
 https://www.tonymacx86.com/audio/58368-guide-how-make-copy-ioreg.html

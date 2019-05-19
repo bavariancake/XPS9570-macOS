@@ -5,6 +5,8 @@ Run macOS Mojave (10.14) on a Dell XPS 9570.
 Most pieces are fully supported, and this setup can be used as your main machine. A few pieces are
 missing (and some will probably never be supported); see Known Problems/Caveats in the Hardware
 section.
+
+The EFI folder can be used to boot into a USB installer, or to for regular booting.
 ** Tested hardware configuration
 - Dell XPS 9570
   - Intel i9-8950HK
@@ -38,7 +40,7 @@ supports up to two DisplayPort connections with an adapter. Even though you coul
 external displays (HDMI + 2 DisplayPort via type C), one of these displays would remain powered
 off. This is a limitation of IGPU, which has 3 pipelines for driving displays, one per display.
 *** Enabling acceleration
-- [[file:CLOVER/config.plist][config.plist]]
+- [[file:EFI/CLOVER/config.plist][config.plist]]
   - +Graphics/Inject/Intel=yes+
   - Graphics/Inject/Intel=no
   - +Graphics/ig-platform-id=0x3e9b0000+
@@ -48,18 +50,18 @@ off. This is a limitation of IGPU, which has 3 pipelines for driving displays, o
     - =dpcd-max-link-rate= = =<14000000>= (or =<0a000000>= for 1080p)
     - =enable-dpcd-max-link-rate-fix= = =<01000000>=
     - =framebuffer-patch-enable= = =<01000000>=
-- Install [[https://github.com/acidanthera/Lilu][Lilu]] [[file:kexts/Lilu.kext][kext]]
-- Install [[https://github.com/acidanthera/WhateverGreen][WhateverGreen]] [[file:kexts/WhateverGreen.kext][kext]]
+- Install [[https://github.com/acidanthera/Lilu][Lilu]] [[file:EFI/CLOVER/kexts/Other/Lilu.kext][kext]]
+- Install [[https://github.com/acidanthera/WhateverGreen][WhateverGreen]] [[file:EFI/CLOVER/kexts/Other/WhateverGreen.kext][kext]]
 *** Enabling backlight control via slider in Sys. Prefs. -> Displays
 Patched via kext and SSDT patch ([[https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightfixup-kext.218222/][discussion]]). Can use pre-built [[https://bitbucket.org/RehabMan/applebacklightfixup/downloads/][kext and SSDT-PNLF.aml]], but is
 identical to SSDT-PNLF.aml compiled from [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl][SSDT-PNLF.dsl]] in [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config][OS-X-Clover-Laptop-Config]].
-- Include [[https://github.com/RehabMan/AppleBacklightFixup][AppleBacklightFixup]] [[file:kexts/AppleBacklightFixup.kext][kext]]
-- +Include [[file:CLOVER/ACPI/patched/SSDT-PNLF.aml][SSDT-PNLF.aml]] ([[file:CLOVER/ACPI/patched/SSDT-PNLF.dsl][SSDT-PNLF.dsl]])+
-- Include [[file:CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] ([[file:CLOVER/ACPI/patched/SSDT-PNLFCFL.dsl][SSDT-PNLFCFL.dsl]]); possibly temporary until fix is included in SSDT-PNLF.
+- Include [[https://github.com/RehabMan/AppleBacklightFixup][AppleBacklightFixup]] [[file:EFI/CLOVER/kexts/Other/AppleBacklightFixup.kext][kext]]
+- +Include [[file:EFI/CLOVER/ACPI/patched/SSDT-PNLF.aml][SSDT-PNLF.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-PNLF.dsl][SSDT-PNLF.dsl]])+
+- Include [[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.dsl][SSDT-PNLFCFL.dsl]]); possibly temporary until fix is included in SSDT-PNLF.
 *** Preventing black/dark screen 3 minutes after booting
 This was a complex issue with a [[https://www.tonymacx86.com/threads/bug-black-screen-3-minutes-after-booting-coffeelake-uhd-630.261131/][long thread]] to find a solution. The new WhateverGreen option
 =enable-cfl-backlight-fix= is probably a better way to implement this, but I have not tested it yet.
-- [[file:CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] is already included in step above
+- [[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] is already included in step above
 - Use Lilu 1.2.9 or higher
 - Use WhateverGreen 1.2.5 or higher
 - Remember to update kext cache whenever a kext is added or updated (note to self: stop forgetting that ugh)
@@ -78,7 +80,7 @@ Connector 0 is the internal LCD, connectors 1 and 2 are DisplayPort via type C, 
 HDMI. The boot argument =agdpmod=vit9696= is required to disable board checks, since the
 =MacBookPro15,1= doesn't have an HDMI output, and would be ignored by the OS by default.
 **** Enabling HDMI and DisplayPort via type C connector
-- [[file:CLOVER/config.plist][config.plist]]
+- [[file:EFI/CLOVER/config.plist][config.plist]]
   - Boot/Arguments
     - =agdpmod=vit9696=
   - Devices/Properties/PciRoot(0x0)/Pci(0x2,0x0)
@@ -96,14 +98,14 @@ HDMI. The boot argument =agdpmod=vit9696= is required to disable board checks, s
 The internal keyboard is a PS/2 device, but macOS does not support PS/2. This can be implemented
 with VoodooPS2Controller.
 *** Installation
-- Include [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]] [[file:kexts/VoodooPS2Controller.kext][kext]]
+- Include [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]] [[file:EFI/CLOVER/kexts/Other/VoodooPS2Controller.kext][kext]]
 - Enabling brightness keys
-  - Include [[file:CLOVER/ACPI/patched/SSDT-BRT6.aml][SSDT-BRT6.aml]] ([[file:CLOVER/ACPI/patched/SSDT-BRT6.dsl][SSDT-BRT6.dsl]])
-  - [[file:CLOVER/config.plist][config.plist]] changes to rename BRT6 to BRTX in DSDT so we can replace it with our function
+  - Include [[file:EFI/CLOVER/ACPI/patched/SSDT-BRT6.aml][SSDT-BRT6.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-BRT6.dsl][SSDT-BRT6.dsl]])
+  - [[file:EFI/CLOVER/config.plist][config.plist]] changes to rename BRT6 to BRTX in DSDT so we can replace it with our function
     - ACPI/DSDT/Patches/Item n
       - Key=Find, Type=Data, Value=<14204252 543602>
       - Key=Replace, Type=Data, Value=<14204252 545802>
-- Include [[file:CLOVER/ACPI/patched/SSDT-PS2-Keymap.aml][SSDT-PS2-Keymap.aml]] ([[file:CLOVER/ACPI/patched/SSDT-PS2-Keymap.dsl][SSDT-PS2-Keymap.dsl]]) to remap keys (optional)
+- Include [[file:EFI/CLOVER/ACPI/patched/SSDT-PS2-Keymap.aml][SSDT-PS2-Keymap.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-PS2-Keymap.dsl][SSDT-PS2-Keymap.dsl]]) to remap keys (optional)
   - See list of [[https://wiki.osdev.org/PS/2_Keyboard][PS/2 scan codes (scan code set 1)]] for codes generated by keyboard, and [[file:/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h][ADB key codes]]
     for codes recognized by macOS.
 *** Debugging key codes
@@ -142,8 +144,8 @@ for Bluetooth. While Wi-Fi works by default, it shows up as a "Third-Party Wirel
 Information unless AirportBrcmFixup is installed, and Bluetooth requires kexts from
 OS-X-BrcmPatchRAM.
 *** Installation
-- Include [[https://github.com/acidanthera/AirportBrcmFixup][AirportBrcmFixup]] [[file:kexts/AirportBrcmFixup.kext][AirportBrcmFixup.kext]] for Wi-Fi
-- Include [[https://github.com/RehabMan/OS-X-BrcmPatchRAM][OS-X-BrcmPatchRAM]] [[file:kexts/BrcmPatchRAM2.kext][BrcmPatchRAM2.kext]] and [[file:kexts/BrcmFirmwareRepo.kext][BrcmFirmwareRepo.kext]] for Bluetooth (for installation to /Library/Extensions)
+- Include [[https://github.com/acidanthera/AirportBrcmFixup][AirportBrcmFixup]] [[file:EFI/CLOVER/kexts/Other/AirportBrcmFixup.kext][AirportBrcmFixup.kext]] for Wi-Fi
+- Include [[https://github.com/RehabMan/OS-X-BrcmPatchRAM][OS-X-BrcmPatchRAM]] [[file:EFI/CLOVER/kexts/Other/BrcmPatchRAM2.kext][BrcmPatchRAM2.kext]] and [[file:EFI/CLOVER/kexts/Other/BrcmFirmwareRepo.kext][BrcmFirmwareRepo.kext]] for Bluetooth (for installation to /Library/Extensions)
 - After swapping out Wi-Fi card, reset Bluetooth info (e.g. to fix AirDrop)
   - Turn off Bluetooth
   - =sudo rm -f /Library/Preferences/com.apple.Bluetooth.plist*=
@@ -156,7 +158,7 @@ OS-X-BrcmPatchRAM.
 *** Testing Wi-Fi speed
 By default, AirportBrcmFixup seems to limit Wi-Fi channel width for 802.11ac to 40MHz instead of
 80MHz, even though the country code defaults to US. The workaround is to disable the country code
-setting with the boot flag =brcmfx-country=#a= ([[file:CLOVER/config.plist][config.plist]]).
+setting with the boot flag =brcmfx-country=#a= ([[file:EFI/CLOVER/config.plist][config.plist]]).
 
 If you have an 802.11ac capable access point, place the XPS 9570 next to it and option-click on the
 Wi-Fi icon. After a few minutes, you should see a line like =Channel: 165 (5 GHz, 80 MHz)= with =Tx
@@ -184,7 +186,7 @@ rm -rf ~/Library/Preferences/com.apple.imservice*
 *** Known problems/caveats
 - Unlock with Apple Watch only works once after actviation, or only sporadically
 ** Battery status
-- Install [[https://github.com/RehabMan/OS-X-ACPI-Battery-Driver][ACPIBatteryManager]] [[file:kexts/ACPIBatteryManager.kext][kext]]
+- Install [[https://github.com/RehabMan/OS-X-ACPI-Battery-Driver][ACPIBatteryManager]] [[file:EFI/CLOVER/kexts/Other/ACPIBatteryManager.kext][kext]]
 
 Only the ACPIBatteryManager kext is required on the XPS 9570, but the kext companion [[https://www.tonymacx86.com/threads/guide-how-to-patch-dsdt-for-working-battery-status.116102/][guide]] includes
 a good step-by-step tutorial on how to make DSDT edits with [[https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/][MaciASL]] if needed.
@@ -199,7 +201,7 @@ HDMI audio output probably requires SSDT-HDEF and FakePCIID_Intel_HDMI_Audio.kex
 implemented yet since it depends on a graphics fix.
 
 *** Installation
-- [[file:CLOVER/config.plist][config.plist]]
+- [[file:EFI/CLOVER/config.plist][config.plist]]
   - ACPI/DSDT/Patches/Item n
     - Comment: Change HDAS to HDEF for audio device
     - Key=Find, Type=Data, Value=<48444153>
@@ -207,7 +209,7 @@ implemented yet since it depends on a graphics fix.
   - Devices/Properties/PciRoot(0)/Pci(0x1f,3)
     - Comment: AppleALC layout-id for ALC298 on XPS 9570
     - layout=id=30
-- Install [[https://github.com/acidanthera/AppleALC][AppleALC]] [[file:kexts/AppleALC.kext][kext]]
+- Install [[https://github.com/acidanthera/AppleALC][AppleALC]] [[file:EFI/CLOVER/kexts/Other/AppleALC.kext][kext]]
 *** Known problems/caveats
 - A bad =layout-id= causes constant CPU activity in a =kernel_task= process (30 should be ok)
 - Lack of an audio output device causes video playback problems, i.e. stalling when seeking
@@ -215,7 +217,7 @@ implemented yet since it depends on a graphics fix.
 ** USB
 The XPS 9570 DSDT table has a few incorrect USB properties, for example the right side type A port
 is marked as being internal, so an attached disk can't be easily ejected. The correct properties are
-injected via USBInjectAll and in [[file:CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-UIAC.dsl]].
+injected via USBInjectAll and in [[file:EFI/CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-UIAC.dsl]].
 
 Based on [[https://www.tonymacx86.com/threads/guide-10-11-usb-changes-and-solutions.173616/][USB guide]] and [[https://www.tonymacx86.com/threads/guide-creating-a-custom-ssdt-for-usbinjectall-kext.211311/][companion guide.]]
 
@@ -233,8 +235,8 @@ Hardware config of the XPS 9570:
 (*) "Set if the device connection point can be seen by the user without disassembly" according to
 ACPI 6.2 A, 6.1.8, _PLD (Physical Location of Device)
 *** Implementing USB port fixes and removing unused ports
-- Include [[https://github.com/RehabMan/OS-X-USB-Inject-All][USBInjectAll]] [[file:kexts/USBInjectAll.kext][kext]]
-- Include [[file:CLOVER/ACPI/patched/SSDT-UIAC.aml][SSDT-UIAC.aml]] ([[file:CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-UIAC.dsl]]) - based on [[https://github.com/RehabMan/OS-X-USB-Inject-All/blob/master/SSDT-UIAC-ALL.dsl][SSDT-UIAC-ALL.dsl]] and customized for XPS 9570
+- Include [[https://github.com/RehabMan/OS-X-USB-Inject-All][USBInjectAll]] [[file:EFI/CLOVER/kexts/Other/USBInjectAll.kext][kext]]
+- Include [[file:EFI/CLOVER/ACPI/patched/SSDT-UIAC.aml][SSDT-UIAC.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-UIAC.dsl]]) - based on [[https://github.com/RehabMan/OS-X-USB-Inject-All/blob/master/SSDT-UIAC-ALL.dsl][SSDT-UIAC-ALL.dsl]] and customized for XPS 9570
 *** Known issue: left side type C port only works in HS mode, not SS
 Will likely work when USB type C and/or Thunderbolt fixes are added.
 *** To-Do: Add [[https://www.tonymacx86.com/threads/guide-usb-power-property-injection-for-sierra-and-later.222266/][USB power property injection]]
@@ -250,7 +252,7 @@ integrated Goodix fingerprint sensor can be used, and enabled with PAM (TBD).
 Since we're using the =MacBookPro15,1= SMBIOS, macOS is expecting Touch ID to be available, causing
 lag on password prompts. This can be disabled for now with the NoTouchID kext.
 
-- Install [[https://github.com/al3xtjames/NoTouchID][NoTouchID]] [[file:kexts/NoTouchID.kext][kext]]
+- Install [[https://github.com/al3xtjames/NoTouchID][NoTouchID]] [[file:EFI/CLOVER/kexts/Other/NoTouchID.kext][kext]]
 ** Touchpad
 The touchpad is supported via [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]]. Although touchpad functionality is a bit lacking
 with this driver, it is reliable.
@@ -397,17 +399,28 @@ Begin with the default Windows 10 installation (or install Windows 10 if using a
   diskutil rename "Install macOS Mojave" install_osx
   #+END_SRC
 - Install Clover on USB drive
-  - Using RehabMan's fork of Clover: [[https://github.com/RehabMan/Clover][source]], [[https://bitbucket.org/RehabMan/clover/downloads/][binaries]]
+  - Using [[https://github.com/Dids/clover-builder][Dids clover build]]: [[https://github.com/Dids/clover-builder/releases][binaries]]
   - Run installer
     - 'Change Install Location' -> Select =install_osx= volume
-    - 'Customize', then apply the following _changes_
+    - 'Customize', then ensure the following are checked:
       - [X] Clover for UEFI booting only
-      - [X] UEFI Drivers -> VBoxHfs-64
-- TODO: This isn't enough to boot the installer - will need to provide config.plist. Re-visit when documenting full installation process.
-  Installing updates is possible when injecting Intel graphics, with invalid platform id, e.g. 0x12345678, and disabling kext patches.
-  Perhaps it makes sense to have a special macOS install CLOVER folder, that disables any brightness 'fixes' that cause the display to be dimmed. TBD.
-* Versions
-- Clover: v2.4k r4701 RM-4963
+      - [X] FSInject-64
+      - [X] SMCHelper-64
+      - [X] ApfsDriverLoader-64
+      - [X] DataHubDxe-64
+      - [X] HFSPlus
+  - Mount USB drive's EFI partition
+    - =sudo diskutil unmount /Volumes/ESP=
+    - =sudo diskutil mount /dev/disk100s1= -> should be mounted to =/Volumes/EFI=
+  - Add config.plist for XPS 9570
+  - Add kexts to [[file:EFI/CLOVER/kexts/Other][=EFI/CLOVER/kexts/Other=]]
+  - Add DSDT patches to [[file:EFI/CLOVER/ACPI/patched][=EFI/CLOVER/ACPI/patched=]]
+** System updates
+Several changes or fixes can stop working after an update, but often only a few steps are required
+to fix or re-enable them. Try these steps before debugging issues after updates:
+
+- Update the kext cache (boot with minimal config if necessary)
+- Check/re-run power management hibernation changes
 * Miscellaneous Notes
 ** Installing kexts
 Kexts should be installed in =/Library/Extensions=.
@@ -424,9 +437,9 @@ sudo kextcache -i / # update kext cache
 Every custom kext should be listed with the line =Kext with invalid signatured (-67062) allowed=
 ** Kext patching
 Kexts can be patched on boot by Clover (see =KernelAndKextPatches/KextsToPatch= section in
-[[file:CLOVER/config.plist][config.plist]]), but Clover has some limitations, e.g. it can only patch kexts that are in the kext
+[[file:EFI/CLOVER/config.plist][config.plist]]), but Clover has some limitations, e.g. it can only patch kexts that are in the kext
 cache. More complex cases can be handled by [[https://github.com/acidanthera/Lilu][Lilu]], used for "arbitrary kext and process patching",
-which is itself installed as a [[file:kexts/Lilu.kext][kext]]. Excellent [[https://www.tonymacx86.com/threads/an-idiots-guide-to-lilu-and-its-plug-ins.260063/][guide]] to using Lilu and commonly used plugins.
+which is itself installed as a [[file:EFI/CLOVER/kexts/Other/Lilu.kext][kext]]. Excellent [[https://www.tonymacx86.com/threads/an-idiots-guide-to-lilu-and-its-plug-ins.260063/][guide]] to using Lilu and commonly used plugins.
 
 See also guide to [[https://www.tonymacx86.com/threads/guide-installing-3rd-party-kexts-el-capitan-sierra-high-sierra-mojave.268964/][installing 3rd party kexts]].
 ** Hackintool
@@ -447,6 +460,7 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2019-05-19: Update clover and use single EFI folder
 *** 2019-05-17: Upgrade to 10.14.5
 Noticed a few kextd stalls with the message:
 #+BEGIN_SRC sh
