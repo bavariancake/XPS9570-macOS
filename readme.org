@@ -6,7 +6,7 @@ Most pieces are fully supported, and this setup can be used as your main machine
 missing (and some will probably never be supported); see Known Problems/Caveats in the Hardware
 section.
 
-The EFI folder can be used to boot into a USB installer, or to for regular booting.
+The EFI folder can be used to boot into a USB installer, or for regular booting.
 ** Tested hardware configuration
 - Dell XPS 9570
   - Intel i9-8950HK
