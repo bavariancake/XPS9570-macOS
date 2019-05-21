@@ -309,12 +309,18 @@ Based on the [[https://www.tonymacx86.com/threads/guide-native-power-management-
   sudo cp /tmp/AppleIntelInfo.dat ~/AppleIntelInfo.txt
   sudo chmod g+rw ~/AppleIntelInfo.txt
   #+END_SRC
-** FakeSMC/VirtualSMC
-
-One of these is required to boot macOS.
-
-[[https://github.com/acidanthera/VirtualSMC][VirtualSMC]] and [[https://github.com/RehabMan/OS-X-FakeSMC-kozlek][FakeSMC]]
-
+** VirtualSMC/FakeSMC
+Either [[https://github.com/acidanthera/VirtualSMC][VirtualSMC]] or [[https://github.com/RehabMan/OS-X-FakeSMC-kozlek][FakeSMC]] is required to boot macOS, since PCs don't have Apple SMC
+hardware. VirtualSMC is newer and actively maintained, but if you run into problems with it, FakeSMC
+seems to cause no issues as well. This repo just switched to VirtualSMC, so if you run into any
+problems specific to it, please open an issue.
+*** Installation
+- Include [[file:EFI/CLOVER/kexts/Other/VirtualSMC.kext][VirtualSMC.kext]]
+- Include [[file:EFI/CLOVER/kexts/Other/SMCBatteryManager.kext][SMCBatteryManager.kext]]
+- Include [[file:EFI/CLOVER/kexts/Other/SMCLightSensor.kext][SMCLightSensor.kext]]
+- Include [[file:EFI/CLOVER/kexts/Other/SMCProcessor.kext][SMCProcessor.kext]]
+- Include [[file:EFI/CLOVER/kexts/Other/SMCSuperIO.kext][SMCSuperIO.kext]]
+- Include [[file:EFI/CLOVER/drivers64UEFI/VirtualSmc.efi][VirtualSmc.efi]], and remove SMCHelper-64.efi if it was installed before
 ** Windows compatibility
 *** Real-time clock
 macOS sets BIOS clock to UTC, but Windows sets clock to local time. The solution is to set Windows
@@ -405,7 +411,7 @@ Begin with the default Windows 10 installation (or install Windows 10 if using a
     - 'Customize', then ensure the following are checked:
       - [X] Clover for UEFI booting only
       - [X] FSInject-64
-      - [X] SMCHelper-64
+      - +[X] SMCHelper-64+ (do not install - replaced by [[file:EFI/CLOVER/drivers64UEFI/VirtualSmc.efi][VirtualSmc.efi]])
       - [X] ApfsDriverLoader-64
       - [X] DataHubDxe-64
       - [X] HFSPlus
@@ -413,8 +419,8 @@ Begin with the default Windows 10 installation (or install Windows 10 if using a
     - =sudo diskutil unmount /Volumes/ESP=
     - =sudo diskutil mount /dev/disk100s1= -> should be mounted to =/Volumes/EFI=
   - Add config.plist for XPS 9570
-  - Add kexts to [[file:EFI/CLOVER/kexts/Other][=EFI/CLOVER/kexts/Other=]]
-  - Add DSDT patches to [[file:EFI/CLOVER/ACPI/patched][=EFI/CLOVER/ACPI/patched=]]
+  - Add kexts to [[file:EFI/CLOVER/kexts/Other][EFI/CLOVER/kexts/Other]]
+  - Add DSDT patches to [[file:EFI/CLOVER/ACPI/patched][EFI/CLOVER/ACPI/patched]]
 ** System updates
 Several changes or fixes can stop working after an update, but often only a few steps are required
 to fix or re-enable them. Try these steps before debugging issues after updates:
@@ -460,6 +466,7 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2019-05-21: Use VirtualSMC in favor of FakeSMC
 *** 2019-05-19: Update clover and use single EFI folder
 *** 2019-05-17: Upgrade to 10.14.5
 Noticed a few kextd stalls with the message:
