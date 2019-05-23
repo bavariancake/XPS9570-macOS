@@ -7,12 +7,12 @@
 DefinitionBlock("", "SSDT", 2, "hack", "BRT6", 0)
 {
     External(_SB.PCI0.PEG0.PEGP, DeviceObj)
-    External(_SB.PCI0.IGPU, DeviceObj)
+    External(_SB.PCI0.GFX0, DeviceObj)
     External(_SB.PCI0.LPCB.PS2K, DeviceObj)
-    External(_SB.PCI0.IGPU.LCD, DeviceObj)
+    External(_SB.PCI0.GFX0.LCD, DeviceObj)
 
     // Allow IGPU brightness keys to trigger PS/2 codes, which can then control brightness
-    Scope(_SB.PCI0.IGPU)
+    Scope(_SB.PCI0.GFX0)
     {
         Method (BRT6, 2, NotSerialized)
         {

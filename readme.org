@@ -41,32 +41,20 @@ external displays (HDMI + 2 DisplayPort via type C), one of these displays would
 off. This is a limitation of IGPU, which has 3 pipelines for driving displays, one per display.
 *** Enabling acceleration
 - [[file:EFI/CLOVER/config.plist][config.plist]]
-  - +Graphics/Inject/Intel=yes+
-  - Graphics/Inject/Intel=no
-  - +Graphics/ig-platform-id=0x3e9b0000+
-  - Devices/Properties/PciRoot(0x0)/Pci(0x2,0x0)
-    - =AAPL,ig-platform-id= = =<00009b3e>=
-    - =device-id= = =<9b3e0000>=
-    - =dpcd-max-link-rate= = =<14000000>= (or =<0a000000>= for 1080p)
-    - =enable-dpcd-max-link-rate-fix= = =<01000000>=
-    - =framebuffer-patch-enable= = =<01000000>=
+  - =Graphics/Inject/Intel=no=
+  - =Devices/Properties/PciRoot(0x0)/Pci(0x2,0x0)=
+    - =AAPL,ig-platform-id = <00009b3e>=
+    - =device-id =<9b3e0000>=
+    - =dpcd-max-link-rate =<14000000>= (or =<0a000000>= for 1080p)
+    - =enable-dpcd-max-link-rate-fix =<01000000>=
+    - =framebuffer-patch-enable =<01000000>=
 - Install [[https://github.com/acidanthera/Lilu][Lilu]] [[file:EFI/CLOVER/kexts/Other/Lilu.kext][kext]]
 - Install [[https://github.com/acidanthera/WhateverGreen][WhateverGreen]] [[file:EFI/CLOVER/kexts/Other/WhateverGreen.kext][kext]]
 *** Enabling backlight control via slider in Sys. Prefs. -> Displays
-Patched via kext and SSDT patch ([[https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightfixup-kext.218222/][discussion]]). Can use pre-built [[https://bitbucket.org/RehabMan/applebacklightfixup/downloads/][kext and SSDT-PNLF.aml]], but is
-identical to SSDT-PNLF.aml compiled from [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl][SSDT-PNLF.dsl]] in [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config][OS-X-Clover-Laptop-Config]].
-- Include [[https://github.com/RehabMan/AppleBacklightFixup][AppleBacklightFixup]] [[file:EFI/CLOVER/kexts/Other/AppleBacklightFixup.kext][kext]]
-- +Include [[file:EFI/CLOVER/ACPI/patched/SSDT-PNLF.aml][SSDT-PNLF.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-PNLF.dsl][SSDT-PNLF.dsl]])+
-- Include [[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.dsl][SSDT-PNLFCFL.dsl]]); possibly temporary until fix is included in SSDT-PNLF.
-*** Preventing black/dark screen 3 minutes after booting
-This was a complex issue with a [[https://www.tonymacx86.com/threads/bug-black-screen-3-minutes-after-booting-coffeelake-uhd-630.261131/][long thread]] to find a solution. The new WhateverGreen option
-=enable-cfl-backlight-fix= is probably a better way to implement this, but I have not tested it yet.
-- [[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] is already included in step above
-- Use Lilu 1.2.9 or higher
-- Use WhateverGreen 1.2.5 or higher
-- Remember to update kext cache whenever a kext is added or updated (note to self: stop forgetting that ugh)
-If brightness controls still don't work on boot, or the screen goes black periodically, try booting
-with WhateverGreen boot argument =igfxcflbklt=1=. This force-enables the Coffee Lake backlight fix.
+- [[file:EFI/CLOVER/config.plist][config.plist]]
+  - =Devices/Properties/PciRoot(0x0)/Pci(0x2,0x0)=
+    - =enable-cfl-backlight-fix = <01000000>=
+- Include [[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.dsl][SSDT-PNLFCFL.dsl]]) (sourced from [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config][OS-X-Clover-Laptop-Config]]'s [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl][SSDT-PNLFCFL.dl]])
 *** Enabling external display support
 Without any options passed to WhateverGreen, a KP will occur whenever an HDMI device is
 attached. @0xFireWolf provided initial required flags in [[https://www.tonymacx86.com/threads/fix-coffee-lake-intel-uhd-graphics-630-on-macos-mojave-hdmi-output-issue-public-testing-stage.275126/][a thread]] to support HDMI 1.4 connections,
@@ -465,6 +453,9 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+  * 2019-05-23: Clean up ACPI renaming/patches with WhateverGreen
+    WhateverGreen now handles ACPI renames and backlight fixes, so unecessary ACPI patches and
+    AppleBacklightFixup are removed.
 *** 2019-05-21: Use VirtualSMC instead of FakeSMC
 Currently provides no new features, but VirtualSMC is more actively maintained than FakeSMC.
 Do open an issue if you run into problems with VirtualSMC however.

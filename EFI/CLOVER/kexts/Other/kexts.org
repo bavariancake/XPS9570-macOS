@@ -16,9 +16,6 @@ Fixes WiFi card to appear as Airport Extreme, and makes the card appear to be na
 https://github.com/RehabMan/OS-X-BrcmPatchRAM
 Enables Bluetooth on supported Broadcom cards. Use BrcmFirmwareData.kext instead of
 BrcmFirmwareRepo.kext if installing to CLOVER/kexts/Other.
-* ACPIBatteryManager (2018-1005)
-https://github.com/RehabMan/OS-X-ACPI-Battery-Driver
-Indicates battery percentage and status.
 * AppleALC (1.3.4)
 https://github.com/acidanthera/AppleALC
 Enables audio for Realtek ALC298 (ALC3266 according to Dell).

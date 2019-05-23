@@ -6,7 +6,7 @@ DefinitionBlock("", "SSDT", 2, "hack", "_PNLFCFL", 0)
 {
 #endif
     // For backlight control
-    Device(_SB.PCI0.IGPU.PNLF)
+    Device(_SB.PCI0.GFX0.PNLF)
     {
         Name(_ADR, Zero)
         Name(_HID, EisaId("APP0002"))
