@@ -186,10 +186,8 @@ rm -rf ~/Library/Preferences/com.apple.imservice*
 *** Known problems/caveats
 - Unlock with Apple Watch only works once after actviation, or only sporadically
 ** Battery status
-- Install [[https://github.com/RehabMan/OS-X-ACPI-Battery-Driver][ACPIBatteryManager]] [[file:EFI/CLOVER/kexts/Other/ACPIBatteryManager.kext][kext]]
-
-Only the ACPIBatteryManager kext is required on the XPS 9570, but the kext companion [[https://www.tonymacx86.com/threads/guide-how-to-patch-dsdt-for-working-battery-status.116102/][guide]] includes
-a good step-by-step tutorial on how to make DSDT edits with [[https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/][MaciASL]] if needed.
+Install [[file:EFI/CLOVER/kexts/Other/SMCBatteryManager.kext][SMCBatteryManager.kext]] that comes with [[https://github.com/acidanthera/VirtualSMC][VirtualSMC]] to get battery status. Ensure that you
+have removed ACPIBatteryManager if you've installed it previously.
 ** Audio
 Audio on the XPS 9570 is based on the Realtek ALC298 audio codec, referred to by Dell as "ALC3266-CG
 with Waves MaxxAudio Pro". The ALC298 is not supported on macOS by default, so we use AppleALC to
@@ -311,9 +309,7 @@ Based on the [[https://www.tonymacx86.com/threads/guide-native-power-management-
   #+END_SRC
 ** VirtualSMC/FakeSMC
 Either [[https://github.com/acidanthera/VirtualSMC][VirtualSMC]] or [[https://github.com/RehabMan/OS-X-FakeSMC-kozlek][FakeSMC]] is required to boot macOS, since PCs don't have Apple SMC
-hardware. VirtualSMC is newer and actively maintained, but if you run into problems with it, FakeSMC
-seems to cause no issues as well. This repo just switched to VirtualSMC, so if you run into any
-problems specific to it, please open an issue.
+hardware. VirtualSMC is newer and actively maintained.
 *** Installation
 - Include [[file:EFI/CLOVER/kexts/Other/VirtualSMC.kext][VirtualSMC.kext]]
 - Include [[file:EFI/CLOVER/kexts/Other/SMCBatteryManager.kext][SMCBatteryManager.kext]]
@@ -346,6 +342,9 @@ importing them in Windows. See [[https://github.com/digitalbirdo/BT-LinkkeySync]
 - HDMI 2.0 output has some quirks (see section), but HDMI 1.4 seems to work
 * ACPI DSDT/SSDT patching
 Most of the ACPI patching info is based on the [[https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/][laptop DSDT/SSDT guide]] and [[https://www.tonymacx86.com/threads/guide-using-clover-to-hotpatch-acpi.200137/][hotpatching guide]].
+
+The ACPIBatteryManager (no longer used) [[https://www.tonymacx86.com/threads/guide-how-to-patch-dsdt-for-working-battery-status.116102/][guide]] includes good step-by-step tutorial on how to make
+DSDT edits with [[https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/][MaciASL]].
 
 Many ACPI patches depend on starting out with a working set of ACPI tables (accomplished via
 patching if needed), so it's useful to test if this is the case and fix any errors before attempting
@@ -466,7 +465,9 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
-*** 2019-05-21: Use VirtualSMC in favor of FakeSMC
+*** 2019-05-21: Use VirtualSMC instead of FakeSMC
+Currently provides no new features, but VirtualSMC is more actively maintained than FakeSMC.
+Do open an issue if you run into problems with VirtualSMC however.
 *** 2019-05-19: Update clover and use single EFI folder
 *** 2019-05-17: Upgrade to 10.14.5
 Noticed a few kextd stalls with the message:
