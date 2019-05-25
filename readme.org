@@ -54,7 +54,7 @@ off. This is a limitation of IGPU, which has 3 pipelines for driving displays, o
 - [[file:EFI/CLOVER/config.plist][config.plist]]
   - =Devices/Properties/PciRoot(0x0)/Pci(0x2,0x0)=
     - =enable-cfl-backlight-fix = <01000000>=
-- Include [[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.dsl][SSDT-PNLFCFL.dsl]]) (sourced from [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config][OS-X-Clover-Laptop-Config]]'s [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl][SSDT-PNLFCFL.dl]])
+- Include [[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.aml][SSDT-PNLFCFL.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-PNLFCFL.dsl][SSDT-PNLFCFL.dsl]]) (sourced from [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config][OS-X-Clover-Laptop-Config]]'s [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl][SSDT-PNLFCFL.dsl]])
 *** Enabling external display support
 Without any options passed to WhateverGreen, a KP will occur whenever an HDMI device is
 attached. @0xFireWolf provided initial required flags in [[https://www.tonymacx86.com/threads/fix-coffee-lake-intel-uhd-graphics-630-on-macos-mojave-hdmi-output-issue-public-testing-stage.275126/][a thread]] to support HDMI 1.4 connections,
@@ -453,9 +453,9 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
-  * 2019-05-23: Clean up ACPI renaming/patches with WhateverGreen
-    WhateverGreen now handles ACPI renames and backlight fixes, so unecessary ACPI patches and
-    AppleBacklightFixup are removed.
+*** 2019-05-23: Clean up ACPI renaming/patches with WhateverGreen
+WhateverGreen now handles ACPI renames and backlight fixes, so unecessary ACPI patches and
+AppleBacklightFixup are removed.
 *** 2019-05-21: Use VirtualSMC instead of FakeSMC
 Currently provides no new features, but VirtualSMC is more actively maintained than FakeSMC.
 Do open an issue if you run into problems with VirtualSMC however.
