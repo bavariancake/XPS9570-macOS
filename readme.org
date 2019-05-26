@@ -20,7 +20,7 @@ The EFI folder can be used to boot into a USB installer, or for regular booting.
   - BIOS: 1.10.1
   - Dual-booting Windows 10
 ** Tested software configurations
-- macOS: 10.14.0, 10.14.1, 10.14.2, 10.14.3 and supp. update (18D109), 10.14.4, 10.14.5
+- macOS: 10.14.0 - 10.14.5 build 18F203 (current)
 - BIOS: 1.5.0, 1.7.0, 1.8.1, 1.9.1, 1.10.1
 * Hardware
 ** Graphics
