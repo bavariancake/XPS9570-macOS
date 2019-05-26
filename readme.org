@@ -397,10 +397,10 @@ Begin with the default Windows 10 installation (or install Windows 10 if using a
     - 'Change Install Location' -> Select =install_osx= volume
     - 'Customize', then ensure the following are checked:
       - [X] Clover for UEFI booting only
-      - [X] FSInject-64
+      - +[X] FSInject-64+ (not needed)
       - +[X] SMCHelper-64+ (do not install - replaced by [[file:EFI/CLOVER/drivers64UEFI/VirtualSmc.efi][VirtualSmc.efi]])
       - [X] ApfsDriverLoader-64
-      - [X] DataHubDxe-64
+      - +[X] DataHubDxe-64+ (not needed)
       - [X] HFSPlus
   - Mount USB drive's EFI partition
     - =sudo diskutil unmount /Volumes/ESP=
@@ -453,8 +453,9 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2019-05-26: Remove unnecessary SMBIOS entries and clover UEFI drivers
 *** 2019-05-23: Clean up ACPI renaming/patches with WhateverGreen
-WhateverGreen now handles ACPI renames and backlight fixes, so unecessary ACPI patches and
+WhateverGreen now handles ACPI renames and backlight fixes, so unnecessary ACPI patches and
 AppleBacklightFixup are removed.
 *** 2019-05-21: Use VirtualSMC instead of FakeSMC
 Currently provides no new features, but VirtualSMC is more actively maintained than FakeSMC.
