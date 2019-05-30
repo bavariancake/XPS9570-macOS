@@ -384,8 +384,10 @@
 	<dict>
 		<key>BooterConfig</key>
 		<string>0x28</string>
+		<key>Comment-Csr</key>
+		<string>Disable System Integrity Protection (SIP)</string>
 		<key>CsrActiveConfig</key>
-		<string>0x67</string>
+		<string>0x3E7</string>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>

@@ -435,6 +435,14 @@ cache. More complex cases can be handled by [[https://github.com/acidanthera/Lil
 which is itself installed as a [[file:EFI/CLOVER/kexts/Other/Lilu.kext][kext]]. Excellent [[https://www.tonymacx86.com/threads/an-idiots-guide-to-lilu-and-its-plug-ins.260063/][guide]] to using Lilu and commonly used plugins.
 
 See also guide to [[https://www.tonymacx86.com/threads/guide-installing-3rd-party-kexts-el-capitan-sierra-high-sierra-mojave.268964/][installing 3rd party kexts]].
+** System Integrity Protection (SIP)
+We want to disable SIP to allow loading unapproved kexts and allow other system features that are
+normally restricted. This is accomplished by setting =CsrActiveConfig= in config.plist:
+
+- [[file:EFI/CLOVER/config.plist][config.plist]]
+  - =RtVariables/CsrActiveConfig=0x3E7=
+
+The bitmask and settings defined by 0x3E7 are [[https://www.reddit.com/r/hackintosh/comments/bt17xk/differences_between_0x67_and_0x3e7/][explained in more detail]] by [[https://www.reddit.com/user/dracoflar][dracoflar]].
 ** Hackintool
 https://www.tonymacx86.com/threads/release-hackintool-v2-3-8.254559/ A full-featured utility to fix
 various issues, including graphics, USB, audio, etc. Requires a fair bit of reading, but is useful
@@ -453,6 +461,9 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2019-05-30: Update CsrActiveConfig bitmask to 0x3E7
+This new value seems to be a better choice for 10.14.5 as recommended by dracoflar,
+who also gave several other very helpful tips for this repo.
 *** 2019-05-26: Remove unnecessary SMBIOS entries and clover UEFI drivers
 *** 2019-05-23: Clean up ACPI renaming/patches with WhateverGreen
 WhateverGreen now handles ACPI renames and backlight fixes, so unnecessary ACPI patches and
