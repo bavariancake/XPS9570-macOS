@@ -20,7 +20,7 @@ The EFI folder can be used to boot into a USB installer, or for regular booting.
   - BIOS: 1.11.2
   - Dual-booting Windows 10
 ** Tested software configurations
-- macOS: 10.14.0 - 10.14.5 build 18F203 (current)
+- macOS: 10.14.0 - 10.14.6 (build 18G84)
 - BIOS: 1.5.0, 1.7.0, 1.8.1, 1.9.1, 1.10.1, 1.11.2
 * Hardware
 ** Graphics
@@ -461,6 +461,8 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2019-07-26: Upgrade to 10.14.6
+No issues.
 *** 2019-05-30: Update CsrActiveConfig bitmask to 0x3E7
 This new value seems to be a better choice for 10.14.5 as recommended by dracoflar,
 who also gave several other very helpful tips for this repo.
