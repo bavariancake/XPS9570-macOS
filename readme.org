@@ -239,7 +239,9 @@ Since we're using the =MacBookPro15,1= SMBIOS, macOS is expecting Touch ID to be
 lag on password prompts. This can be disabled for now with the NoTouchID kext.
 
 - Install [[https://github.com/al3xtjames/NoTouchID][NoTouchID]] [[file:EFI/CLOVER/kexts/Other/NoTouchID.kext][kext]]
-** Touchpad
+** Touchpad and touch screen
+TODO: Update docs for VoodooI2C. This is a testing branch to test stability.
+
 The touchpad is supported via [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]]. Although touchpad functionality is a bit lacking
 with this driver, it is reliable.
 

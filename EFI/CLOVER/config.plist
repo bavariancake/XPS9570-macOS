@@ -130,6 +130,16 @@
 					<key>Replace</key>
 					<data>QlJUWAKg</data>
 				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>rename _CRS to XCRS ,pair with SSDT-I2C.aml</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>FEwEX0NSUwCgDpVPU1lTC9wHpFNCRkk=</data>
+					<key>Replace</key>
+					<data>FEwEWENSUwCgDpVPU1lTC9wHpFNCRkk=</data>
+				</dict>
 			</array>
 		</dict>
 		<key>DropTables</key>
