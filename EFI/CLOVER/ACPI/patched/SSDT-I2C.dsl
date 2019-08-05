@@ -1,22 +1,16 @@
 // By LuletterSoul
 
-// a "GPIO Controller Enable" patch for ensuring your 
-
+// a "GPIO Controller Enable" patch for ensuring your
 // DSDT notifies the system that your device is GPIO pinned
 
-// TPD0 is the ACPI id of tracpad 
-
+// TPD0 is the ACPI id of trackpad
 // TPL1 is the ACPI id of touchscreen
 
-// TPD0 and TPL1 are both I2C devices in Dell XPS 9570 ,speacially TPD0, 
-
-// should enable GPIN interuption as VoodooI2C document requirments.
-
-
+// TPD0 and TPL1 are both I2C devices in Dell XPS 9570 , specifically TPD0,
+// should enable GPIO interrupts as VoodooI2C documentation requires.
 
 DefinitionBlock ("", "SSDT", 2, "hack", "I2C", 0x00000000)
 {
-    External (_SB_.PCI0.GPI0, DeviceObj)    // (from opcode)
     External (_SB_.PCI0.I2C0.TPD0, DeviceObj)    // (from opcode)
     External (_SB_.PCI0.I2C0.TPD0.SBFB, FieldUnitObj)    // (from opcode)
     External (_SB_.PCI0.I2C0.TPD0.SBFG, FieldUnitObj)    // (from opcode)
@@ -73,5 +67,5 @@ DefinitionBlock ("", "SSDT", 2, "hack", "I2C", 0x00000000)
             Return (ConcatenateResTemplate (SBFB, SBFG))
         }
     }
-}
 
+}

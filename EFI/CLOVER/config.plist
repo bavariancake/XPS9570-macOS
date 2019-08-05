@@ -132,7 +132,7 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>rename _CRS to XCRS ,pair with SSDT-I2C.aml</string>
+					<string>Rename _CRS to XCRS, pair with SSDT-I2C.aml</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
