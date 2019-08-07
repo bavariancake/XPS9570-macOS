@@ -266,22 +266,12 @@
 			<key>Entries</key>
 			<array>
 				<dict>
-					<key>Disabled</key>
-					<false/>
 					<key>Hidden</key>
-					<false/>
-					<key>Ignore</key>
-					<false/>
-					<key>NoCaches</key>
 					<false/>
 					<key>Type</key>
 					<string>OSXRecovery</string>
 				</dict>
 				<dict>
-					<key>Disabled</key>
-					<false/>
-					<key>Ignore</key>
-					<false/>
 					<key>Title</key>
 					<string>Windows</string>
 					<key>Type</key>
@@ -394,7 +384,7 @@
 	<dict>
 		<key>BooterConfig</key>
 		<string>0x28</string>
-		<key>Comment-Csr</key>
+		<key>Comment-CsrActiveConfig</key>
 		<string>Disable System Integrity Protection (SIP)</string>
 		<key>CsrActiveConfig</key>
 		<string>0x3E7</string>
