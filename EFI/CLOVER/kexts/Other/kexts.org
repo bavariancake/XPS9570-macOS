@@ -1,25 +1,22 @@
 #+STARTUP: indent
 * Display/Graphics
-** WhateverGreen.kext (1.2.8 dev. commit ab43814f45)
+** WhateverGreen.kext (1.3.1)
 https://github.com/acidanthera/WhateverGreen
 Lilu plugin providing patches for GPUs on macOS.
-** AppleBacklightFixup.kext (2018-1013)
-https://github.com/RehabMan/AppleBacklightFixup
-Implement backlight control for laptop internal displays on macOS
 * Wi-Fi/Bluetooth
 See readme for more info on Wi-Fi and Bluetooth - different options may be needed depending on the
 Broadcom card used.
-** AirportBrcmFixup.kext (1.1.9)
+** AirportBrcmFixup.kext (2.0.3)
 https://github.com/acidanthera/AirportBrcmFixup
 Fixes WiFi card to appear as Airport Extreme, and makes the card appear to be native.
-** BrcmFirmwareRepo.kext and BrcmPatchRAM2.kext (2018-050)
+** BrcmFirmwareRepo.kext and BrcmPatchRAM2.kext (2018-0505)
 https://github.com/RehabMan/OS-X-BrcmPatchRAM
 Enables Bluetooth on supported Broadcom cards. Use BrcmFirmwareData.kext instead of
 BrcmFirmwareRepo.kext if installing to CLOVER/kexts/Other.
-* AppleALC (1.3.4)
+* AppleALC (1.4.0)
 https://github.com/acidanthera/AppleALC
 Enables audio for Realtek ALC298 (ALC3266 according to Dell).
-* NoTouchID (1.0.1)
+* NoTouchID (1.0.2)
 https://github.com/al3xtjames/NoTouchID
 Disables support for Touch ID, which is useful to prevent lags on auth dialogs. This occurs on
 SMBIOS versions where Touch ID is expected, e.g. MacBookPro15,1 that we're using for the XPS 9570.
@@ -32,11 +29,11 @@ Support internal PS/2 keyboard.
 * VoodooI2C/VoodooI2CHID (2.2)
 https://github.com/alexandred/VoodooI2C
 Support touchpad and touchscreen as I2C devices.
-* Lilu (1.3.5)
+* Lilu (1.3.8)
 https://github.com/acidanthera/Lilu
 An open source kernel extension bringing a platform for arbitrary kext, library, and program
 patching throughout the macOS. Required by WhateverGreen and other kexts.
-* VirtualSMC/SMCBatteryManager/SMCLightSensor/SMCProcessor/SMCSuperIO (1.0.3)
+* VirtualSMC/SMCBatteryManager/SMCLightSensor/SMCProcessor/SMCSuperIO (1.0.7)
 https://github.com/acidanthera/VirtualSMC
 Apple SMC emulator. Required to boot macOS on a hackintosh, since PCs
 do not have Apple SMC hardware.
