@@ -18,11 +18,10 @@ The EFI folder can be used to boot into a USB installer, or for regular booting.
   - Sound: Realtek ALC3266 (similar to ALC298)
   - Goodix fingerprint reader
 - Software environment
-  - BIOS: 1.11.2
   - Dual-booting Windows 10
 ** Tested software configurations
-- macOS: 10.14.0 - 10.14.6 (build 18G84)
-- BIOS: 1.5.0, 1.7.0, 1.8.1, 1.9.1, 1.10.1, 1.11.2
+- macOS: 10.14.0 - 10.14.6 (build 18G84 and 18G87 with supplemental update)
+- BIOS: 1.5.0 - 1.12.0
 * Hardware
 ** Graphics
 Integrated Intel UHD Graphics 630 support is handled by [[https://github.com/acidanthera/WhateverGreen][WhateverGreen]], and configured in the
@@ -400,11 +399,11 @@ Begin with the default Windows 10 installation (or install Windows 10 if using a
     - 'Change Install Location' -> Select =install_osx= volume
     - 'Customize', then ensure the following are checked:
       - [X] Clover for UEFI booting only
+      - [X] ApfsDriverLoader-64
+      - [X] HFSPlus
       - +[X] FSInject-64+ (not needed)
       - +[X] SMCHelper-64+ (do not install - replaced by [[file:EFI/CLOVER/drivers64UEFI/VirtualSmc.efi][VirtualSmc.efi]])
-      - [X] ApfsDriverLoader-64
       - +[X] DataHubDxe-64+ (not needed)
-      - [X] HFSPlus
   - Mount USB drive's EFI partition
     - =sudo diskutil unmount /Volumes/ESP=
     - =sudo diskutil mount /dev/disk100s1= -> should be mounted to =/Volumes/EFI=
