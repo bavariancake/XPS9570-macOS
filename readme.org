@@ -306,7 +306,7 @@ hardware. VirtualSMC is newer and actively maintained.
 - Include [[file:EFI/CLOVER/kexts/Other/SMCLightSensor.kext][SMCLightSensor.kext]]
 - Include [[file:EFI/CLOVER/kexts/Other/SMCProcessor.kext][SMCProcessor.kext]]
 - Include [[file:EFI/CLOVER/kexts/Other/SMCSuperIO.kext][SMCSuperIO.kext]]
-- Include [[file:EFI/CLOVER/drivers64UEFI/VirtualSmc.efi][VirtualSmc.efi]], and remove SMCHelper-64.efi if it was installed before
+- Include [[file:EFI/CLOVER/drivers/UEFI/VirtualSmc.efi][VirtualSmc.efi]], and remove SMCHelper-64.efi if it was installed before
 ** Windows compatibility
 *** Real-time clock
 macOS sets BIOS clock to UTC, but Windows sets clock to local time. The solution is to set Windows
@@ -378,19 +378,22 @@ NVIDIA GTX 1050, unlike in macOS.
 
 Begin with the default Windows 10 installation (or install Windows 10 if using a new drive).
 
+- Create a Windows USB installer using the media creation tool (not in a VM)
+  The installed copy of Windows will be wiped when switching to 4k sectors or AHCI mode below.
 - Update BIOS and other firmware using Dell SupportAssist in Windows
 - Toshiba SSD only
   - Update [[https://www.dell.com/support/home/us/en/04/product-support/product/xps-15-9570-laptop/drivers][Toshiba SSD firmware]] (search for "toshiba")
     Needed to fix 4k sector bug. Dell SupportAssist does not do this automatically!
   - Set SSD to [[https://github.com/wmchris/DellXPS15-9550-OSX/blob/master/4k_sector.md][use 4k sectors]] - this will WIPE the drive!
 - Enable Intel SpeedShift in BIOS
-- TODO: add more steps from original notes.org
+- Ensure SSD mode is set to AHCI mode instead of RAID in BIOS
+  This will make an existing installation of Windows unbootable.
 *** Creating USB installation media (see [[https://www.tonymacx86.com/threads/guide-booting-the-os-x-installer-on-laptops-with-clover.148093/][guide]] for more details)
 - Download macOS install from App Store
 - Format USB drive and write installer to drive (assuming drive is =/dev/disk100=)
   #+BEGIN_SRC sh
   diskutil partitionDisk /dev/disk100 1 GPT HFS+J "install_osx" R
-  sudo "/Applications/Install macOS Mojave.app/Contents/Resources/createinstallmedia" --volume  /Volumes/install_osx --nointeraction
+  sudo "/Applications/Install macOS Mojave.app/Contents/Resources/createinstallmedia" --volume /Volumes/install_osx --nointeraction
   diskutil rename "Install macOS Mojave" install_osx
   #+END_SRC
 - Install Clover on USB drive
@@ -399,10 +402,12 @@ Begin with the default Windows 10 installation (or install Windows 10 if using a
     - 'Change Install Location' -> Select =install_osx= volume
     - 'Customize', then ensure the following are checked:
       - [X] Clover for UEFI booting only
-      - [X] ApfsDriverLoader-64
+      - [X] ApfsDriverLoader
+      - [X] AptioMemoryFix.efi
       - [X] HFSPlus
+      - Copy [[file:EFI/CLOVER/drivers/UEFI/VirtualSmc.efi][VirtualSmc.efi]] to [[file:EFI/CLOVER/drivers/UEFI][EFI/CLOVER/drivers/UEFI]]
       - +[X] FSInject-64+ (not needed)
-      - +[X] SMCHelper-64+ (do not install - replaced by [[file:EFI/CLOVER/drivers64UEFI/VirtualSmc.efi][VirtualSmc.efi]])
+      - +[X] SMCHelper-64+ (do not install - replaced by [[file:EFI/CLOVER/drivers/UEFI/VirtualSmc.efi][VirtualSmc.efi]])
       - +[X] DataHubDxe-64+ (not needed)
   - Mount USB drive's EFI partition
     - =sudo diskutil unmount /Volumes/ESP=
@@ -463,6 +468,7 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2019-08-19: Update Clover to v2.5k_r5050
 *** 2019-08-11: Update kexts
 - AirportBrcmFixup: 1.1.9 -> 2.0.3
 - AppleALC: 1.3.4 -> 1.4.0
