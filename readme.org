@@ -196,25 +196,24 @@ implemented yet since it depends on a graphics fix.
 - Lack of an audio output device causes video playback problems, i.e. stalling when seeking
 - HDMI audio out not implemented since HDMI out causes kernel panic (dependent on graphics fix)
 ** USB
-The XPS 9570 DSDT table has a few incorrect USB properties, for example the right side type A port
-is marked as being internal, so an attached disk can't be easily ejected. The correct properties are
-injected via USBInjectAll and in [[file:EFI/CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-UIAC.dsl]].
+The XPS 9570 DSDT table has a few incorrect USB properties, but we can inject the correct properties
+via [[https://github.com/RehabMan/OS-X-USB-Inject-All][USBInjectAll]] with [[file:EFI/CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-UIAC.dsl]].
 
-Based on [[https://www.tonymacx86.com/threads/guide-10-11-usb-changes-and-solutions.173616/][USB guide]] and [[https://www.tonymacx86.com/threads/guide-creating-a-custom-ssdt-for-usbinjectall-kext.211311/][companion guide.]]
+The DSDT patch corresponds to the actual hardware config of the XPS 9570, which is as follows:
 
-Hardware config of the XPS 9570:
-| Port      | Type        | User Visible* | Description                                |
-|-----------+-------------+---------------+--------------------------------------------|
-| HS01/SS01 | Type A      | Yes           | Right side                                 |
-| HS02/SS02 | Type A      | Yes           | Left side                                  |
-| HS04      | Proprietary | No            | Bluetooth                                  |
-| HS05      | Type C      | Yes           | Left side                                  |
-| HS07      | Proprietary | No            | Goodix fingerprint reader                  |
-| HS09      | Proprietary | No            | No longer used; touchscreen on prior model |
-| HS12      | Proprietary | No            | Webcam                                     |
+| Name       |  Port | Type        | User Visible* | Description               |
+|------------+-------+-------------+---------------+---------------------------|
+| HS01, SS01 | 1, 17 | Type A      | Yes           | Right side                |
+| HS02, SS02 | 2, 18 | Type A      | Yes           | Left side                 |
+| HS03       |     4 | Proprietary | No            | Bluetooth                 |
+| HS04       |     5 | Type C      | Yes           | Left side                 |
+| HS05       |     7 | Proprietary | No            | Goodix fingerprint reader |
+| HS06       |    12 | Proprietary | No            | Webcam                    |
 
 (*) "Set if the device connection point can be seen by the user without disassembly" according to
 ACPI 6.2 A, 6.1.8, _PLD (Physical Location of Device)
+
+Based on [[https://www.tonymacx86.com/threads/guide-10-11-usb-changes-and-solutions.173616/][USB guide]] and [[https://www.tonymacx86.com/threads/guide-creating-a-custom-ssdt-for-usbinjectall-kext.211311/][companion guide.]]
 *** Implementing USB port fixes and removing unused ports
 - Include [[https://github.com/RehabMan/OS-X-USB-Inject-All][USBInjectAll]] [[file:EFI/CLOVER/kexts/Other/USBInjectAll.kext][kext]]
 - Include [[file:EFI/CLOVER/ACPI/patched/SSDT-UIAC.aml][SSDT-UIAC.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-UIAC.dsl][SSDT-UIAC.dsl]]) - based on [[https://github.com/RehabMan/OS-X-USB-Inject-All/blob/master/SSDT-UIAC-ALL.dsl][SSDT-UIAC-ALL.dsl]] and customized for XPS 9570
@@ -468,6 +467,7 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2019-09-04: Clean up USB config
 *** 2019-08-19: Update Clover to v2.5k_r5050
 *** 2019-08-11: Update kexts
 - AirportBrcmFixup: 1.1.9 -> 2.0.3

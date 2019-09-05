@@ -19,6 +19,8 @@
 // | 0x0A | Type C connector - USB2 and SS without Switch                      |
 // | 0xFF | Proprietary connector                                              |
 //
+// port-count is not a count; it is the maximum port address specific by port.
+//
 // Credit bavariancake: https://github.com/bavariancake/XPS9570-macOS
 
 DefinitionBlock ("", "SSDT", 2, "hack", "_UIAC", 0)
@@ -31,47 +33,47 @@ DefinitionBlock ("", "SSDT", 2, "hack", "_UIAC", 0)
         {
             "8086_a36d", Package()
             {
-                "port-count", Buffer() { 26, 0, 0, 0 },
+                "port-count", Buffer() { 18, 0, 0, 0 },
                 "ports", Package()
                 {
-                    "HS01", Package() // right side HS USB3 type A
+                    "HS01", Package() // right side type A
                     {
-                        "UsbConnector", 3,
+                        "UsbConnector", 0x03,
                         "port", Buffer() { 1, 0, 0, 0 },
                     },
-                    "HS02", Package() // left side HS USB3 type A
+                    "HS02", Package() // left side type A
                     {
-                        "UsbConnector", 3,
+                        "UsbConnector", 0x03,
                         "port", Buffer() { 2, 0, 0, 0 },
                     },
-                    "HS04", Package() // internal HS Bluetooth
+                    "HS03", Package() // internal Bluetooth
                     {
                         "UsbConnector", 0xFF,
                         "port", Buffer() { 4, 0, 0, 0 },
                     },
-                    "HS05", Package() // HS left side type C (Thunderbolt port)
+                    "HS04", Package() // type C
                     {
-                        "UsbConnector", 0x09, // reversible
+                        "UsbConnector", 0x09,
                         "port", Buffer() { 5, 0, 0, 0 },
                     },
-                    "HS07", Package() // HS internal Goodix fingerprint reader
+                    "HS05", Package() // Goodix fingerprint reader
                     {
                         "UsbConnector", 0xFF,
                         "port", Buffer() { 7, 0, 0, 0 },
                     },
-                    "HS12", Package() // HS internal webcam
+                    "HS06", Package() // webcam
                     {
                         "UsbConnector", 0xFF,
                         "port", Buffer() { 12, 0, 0, 0 },
                     },
-                    "SS01", Package() // SS right side type A
+                    "SS01", Package() // right side type A
                     {
-                        "UsbConnector", 3,
+                        "UsbConnector", 0x03,
                         "port", Buffer() { 17, 0, 0, 0 },
                     },
-                    "SS02", Package() // SS left side type A
+                    "SS02", Package() // left side type A
                     {
-                        "UsbConnector", 3,
+                        "UsbConnector", 0x03,
                         "port", Buffer() { 18, 0, 0, 0 },
                     },
                 },
