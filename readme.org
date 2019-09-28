@@ -458,6 +458,36 @@ to verify an installed config or hardware.
 ** ACPI debugging
 The [[https://github.com/RehabMan/OS-X-ACPI-Debug][OS-X-ACPI-Debug]] repo allows for "debug tracing from ACPI code (DSDT) to system.log".
 Not currently installed and not tested, but should be useful if ACPI  problems come up.
+** Boot arguments
+These are the boot arguments currently used:
+- =slide=0 npci=0x2000=
+
+  These come from LuletterSoul's [[https://github.com/LuletterSoul/Dell-XPS-15-9570-macOS-Mojave][repo]], and seem to have a positive effect on boot stability.  For
+  example, =slide=0= appears to [[https://github.com/wmchris/DellXPS15-9550-OSX/blob/master/Additional/slide_calc.md][control ASLR]] during the boot process, and if an EFI or kext depends
+  on a particular address layout, fixing this value could improve system boot stability. In my
+  experience, this has reduced the number of random hangs on boot to zero (open an issue if you see
+  problems with these flags).
+- =dart=0=
+
+  This value has been inherited from [[https://github.com/RehabMan][RehabMan]]'s [[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/config_UHD630.plist][config_UHD630.plist]], to disable an older
+  virtualization feature that's not generally used. TBD if this is needed, but it seems to
+  cause no issues.
+- =darkwake=1=
+
+  The =darkwake= flag has to do with sleep, and what it does can only be discerned from Apple's
+  [[https://opensource.apple.com][Darwin source]] once it's posted, but there is a delay between the latest update and the source they
+  post. The best resource I was able to find is a [[https://www.tonymacx86.com/threads/important-darkwake-0-flag-can-break-auto-sleep-in-10-8-1.69714/#post-447117][thread here]].
+- =agdpmod=vit9696=
+
+  Enables HDMI output by disabling a check for =board-id=, since the XPS 9570 *does* have an
+  HDMI output, unlike the =MacBookPro15,1= we're pretending to be. See graphics section.
+- =brcmfx-country=#a=
+
+  Enables 80MHz wide channels on the 5GHz spectrum. See Wi-Fi/Bluetooth section for more info.
+- =-v=
+
+  Show verbose logs during boot. Not necessary, but can be helpful for debugging issues,
+  which.. I mean.. you signed up for issues with a hackintosh. So you probably want this.
 ** Links to tonymacx86.com guides, etc
 **** [[https://www.tonymacx86.com/threads/faq-read-first-laptop-frequent-questions.164990/][Laptop Frequent Questions]]
 Long, thorough guide. Good to refer back to for specific issues.
