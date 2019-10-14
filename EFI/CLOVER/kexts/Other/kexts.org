@@ -9,10 +9,10 @@ Broadcom card used.
 ** AirportBrcmFixup.kext (2.0.3)
 https://github.com/acidanthera/AirportBrcmFixup
 Fixes WiFi card to appear as Airport Extreme, and makes the card appear to be native.
-** BrcmFirmwareRepo.kext and BrcmPatchRAM2.kext (2018-0505)
-https://github.com/RehabMan/OS-X-BrcmPatchRAM
-Enables Bluetooth on supported Broadcom cards. Use BrcmFirmwareData.kext instead of
-BrcmFirmwareRepo.kext if installing to CLOVER/kexts/Other.
+** BrcmBluetoothInjector.kext/BrcmFirmwareRepo.kext/BrcmPatchRAM3.kext (V2.3.0d3)
+https://github.com/acidanthera/BrcmPatchRAM
+Enables Bluetooth on supported Broadcom cards.
+Binary [[https://www.insanelymac.com/forum/topic/339175-brcmpatchram2-for-1015-catalina-broadcom-bluetooth-firmware-upload/?do=findComment&comment=2693219][built by Mieze]].
 * AppleALC (1.4.0)
 https://github.com/acidanthera/AppleALC
 Enables audio for Realtek ALC298 (ALC3266 according to Dell).

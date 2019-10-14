@@ -135,7 +135,7 @@ Information unless AirportBrcmFixup is installed, and Bluetooth requires kexts f
 OS-X-BrcmPatchRAM.
 *** Installation
 - Include [[https://github.com/acidanthera/AirportBrcmFixup][AirportBrcmFixup]] [[file:EFI/CLOVER/kexts/Other/AirportBrcmFixup.kext][AirportBrcmFixup.kext]] for Wi-Fi
-- Include [[https://github.com/RehabMan/OS-X-BrcmPatchRAM][OS-X-BrcmPatchRAM]] [[file:EFI/CLOVER/kexts/Other/BrcmPatchRAM2.kext][BrcmPatchRAM2.kext]] and [[file:EFI/CLOVER/kexts/Other/BrcmFirmwareRepo.kext][BrcmFirmwareRepo.kext]] for Bluetooth (for installation to /Library/Extensions)
+- Include [[https://github.com/acidanthera/BrcmPatchRAM][BrcmPatchRAM]] [[file:EFI/CLOVER/kexts/Other/BrcmBluetoothInjector.kext][BrcmBluetoothInjector.kext]], [[file:EFI/CLOVER/kexts/Other/BrcmPatchRAM3.kext][BrcmPatchRAM3.kext]], and [[file:EFI/CLOVER/kexts/Other/BrcmFirmwareRepo.kext][BrcmFirmwareRepo.kext]] for Bluetooth (for installation to /Library/Extensions)
 - After swapping out Wi-Fi card, reset Bluetooth info (e.g. to fix AirDrop)
   - Turn off Bluetooth
   - =sudo rm -f /Library/Preferences/com.apple.Bluetooth.plist*=
@@ -499,6 +499,9 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2019-10-14: Update Bluetooth to work with Mojave and Catalina
+The same kexts should work for both Mojave and Catalina, at least for the DW1830.
+Catalina now requires BrcmBluetoothInjector.kext.
 *** 2019-09-13: Enable HDMI 2.0 support via LSPCON thanks to @0xFireWolf
 This one was a bit overdue, but I didn't have a 4k monitor that required HDMI 2.0 for testing.
 *** 2019-09-04: Clean up USB config
