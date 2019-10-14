@@ -118,10 +118,10 @@ this card here (purchased on EBay), although it's currently a bit expensive at a
 longer offers this card directly.
 
 This card has three antennas, while the XPS 9570 has only two antennas in the display. To get full
-Wi-Fi speed, a third antenna with a U.FL connector must be added. This antenna can be placed in a
-small gap next to the battery. It's OK to leave J2 unconnected, however - modern network cards
-should recognize this and disable the 3rd port. Without the 3rd antenna, I'm able to get speeds up
-to about 800Mbps.
+Wi-Fi speed, a third antenna with a +U.FL+ MHF4 (thanks romton843!) connector must be added. This
+antenna can be placed in a small gap next to the battery. It's OK to leave J2 unconnected, however -
+modern network cards should recognize this and disable the 3rd port. Without the 3rd antenna, I'm
+able to get speeds up to about 800Mbps.
 
 Connectors J0, J1, J2 should be connected as follows (see [[file:images/3rd_antenna.jpg][installation example]]):
 
@@ -133,6 +133,8 @@ The DW1830 Wi-Fi card is based on the Broadcom BCM943602BAED, using BCM43602 for
 for Bluetooth. While Wi-Fi works by default, it shows up as a "Third-Party Wireless Card" in System
 Information unless AirportBrcmFixup is installed, and Bluetooth requires kexts from
 OS-X-BrcmPatchRAM.
+
+Side note: romton843 explains that U.FL connectors are 2mm and white, while MHF4 are 1.5mm and black.
 *** Installation
 - Include [[https://github.com/acidanthera/AirportBrcmFixup][AirportBrcmFixup]] [[file:EFI/CLOVER/kexts/Other/AirportBrcmFixup.kext][AirportBrcmFixup.kext]] for Wi-Fi
 - Include [[https://github.com/acidanthera/BrcmPatchRAM][BrcmPatchRAM]] [[file:EFI/CLOVER/kexts/Other/BrcmBluetoothInjector.kext][BrcmBluetoothInjector.kext]], [[file:EFI/CLOVER/kexts/Other/BrcmPatchRAM3.kext][BrcmPatchRAM3.kext]], and [[file:EFI/CLOVER/kexts/Other/BrcmFirmwareRepo.kext][BrcmFirmwareRepo.kext]] for Bluetooth (for installation to /Library/Extensions)
