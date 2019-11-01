@@ -238,7 +238,7 @@ lag on password prompts. This can be disabled for now with the NoTouchID kext.
 ** Touchpad and touchscreen
 Both the Synaptics touchpad and Wacom touchscreen are I2C devices that can be driven with
 [[https://github.com/alexandred/VoodooI2C][VoodooI2C]]. [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]] also provides basic touchpad support, but the quality is not as good.
-In order to get a proper touchpad support, you can use **VoodooI2CSynaptics.kext** which offer a full gesture support.
+In order to get a proper touchpad support, you can use VoodooI2CSynaptics.kext which offer a full gesture support.
 *** Installation
 - Include [[https://github.com/alexandred/VoodooI2C][VoodooI2C]]'s [[file:EFI/CLOVER/kexts/Other/VoodooI2C.kext][VoodooI2c.kext]] [[file:EFI/CLOVER/kexts/Other/VoodooI2CHID.kext][VoodooI2CHID.kext]] and [[file:EFI/CLOVER/kexts/Other/VoodooI2CSynaptics.kext][VoodooI2CSynaptics.kext]]
 - Include [[file:EFI/CLOVER/ACPI/patched/SSDT-I2C.aml][SSDT-I2C.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-I2C.dsl][SSDT-I2C.dsl]])
