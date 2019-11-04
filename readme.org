@@ -110,7 +110,7 @@ with VoodooPS2Controller.
 - Keyboard options like modifier key settings cause an erratic/disabled keyboard
   For key remapping, see SSDT-PS2-Keymap.dsl above. Key repeat speed and delay are ok to change.
 - Can't wake up from sleep with internal keyboard
-- Enables poor quality touchpad by default
+- +Enables poor quality touchpad by default+ (Not since VoodooI2CSynaptics)
 ** Wi-Fi/Bluetooth
 Based on [[https://www.tonymacx86.com/threads/broadcom-wifi-bluetooth-guide.242423/][Broadcom Wi-Fi Bluetooth Guide]], and see threads [[https://www.tonymacx86.com/threads/wip-guide-hp-envy-x360-13-y013cl-i7-7500u-kaby-lake.213327/page-17][one]] and [[https://www.tonymacx86.com/threads/solved-handoff-continuity-auto-unlock-not-working-bcm94360cd-asrock-fatal1ty-z97x-killer.239277/][two]].
 
@@ -241,8 +241,9 @@ lag on password prompts. This can be disabled for now with the NoTouchID kext.
 ** Touchpad and touchscreen
 Both the Synaptics touchpad and Wacom touchscreen are I2C devices that can be driven with
 [[https://github.com/alexandred/VoodooI2C][VoodooI2C]]. [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]] also provides basic touchpad support, but the quality is not as good.
+In order to get a proper touchpad support, you can use VoodooI2CSynaptics.kext which offer a full gesture support.
 *** Installation
-- Include [[https://github.com/alexandred/VoodooI2C][VoodooI2C]]'s [[file:EFI/CLOVER/kexts/Other/VoodooI2C.kext][VoodooI2c.kext]] and [[file:EFI/CLOVER/kexts/Other/VoodooI2CHID.kext][VoodooI2CHID.kext]]
+- Include [[https://github.com/alexandred/VoodooI2C][VoodooI2C]]'s [[file:EFI/CLOVER/kexts/Other/VoodooI2C.kext][VoodooI2c.kext]] [[file:EFI/CLOVER/kexts/Other/VoodooI2CHID.kext][VoodooI2CHID.kext]] and [[file:EFI/CLOVER/kexts/Other/VoodooI2CSynaptics.kext][VoodooI2CSynaptics.kext]]
 - Include [[file:EFI/CLOVER/ACPI/patched/SSDT-I2C.aml][SSDT-I2C.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-I2C.dsl][SSDT-I2C.dsl]])
 - [[file:EFI/CLOVER/config.plist][config.plist]]
   - =ACPI/DSDT/Patches/Item n=
@@ -502,6 +503,7 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2019-11-01: Add VoodooI2CSynaptics to improve touchpad gestures on Catalina 10.15.1
 *** 2019-10-14: Update Bluetooth to work with Mojave and Catalina
 The same kexts should work for both Mojave and Catalina, at least for the DW1830.
 Catalina now requires BrcmBluetoothInjector.kext.
