@@ -20,7 +20,8 @@ The EFI folder can be used to boot into a USB installer, or for regular booting.
 - Software environment
   - Dual-booting Windows 10
 ** Tested software configurations
-- macOS: 10.14.0 - 10.14.6 (builds 18G84, 18G87, 18G95, 18G103)
+- macOS Mojave: 10.14.0 - 10.14.6 (builds 18G84, 18G87, 18G95, 18G103, 18G1012)
+- macOS Catalina: 10.15 - 10.15.1
 - BIOS: 1.5.0 - 1.13.0
 * Hardware
 ** Graphics
