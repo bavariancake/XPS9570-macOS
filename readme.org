@@ -503,6 +503,9 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2020-01-25: Update BrcmPatchRAM kexts to 2.5.1
+This uses BrcmFirmwareData in favor of BrcmFirmwareRepo to work with Clover injection per issue
+[[https://github.com/bavariancake/XPS9570-macOS/issues/51][#51]]. Oddly, this also seems to work with /L/E injection (at least in Catalina).
 *** 2020-01-25: Update AppleALC to to 1.4.5
 *** 2019-10-14: Update Bluetooth to work with Mojave and Catalina
 The same kexts should work for both Mojave and Catalina, at least for the DW1830.
