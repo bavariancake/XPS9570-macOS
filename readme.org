@@ -503,6 +503,7 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2020-01-25: Update AppleALC to to 1.4.5
 *** 2019-10-14: Update Bluetooth to work with Mojave and Catalina
 The same kexts should work for both Mojave and Catalina, at least for the DW1830.
 Catalina now requires BrcmBluetoothInjector.kext.

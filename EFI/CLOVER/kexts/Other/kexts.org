@@ -13,7 +13,7 @@ Fixes WiFi card to appear as Airport Extreme, and makes the card appear to be na
 https://github.com/acidanthera/BrcmPatchRAM
 Enables Bluetooth on supported Broadcom cards.
 Binary [[https://www.insanelymac.com/forum/topic/339175-brcmpatchram2-for-1015-catalina-broadcom-bluetooth-firmware-upload/?do=findComment&comment=2693219][built by Mieze]].
-* AppleALC (1.4.0)
+* AppleALC (1.4.5)
 https://github.com/acidanthera/AppleALC
 Enables audio for Realtek ALC298 (ALC3266 according to Dell).
 * NoTouchID (1.0.2)
