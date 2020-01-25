@@ -17,6 +17,7 @@ The EFI folder can be used to boot into a USB installer, or for regular booting.
   - Touchscreen: Wacom WCOM488F
   - Sound: Realtek ALC3266 (similar to ALC298)
   - Goodix fingerprint reader
+  - Dell 6GTPY battery (11.4V, 8083mAh, 97Wh stated capacity, reports as 7488mAh)
 - Software environment
   - Dual-booting Windows 10
 ** Tested software configurations
