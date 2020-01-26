@@ -311,7 +311,7 @@ hardware. VirtualSMC is newer and actively maintained.
 - Include [[file:EFI/CLOVER/kexts/Other/SMCLightSensor.kext][SMCLightSensor.kext]]
 - Include [[file:EFI/CLOVER/kexts/Other/SMCProcessor.kext][SMCProcessor.kext]]
 - Include [[file:EFI/CLOVER/kexts/Other/SMCSuperIO.kext][SMCSuperIO.kext]]
-- Include [[file:EFI/CLOVER/drivers/UEFI/VirtualSmc.efi][VirtualSmc.efi]], and remove SMCHelper-64.efi if it was installed before
+- Include [[file:EFI/CLOVER/drivers/UEFI/VirtualSmc.efi][VirtualSmc.efi]] (found [[https://github.com/acidanthera/VirtualSMC/blob/master/EfiDriver/VirtualSmc.efi][here]]),  and remove SMCHelper-64.efi if it was installed before
 ** Windows compatibility
 *** Real-time clock
 macOS sets BIOS clock to UTC, but Windows sets clock to local time. The solution is to set Windows
@@ -503,6 +503,7 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2020-01-25: Update VirtualSMC to 1.1.0
 *** 2020-01-25: Update Lilu to 1.4.1
 *** 2020-01-25: Update BrcmPatchRAM kexts to 2.5.1
 This uses BrcmFirmwareData in favor of BrcmFirmwareRepo to work with Clover injection per issue

@@ -32,7 +32,7 @@ Support touchpad and touchscreen as I2C devices.
 https://github.com/acidanthera/Lilu
 An open source kernel extension bringing a platform for arbitrary kext, library, and program
 patching throughout the macOS. Required by WhateverGreen and other kexts.
-* VirtualSMC/SMCBatteryManager/SMCLightSensor/SMCProcessor/SMCSuperIO (1.0.7)
+* VirtualSMC/SMCBatteryManager/SMCLightSensor/SMCProcessor/SMCSuperIO (1.1.0)
 https://github.com/acidanthera/VirtualSMC
 Apple SMC emulator. Required to boot macOS on a hackintosh, since PCs
 do not have Apple SMC hardware.
