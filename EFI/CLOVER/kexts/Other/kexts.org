@@ -28,7 +28,7 @@ Support internal PS/2 keyboard.
 * VoodooI2C/VoodooI2CHID (2.2)
 https://github.com/alexandred/VoodooI2C
 Support touchpad and touchscreen as I2C devices.
-* Lilu (1.3.8)
+* Lilu (1.4.1)
 https://github.com/acidanthera/Lilu
 An open source kernel extension bringing a platform for arbitrary kext, library, and program
 patching throughout the macOS. Required by WhateverGreen and other kexts.
