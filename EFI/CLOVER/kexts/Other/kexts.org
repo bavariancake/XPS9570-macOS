@@ -6,7 +6,7 @@ Lilu plugin providing patches for GPUs on macOS.
 * Wi-Fi/Bluetooth
 See readme for more info on Wi-Fi and Bluetooth - different options may be needed depending on the
 Broadcom card used.
-** AirportBrcmFixup.kext (2.0.3)
+** AirportBrcmFixup.kext (2.0.5)
 https://github.com/acidanthera/AirportBrcmFixup
 Fixes WiFi card to appear as Airport Extreme, and makes the card appear to be native.
 ** BrcmBluetoothInjector.kext/BrcmFirmwareData.kext/BrcmPatchRAM3.kext (2.5.1)

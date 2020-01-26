@@ -503,6 +503,7 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+  * 2020-01-26: Update AirportBrcmFixup to 2.0.5
 *** 2020-01-25: Update VirtualSMC to 1.1.0
 *** 2020-01-25: Update Lilu to 1.4.1
 *** 2020-01-25: Update BrcmPatchRAM kexts to 2.5.1
