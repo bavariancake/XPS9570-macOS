@@ -140,7 +140,7 @@ OS-X-BrcmPatchRAM.
 Side note: romton843 explains that U.FL connectors are 2mm and white, while MHF4 are 1.5mm and black.
 *** Installation
 - Include [[https://github.com/acidanthera/AirportBrcmFixup][AirportBrcmFixup]] [[file:EFI/CLOVER/kexts/Other/AirportBrcmFixup.kext][AirportBrcmFixup.kext]] for Wi-Fi
-- Include [[https://github.com/acidanthera/BrcmPatchRAM][BrcmPatchRAM]] [[file:EFI/CLOVER/kexts/Other/BrcmBluetoothInjector.kext][BrcmBluetoothInjector.kext]], [[file:EFI/CLOVER/kexts/Other/BrcmPatchRAM3.kext][BrcmPatchRAM3.kext]], and [[file:EFI/CLOVER/kexts/Other/BrcmFirmwareRepo.kext][BrcmFirmwareRepo.kext]] for Bluetooth (for installation to /Library/Extensions)
+- Include [[https://github.com/acidanthera/BrcmPatchRAM][BrcmPatchRAM]] [[file:EFI/CLOVER/kexts/Other/BrcmBluetoothInjector.kext][BrcmBluetoothInjector.kext]], [[file:EFI/CLOVER/kexts/Other/BrcmPatchRAM3.kext][BrcmPatchRAM3.kext]], and [[file:EFI/CLOVER/kexts/Other/BrcmFirmwareData.kext][BrcmFirmwareData.kext]] for Bluetooth (for installation to CLOVER/kexts/Other)
 - After swapping out Wi-Fi card, reset Bluetooth info (e.g. to fix AirDrop)
   - Turn off Bluetooth
   - =sudo rm -f /Library/Preferences/com.apple.Bluetooth.plist*=
@@ -427,17 +427,21 @@ to fix or re-enable them. Try these steps before debugging issues after updates:
 - Check/re-run power management hibernation changes
 * Miscellaneous Notes
 ** Installing kexts
-Kexts should be installed in =/Library/Extensions=.
++Kexts should be installed in =/Library/Extensions=.+
+Kexts should be installed only in CLOVER/kexts/Other, and _not_ in /Library/Extensions.
 
-Installation:
+Using both CLOVER/kexts/Other and /Library/Extensions for some kexts and not others is not
+recommended. It looks like Clover can get confused if it needs to load a kext when doing this.
+
+This seems to work well and provides more flexibility, but if you run into any issues doing this,
+please report it.
+
+To update the kext cache in /Library/Extensions after making changes there, do:
 #+BEGIN_SRC sh
-sudo cp -r <mydriver.kext> /Library/Extensions
-sudo chown -R root:wheel /Library/Extensions/<mydriver.kext>
-sudo kextcache -i / # update kext cache
+sudo kextcache -i /
 #+END_SRC
 
 *Be sure to check output for errors!*
-
 Every custom kext should be listed with the line =Kext with invalid signatured (-67062) allowed=
 ** Kext patching
 Kexts can be patched on boot by Clover (see =KernelAndKextPatches/KextsToPatch= section in
@@ -502,6 +506,11 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2020-01-29: Change recommended kext directory to CLOVER/kexts/Other
+Previously, I would install kexts to both /Library/Extensions and CLOVER/kexts/Other, but many users
+prefer installing only to CLOVER/kexts/Other. After testing kexts installed via Clover for a while,
+everything seems to be stable, so I'm changing the recommended location. If you run into issues
+doing this, please open an issue.
 *** 2020-01-29: Update WhateverGreen to 1.3.6
 *** 2020-01-29: Update NoTouchID to 1.0.3
 *** 2020-01-28: Use [[https://github.com/acidanthera][acidanthera]]'s VoodooPS2Controller 2.1.0 and VoodooInput 1.0.2

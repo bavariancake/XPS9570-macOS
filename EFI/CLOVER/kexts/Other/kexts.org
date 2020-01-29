@@ -40,4 +40,8 @@ do not have Apple SMC hardware.
 * Notes
 All kexts are release versions, if both debug and release are provided.
 
-Kexts should also be installed to /Library/Extensions.
++Kexts should also be installed to /Library/Extensions.+
+Kexts should be installed only in CLOVER/kexts/Other, and _not_ in /Library/Extensions.
+
+This seems to work well and provides more flexibility, but if you run into any issues doing this,
+please report it.
