@@ -90,7 +90,8 @@ HDMI. The boot argument =agdpmod=vit9696= is required to disable board checks, s
 The internal keyboard is a PS/2 device, but macOS does not support PS/2. This can be implemented
 with VoodooPS2Controller.
 *** Installation
-- Include [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]] [[file:EFI/CLOVER/kexts/Other/VoodooPS2Controller.kext][kext]]
+- Include [[https://github.com/acidanthera/VoodooPS2][VoodooPS2]] [[file:EFI/CLOVER/kexts/Other/VoodooPS2Controller.kext][VoodooPS2Controller]]
+- Include [[https://github.com/acidanthera/VoodooInput][VoodooInput]] [[file:EFI/CLOVER/kexts/Other/VoodooInput.kext][kext]]
 - Enabling brightness keys
   - Include [[file:EFI/CLOVER/ACPI/patched/SSDT-BRT6.aml][SSDT-BRT6.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-BRT6.dsl][SSDT-BRT6.dsl]])
   - [[file:EFI/CLOVER/config.plist][config.plist]] changes to rename BRT6 to BRTX in DSDT so we can replace it with our function
@@ -241,7 +242,7 @@ lag on password prompts. This can be disabled for now with the NoTouchID kext.
 - Install [[https://github.com/al3xtjames/NoTouchID][NoTouchID]] [[file:EFI/CLOVER/kexts/Other/NoTouchID.kext][kext]]
 ** Touchpad and touchscreen
 Both the Synaptics touchpad and Wacom touchscreen are I2C devices that can be driven with
-[[https://github.com/alexandred/VoodooI2C][VoodooI2C]]. [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]] also provides basic touchpad support, but the quality is not as good.
+[[https://github.com/alexandred/VoodooI2C][VoodooI2C]]. TBD: Does the new [[https://github.com/acidanthera/VoodooPS2][VoodooPS2]] provide touchpad support as well, and how is the quality?
 *** Installation
 - Include [[https://github.com/alexandred/VoodooI2C][VoodooI2C]]'s [[file:EFI/CLOVER/kexts/Other/VoodooI2C.kext][VoodooI2c.kext]] and [[file:EFI/CLOVER/kexts/Other/VoodooI2CHID.kext][VoodooI2CHID.kext]]
 - Include [[file:EFI/CLOVER/ACPI/patched/SSDT-I2C.aml][SSDT-I2C.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-I2C.dsl][SSDT-I2C.dsl]])
@@ -333,8 +334,6 @@ importing them in Windows. See [[https://github.com/digitalbirdo/BT-LinkkeySync]
 - Wi-Fi and Bluetooth require card swap, since there are no macOS drivers for OEM Killer Qualcomm card
 - Fingerprint reader does not work (see Touch ID / fingerprint reader section)
 - SD card reader not present
-- +HDMI 2.0 output has some quirks (see section), but HDMI 1.4 seems to work+
-- +VoodooPS2Controller provides poor touchpad support (should be implemented with VoodooI2C probably, TODO)+
 * ACPI DSDT/SSDT patching
 Most of the ACPI patching info is based on the [[https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/][laptop DSDT/SSDT guide]] and [[https://www.tonymacx86.com/threads/guide-using-clover-to-hotpatch-acpi.200137/][hotpatching guide]].
 
@@ -503,7 +502,8 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
-  * 2020-01-26: Update AirportBrcmFixup to 2.0.5
+*** 2020-01-28: Use [[https://github.com/acidanthera][acidanthera]]'s VoodooPS2Controller 2.1.0 and VoodooInput 1.0.2
+*** 2020-01-26: Update AirportBrcmFixup to 2.0.5
 *** 2020-01-25: Update VirtualSMC to 1.1.0
 *** 2020-01-25: Update Lilu to 1.4.1
 *** 2020-01-25: Update BrcmPatchRAM kexts to 2.5.1

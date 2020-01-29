@@ -22,8 +22,9 @@ SMBIOS versions where Touch ID is expected, e.g. MacBookPro15,1 that we're using
 * USBInjectAll (2018-1108)
 https://github.com/RehabMan/OS-X-USB-Inject-All
 Inject custom USB port properties to work around buggy ACPI tables.
-* VoodooPS2Controller (2018-1008)
-https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller
+* VoodooPS2Controller (2.1.0) and VoodooInput (1.0.2)
+https://github.com/acidanthera/VoodooPS2
+https://github.com/acidanthera/VoodooInput
 Support internal PS/2 keyboard.
 * VoodooI2C/VoodooI2CHID (2.2)
 https://github.com/alexandred/VoodooI2C
