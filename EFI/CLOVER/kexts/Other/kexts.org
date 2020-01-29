@@ -1,6 +1,6 @@
 #+STARTUP: indent
 * Display/Graphics
-** WhateverGreen.kext (1.3.1)
+** WhateverGreen.kext (1.3.6)
 https://github.com/acidanthera/WhateverGreen
 Lilu plugin providing patches for GPUs on macOS.
 * Wi-Fi/Bluetooth

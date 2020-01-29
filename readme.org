@@ -502,6 +502,7 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2020-01-29: Update WhateverGreen to 1.3.6
 *** 2020-01-29: Update NoTouchID to 1.0.3
 *** 2020-01-28: Use [[https://github.com/acidanthera][acidanthera]]'s VoodooPS2Controller 2.1.0 and VoodooInput 1.0.2
 *** 2020-01-26: Update AirportBrcmFixup to 2.0.5
