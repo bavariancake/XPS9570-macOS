@@ -90,8 +90,7 @@ HDMI. The boot argument =agdpmod=vit9696= is required to disable board checks, s
 The internal keyboard is a PS/2 device, but macOS does not support PS/2. This can be implemented
 with VoodooPS2Controller.
 *** Installation
-- Include [[https://github.com/acidanthera/VoodooPS2][VoodooPS2]] [[file:EFI/CLOVER/kexts/Other/VoodooPS2Controller.kext][VoodooPS2Controller]]
-- Include [[https://github.com/acidanthera/VoodooInput][VoodooInput]] [[file:EFI/CLOVER/kexts/Other/VoodooInput.kext][kext]]
+- Include [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]] [[file:EFI/CLOVER/kexts/Other/VoodooPS2Controller.kext][kext]]
 - Enabling brightness keys
   - Include [[file:EFI/CLOVER/ACPI/patched/SSDT-BRT6.aml][SSDT-BRT6.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-BRT6.dsl][SSDT-BRT6.dsl]])
   - [[file:EFI/CLOVER/config.plist][config.plist]] changes to rename BRT6 to BRTX in DSDT so we can replace it with our function
@@ -242,7 +241,7 @@ lag on password prompts. This can be disabled for now with the NoTouchID kext.
 - Install [[https://github.com/al3xtjames/NoTouchID][NoTouchID]] [[file:EFI/CLOVER/kexts/Other/NoTouchID.kext][kext]]
 ** Touchpad and touchscreen
 Both the Synaptics touchpad and Wacom touchscreen are I2C devices that can be driven with
-[[https://github.com/alexandred/VoodooI2C][VoodooI2C]]. TBD: Does the new [[https://github.com/acidanthera/VoodooPS2][VoodooPS2]] provide touchpad support as well, and how is the quality?
+[[https://github.com/alexandred/VoodooI2C][VoodooI2C]]. [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]] also provides basic touchpad support, but the quality is not as good.
 *** Installation
 - Include [[https://github.com/alexandred/VoodooI2C][VoodooI2C]]'s [[file:EFI/CLOVER/kexts/Other/VoodooI2C.kext][VoodooI2c.kext]] and [[file:EFI/CLOVER/kexts/Other/VoodooI2CHID.kext][VoodooI2CHID.kext]]
 - Include [[file:EFI/CLOVER/ACPI/patched/SSDT-I2C.aml][SSDT-I2C.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-I2C.dsl][SSDT-I2C.dsl]])
@@ -513,7 +512,9 @@ everything seems to be stable, so I'm changing the recommended location. If you 
 doing this, please open an issue.
 *** 2020-01-29: Update WhateverGreen to 1.3.6
 *** 2020-01-29: Update NoTouchID to 1.0.3
-*** 2020-01-28: Use [[https://github.com/acidanthera][acidanthera]]'s VoodooPS2Controller 2.1.0 and VoodooInput 1.0.2
+*** 2020-01-28: +Use [[https://github.com/acidanthera][acidanthera]]'s VoodooPS2Controller 2.1.0 and VoodooInput 1.0.2+
+This overrides the VoodooI2C trackpad driver and seems to have other keyboard glitches.
+Reverting for now since it provides no additional value.
 *** 2020-01-26: Update AirportBrcmFixup to 2.0.5
 *** 2020-01-25: Update VirtualSMC to 1.1.0
 *** 2020-01-25: Update Lilu to 1.4.1
