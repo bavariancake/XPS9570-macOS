@@ -396,8 +396,12 @@ Begin with the default Windows 10 installation (or install Windows 10 if using a
 - Format USB drive and write installer to drive (assuming drive is =/dev/disk100=)
   #+BEGIN_SRC sh
   diskutil partitionDisk /dev/disk100 1 GPT HFS+J "install_osx" R
+  # Choose either Mojave:
   sudo "/Applications/Install macOS Mojave.app/Contents/Resources/createinstallmedia" --volume /Volumes/install_osx --nointeraction
   diskutil rename "Install macOS Mojave" install_osx
+  # Or Catalina:
+  sudo "/Applications/Install macOS Catalina.app/Contents/Resources/createinstallmedia" --volume /Volumes/install_osx --nointeraction
+  diskutil rename "Install macOS Catalina" install_osx
   #+END_SRC
 - Install Clover on USB drive
   - Using [[https://github.com/Dids/clover-builder][Dids clover build]]: [[https://github.com/Dids/clover-builder/releases][binaries]]
