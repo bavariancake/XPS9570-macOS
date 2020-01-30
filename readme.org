@@ -13,7 +13,7 @@ The EFI folder can be used to boot into a USB installer, or for regular booting.
   - Memory: 32GB 2x SK Hynix HMA82GS6CJR8N-VK
   - Display: 4k Sharp
   - SSD: Toshiba 2TB KXG50PNV2T04
-  - Touchpad: Synaptics SYNA2393
+  - Trackpad: Synaptics SYNA2393
   - Touchscreen: Wacom WCOM488F
   - Sound: Realtek ALC3266 (similar to ALC298)
   - Goodix fingerprint reader
@@ -111,7 +111,7 @@ with VoodooPS2Controller.
 - Keyboard options like modifier key settings cause an erratic/disabled keyboard
   For key remapping, see SSDT-PS2-Keymap.dsl above. Key repeat speed and delay are ok to change.
 - Can't wake up from sleep with internal keyboard
-- Enables poor quality touchpad by default
+- Enables poor quality trackpad by default
 ** Wi-Fi/Bluetooth
 Based on [[https://www.tonymacx86.com/threads/broadcom-wifi-bluetooth-guide.242423/][Broadcom Wi-Fi Bluetooth Guide]], and see threads [[https://www.tonymacx86.com/threads/wip-guide-hp-envy-x360-13-y013cl-i7-7500u-kaby-lake.213327/page-17][one]] and [[https://www.tonymacx86.com/threads/solved-handoff-continuity-auto-unlock-not-working-bcm94360cd-asrock-fatal1ty-z97x-killer.239277/][two]].
 
@@ -239,9 +239,9 @@ Since we're using the =MacBookPro15,1= SMBIOS, macOS is expecting Touch ID to be
 lag on password prompts. This can be disabled for now with the NoTouchID kext.
 
 - Install [[https://github.com/al3xtjames/NoTouchID][NoTouchID]] [[file:EFI/CLOVER/kexts/Other/NoTouchID.kext][kext]]
-** Touchpad and touchscreen
-Both the Synaptics touchpad and Wacom touchscreen are I2C devices that can be driven with
-[[https://github.com/alexandred/VoodooI2C][VoodooI2C]]. [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]] also provides basic touchpad support, but the quality is not as good.
+** Trackpad and touchscreen
+Both the Synaptics trackpad and Wacom touchscreen are I2C devices that can be driven with
+[[https://github.com/alexandred/VoodooI2C][VoodooI2C]]. [[https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller][VoodooPS2Controller]] also provides basic trackpad support, but the quality is not as good.
 *** Installation
 - Include [[https://github.com/alexandred/VoodooI2C][VoodooI2C]]'s [[file:EFI/CLOVER/kexts/Other/VoodooI2C.kext][VoodooI2c.kext]] and [[file:EFI/CLOVER/kexts/Other/VoodooI2CHID.kext][VoodooI2CHID.kext]]
 - Include [[file:EFI/CLOVER/ACPI/patched/SSDT-I2C.aml][SSDT-I2C.aml]] ([[file:EFI/CLOVER/ACPI/patched/SSDT-I2C.dsl][SSDT-I2C.dsl]])
@@ -250,9 +250,9 @@ Both the Synaptics touchpad and Wacom touchscreen are I2C devices that can be dr
     - =Comment: Rename _CRS to XCRS, pair with SSDT-I2C.aml=
     - =Key=Find, Type=Data, Value=<144c045f 43525300 a00e954f 5359530b dc07a453 424649>=
     - =Key=Replace, Type=Data, Value=<144c0458 43525300 a00e954f 5359530b dc07a453 424649>=
-- [[file:EFI/CLOVER/kexts/Other/VoodooI2CHID.kext/Contents/Info.plist][VoodooI2CHID.kext/Contents/Info.plist]]
-  - =IOKitPersonalities/VoodooI2CHIDDevice Precision Touchpad HID Event Driver=
-    - =QuietTimeAfterTyping=0= (so trackpad isn't disabled by keystroke for 500ms)
+- +[[file:EFI/CLOVER/kexts/Other/VoodooI2CHID.kext/Contents/Info.plist][VoodooI2CHID.kext/Contents/Info.plist]]+ (no longer necessary with VoodooI2C 2.3)
+  - +=IOKitPersonalities/VoodooI2CHIDDevice Precision Touchpad HID Event Driver=+
+    - +=QuietTimeAfterTyping=0= (so trackpad isn't disabled by keystroke for 500ms)+
 ** Power management
 Note: There is some information in power management guides that only applies pre-Coffee Lake. See
 section below to avoid unnecessary changes.
@@ -505,6 +505,8 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2020-01-30: Update VoodooI2C to 2.3
+The trackpad driver seems to have improved and has other stability fixes.
 *** 2020-01-29: Change recommended kext directory to CLOVER/kexts/Other
 Previously, I would install kexts to both /Library/Extensions and CLOVER/kexts/Other, but many users
 prefer installing only to CLOVER/kexts/Other. After testing kexts installed via Clover for a while,
@@ -536,7 +538,7 @@ This one was a bit overdue, but I didn't have a 4k monitor that required HDMI 2.
 - NoTouchID: 1.0.1 -> 1.0.2
 - VirtualSMC: 1.0.3 -> 1.0.7
 - WhateverGreen: 1.2.8 dev. commit ab43814f45 -> 1.3.1
-*** 2019-08-05: Use VoodooI2C for touchpad and touchscreen
+*** 2019-08-05: Use VoodooI2C for trackpad and touchscreen
 Previously VoodooI2C was too unstable, but its reliability seems to have
 improved and [[https://github.com/LuletterSoul][LuletterSoul]] provided a patch for GPIO interrupts in [[https://github.com/LuletterSoul/Dell-XPS-15-9570-macOS-Mojave][his repo]].
 *** 2019-07-26: Upgrade to 10.14.6
