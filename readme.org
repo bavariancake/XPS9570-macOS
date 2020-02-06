@@ -377,7 +377,7 @@ the best way to do it - caveat emptor.
 ** Installation from scratch
 *** Preparing the XPS 9570
 This setup dual-boots Windows 10, which is nice to have for games, since we can actually use the
-NVIDIA GTX 1050, unlike in macOS.
+Nvidia GTX 1050, unlike in macOS.
 
 Begin with the default Windows 10 installation (or install Windows 10 if using a new drive).
 
@@ -509,6 +509,10 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2020-02-05: Use WhateverGreen to disable discrete GPU
+Remove Clover SSDT renames and SSDT patches in favor of having
+WhateverGreen disable the discrete Nvidia GPU.
+Shouldn't have any visible impact, but more simple, more better.
 *** 2020-01-30: Update VoodooI2C to 2.3
 The trackpad driver seems to have improved and has other stability fixes.
 *** 2020-01-29: Change recommended kext directory to CLOVER/kexts/Other

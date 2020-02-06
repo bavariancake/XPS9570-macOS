@@ -82,46 +82,6 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>change Method(_PTS,1,N) to ZPTS, pair with SSDT-PTSWAK.aml</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>X1BUUwE=</data>
-					<key>Replace</key>
-					<data>WlBUUwE=</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>change Method(_PTS,1,S) to ZPTS, pair with SSDT-PTSWAK.aml</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>X1BUUwk=</data>
-					<key>Replace</key>
-					<data>WlBUUwk=</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>change Method(_WAK,1,N) to ZWAK, pair with SSDT-PTSWAK.aml</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>X1dBSwE=</data>
-					<key>Replace</key>
-					<data>WldBSwE=</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>change Method(_WAK,1,S) to ZWAK, pair with SSDT-PTSWAK.aml</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>X1dBSwk=</data>
-					<key>Replace</key>
-					<data>WldBSwk=</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
 					<string>Rename BRT6 to BRTX, use with SSDT-BRT6.aml and SSDT-PNLF.aml</string>
 					<key>Disabled</key>
 					<false/>
@@ -248,6 +208,8 @@
 				<key>framebuffer-con3-has-lspcon</key>
 				<data>AQAAAA==</data>
 				<key>framebuffer-con3-preferred-lspcon-mode</key>
+				<data>AQAAAA==</data>
+				<key>disable-external-gpu</key>
 				<data>AQAAAA==</data>
 				<key>framebuffer-patch-enable</key>
 				<data>AQAAAA==</data>

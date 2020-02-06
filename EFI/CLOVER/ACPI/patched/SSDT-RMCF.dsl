@@ -11,7 +11,6 @@ DefinitionBlock("", "SSDT", 2, "hack", "_RMCF", 0)
         Method(HELP)
         {
             Store("TYPE indicates type of the computer. 0: desktop, 1: laptop", Debug)
-            Store("DPTS for laptops only. 1: enables/disables DGPU in _WAK/_PTS", Debug)
             Store("SHUT enables shutdown fix. bit 0: disables _PTS code when Arg0==5, bit 1: SLPE=0 when Arg0==5", Debug)
             Store("XPEE enables XHC.PMEE fix. 1: set XHC.PMEE to zero in _PTS when Arg0==5", Debug)
             Store("SSTF enables _SST LED fix. 1: enables _SI._SST in _WAK when Arg0 == 3", Debug)
@@ -23,13 +22,6 @@ DefinitionBlock("", "SSDT", 2, "hack", "_RMCF", 0)
         //  0: desktop
         //  1: laptop
         Name(TYPE, 1)
-
-        // DPTS: For laptops only: set to 1 if you want to enable and
-        //  disable the DGPU _PTS and _WAK.
-        //
-        //  0: does not manipulate the DGPU in _WAK and _PTS
-        //  1: disables the DGPU in _WAK and enables it in _PTS
-        Name(DPTS, 0)
 
         // SHUT: Shutdown fix, disable _PTS code when Arg0==5 (shutdown)
         //
