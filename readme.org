@@ -509,6 +509,7 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
 * Change history
+*** 2020-02-07: Update AppleALC to 1.4.6
 *** 2020-02-05: Use WhateverGreen to disable discrete GPU
 Remove Clover SSDT renames and SSDT patches in favor of having
 WhateverGreen disable the discrete Nvidia GPU.

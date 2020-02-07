@@ -12,7 +12,7 @@ Fixes WiFi card to appear as Airport Extreme, and makes the card appear to be na
 ** BrcmBluetoothInjector.kext/BrcmFirmwareData.kext/BrcmPatchRAM3.kext (2.5.1)
 https://github.com/acidanthera/BrcmPatchRAM
 Enables Bluetooth on supported Broadcom cards.
-* AppleALC (1.4.5)
+* AppleALC (1.4.6)
 https://github.com/acidanthera/AppleALC
 Enables audio for Realtek ALC298 (ALC3266 according to Dell).
 * NoTouchID (1.0.3)
