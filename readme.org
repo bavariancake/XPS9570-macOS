@@ -498,16 +498,6 @@ These are the boot arguments currently used:
 
   Show verbose logs during boot. Not necessary, but can be helpful for debugging issues,
   which.. I mean.. you signed up for issues with a hackintosh. So you probably want this.
-** Links to tonymacx86.com guides, etc
-**** [[https://www.tonymacx86.com/threads/faq-read-first-laptop-frequent-questions.164990/][Laptop Frequent Questions]]
-Long, thorough guide. Good to refer back to for specific issues.
-
-https://github.com/darkhandz/XPS15-9550-High-Sierra
-**** KNNSpeed's [[https://www.tonymacx86.com/threads/guide-dell-xps-15-9560-4k-touch-1tb-ssd-32gb-ram-100-adobergb.224486/][Dell XPS 15 9560 guide]] is a useful reference for a similar system
-**** bozma88's [[https://www.tonymacx86.com/threads/guide-dell-xps-13-9360-on-macos-sierra-10-12-x-lts-long-term-support-guide.213141/][Dell XPS 15 9360 guide]]
-**** https://github.com/the-darkvoid/XPS9360-macOS
-**** https://github.com/darkhandz/XPS15-9550-Sierra
-**** https://github.com/syscl/XPS9350-macOS
 ** Editing .plist files
 The easiest way to edit .plist files is using Xcode. Do not use Clover Configurator, since it will
 re-indent and re-order items in your .plist file, making it harder to manage changes with git.
