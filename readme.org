@@ -508,6 +508,24 @@ https://github.com/darkhandz/XPS15-9550-High-Sierra
 **** https://github.com/the-darkvoid/XPS9360-macOS
 **** https://github.com/darkhandz/XPS15-9550-Sierra
 **** https://github.com/syscl/XPS9350-macOS
+** Editing .plist files
+The easiest way to edit .plist files is using Xcode. Do not use Clover Configurator, since it will
+re-indent and re-order items in your .plist file, making it harder to manage changes with git.
+
+Xcode 11.3 and newer has a quirk when editing binary data. Data must be entered in the format
+=<DEADBEEF>= with hex input between brackets, but the editor will show ={length = 4, bytes =
+0xdeadbeef}=. To make changes to the data, you have to enter it again in the =<...>= format.
+
+You can edit .plist files on the command line with PlistBuddy:
+=/usr/libexec/PlistBuddy -c "Add :SomeData data `echo 0xDEADBEEF | xxd -r -p`" test.plist=
+Or you can print .plist contents with plutil:
+=plutil -p test.plist=
+Which would show the output:
+#+BEGIN_SRC
+{
+  "SomeData" => {length = 4, bytes = 0xdeadbeef}
+}
+#+END_SRC
 * Change history
 *** 2020-02-07: Update AppleALC to 1.4.6
 *** 2020-02-05: Use WhateverGreen to disable discrete GPU
