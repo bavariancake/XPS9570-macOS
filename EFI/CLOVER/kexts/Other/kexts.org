@@ -36,6 +36,10 @@ patching throughout the macOS. Required by WhateverGreen and other kexts.
 https://github.com/acidanthera/VirtualSMC
 Apple SMC emulator. Required to boot macOS on a hackintosh, since PCs
 do not have Apple SMC hardware.
+* Sintekek-rtsx (2.2)
+https://github.com/cholonam/Sinetek-rtsx
+macOS driver for Realtek SD card readers. This allows the use of the internal PCIe SD card reader 
+
 * Notes
 All kexts are release versions, if both debug and release are provided.
 
